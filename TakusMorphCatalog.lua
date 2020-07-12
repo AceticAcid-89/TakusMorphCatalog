@@ -83,7 +83,7 @@ end)
 TMCFrame.ModelPreview = CreateFrame("Frame", nil, TMCFrame)
 TMCFrame.ModelPreview.CloseButton = CreateFrame(
 		"Button", nil, TMCFrame.ModelPreview, "UIPanelCloseButton")
-TMCFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 495, -5)
+TMCFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 695, -5)
 TMCFrame.ModelPreview.CloseButton:SetScript("OnClick", function(self, Button, Down)
 	TMCFrame.ModelPreview:Hide()
 end)
@@ -107,15 +107,36 @@ TMCFrame.ModelPreview.FontString:SetPoint("TOP", 0, -22)
 
 --
 TMCFrame.ModelPreview.ModelFrame.DisplayInfo = 0
-TMCFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth / 2)
+TMCFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth - 300)
 TMCFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
-TMCFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 500, 0)
+TMCFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 700, 0)
 TMCFrame.ModelPreview.ModelFrame:SetBackdrop({
 	bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     insets = {left = 11, right = 12, top = 12, bottom = 11}
 })
 
+local lastX = 0
+local lastY = 520
+
+local function OnUpdate(self, elapsed)
+	local x, y = GetCursorPosition()
+	if x > 1140 or x < 780 then
+		return
+	end
+	if y > 700 or y < 340 then
+		return
+	end
+	offsetX = x - lastX
+	offsetY = y - lastY
+	offsetDegree = offsetX / 100 * math.pi
+	offsetScale = (offsetY / 180 * 2) * 0.45 + 1
+	self:SetFacing(offsetDegree)
+	self:SetModelScale(offsetScale)
+end
+TMCFrame.ModelPreview.ModelFrame:EnableMouse()
+TMCFrame.ModelPreview.ModelFrame:SetScript("OnUpdate", OnUpdate)
+TMCFrame.ModelPreview.ModelFrame:Show()
 --
 TMCFrame.ModelPreview.Favorite = TMCFrame.ModelPreview.ModelFrame:CreateTexture(nil, "ARTWORK")
 TMCFrame.ModelPreview.Favorite:SetPoint("TOPLEFT", 0, -11)
