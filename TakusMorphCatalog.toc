@@ -1,4 +1,4 @@
-﻿## Interface: 70300
+﻿## Interface: 80300
 ## Title: Taku's Morph Catalog
 ## Version: 1.0.0
 ## Author: Taku @Druidsmoker

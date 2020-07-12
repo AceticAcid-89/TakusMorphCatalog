@@ -1,11 +1,12 @@
 -- settings
 local Debug = false
-local MaxNumberOfColumn = 12
+local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
-local NumberOfColumn = 12
-local MaxModelID = 90000
+local NumberOfColumn = 5
+local MaxModelID = 97000
 local WindowWidth = 1000
-local WindowHeight = 760
+local WindowHeight = 700
+
 -- vars
 local Cells = {}
 local OffsetModelID = 0
@@ -14,6 +15,7 @@ local LastMaxModelID = 0
 local GoBackStack = {}
 local GoBackDepth = 0
 local DisplayFavorites = false
+
 --
 TakusMorphCatalogDB = {
 	FavoriteList = {}
@@ -25,17 +27,24 @@ print("TakusMorphCatalog: Type /tmc to display the morph catalog !")
 local TMCFrame = CreateFrame("Frame", nil, UIParent)
 TMCFrame:Hide()
 TMCFrame:SetFrameStrata("DIALOG")
-TMCFrame:SetWidth(WindowWidth) 
+TMCFrame:SetWidth(WindowWidth)
 TMCFrame:SetHeight(WindowHeight)
-TMCFrame:SetPoint("CENTER",0,0)
+TMCFrame:SetPoint("TOPLEFT",0,0)
 TMCFrame:SetMovable(true)
 TMCFrame:SetMinResize(400, 400)
 TMCFrame:SetClampedToScreen(true)
-TMCFrame:SetBackdrop( { 
-  bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", 
-  edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border", tile = true, tileSize = 32, edgeSize = 32, 
-  insets = { left = 11, right = 12, top = 12, bottom = 11 }
+TMCFrame:SetBackdrop({
+	bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
+    edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+    tile = true, tileSize = 32, edgeSize = 32,
+    insets = { left = 11, right = 12, top = 12, bottom = 11 }
 })
+TMCFrame:EnableKeyboard(true)
+TMCFrame:SetScript("OnKeyDown", function(self, key)
+	if key == "ESCAPE" then
+		TMCFrame:Hide()
+	end
+end)
 -- end TMCFrame
 
 if Debug then
@@ -43,24 +52,23 @@ if Debug then
 end
 
 -- Collection
-TMCFrame.Collection = CreateFrame("Button",nil,TMCFrame, "UIPanelButtonTemplate")
+TMCFrame.Collection = CreateFrame("Button", nil, TMCFrame, "UIPanelButtonTemplate")
 TMCFrame.Collection:SetSize(120,30)
-TMCFrame.Collection:SetPoint("TOPLEFT",10,-10)
+TMCFrame.Collection:SetPoint("TOPLEFT", 10, -10)
 TMCFrame.Collection:SetText("Collection")
 TMCFrame.Collection:SetScript("OnClick", function(self, Button, Down)
 	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = false
-	--
 	NumberOfColumn = MaxNumberOfColumn
 	TMCFrame.Gallery:Load(true)
 end)
 -- end Collection
 
 -- Favorites
-TMCFrame.Favorites = CreateFrame("Button",nil,TMCFrame, "UIPanelButtonTemplate")
-TMCFrame.Favorites:SetSize(120,30)
-TMCFrame.Favorites:SetPoint("TOPLEFT",130,-10)
+TMCFrame.Favorites = CreateFrame("Button", nil, TMCFrame, "UIPanelButtonTemplate")
+TMCFrame.Favorites:SetSize(120, 30)
+TMCFrame.Favorites:SetPoint("TOPLEFT", 130, -10)
 TMCFrame.Favorites:SetText("Favorites")
 TMCFrame.Favorites:SetScript("OnClick", function(self, Button, Down)
 	OffsetModelID = 0
@@ -72,42 +80,54 @@ end)
 -- end Favorites
 
 -- ModelPreview
-TMCFrame.ModelPreview = CreateFrame("Frame",nil,TMCFrame)
-TMCFrame.ModelPreview:SetScript("OnMouseDown", function(self, Button, Down)
+TMCFrame.ModelPreview = CreateFrame("Frame", nil, TMCFrame)
+TMCFrame.ModelPreview.CloseButton = CreateFrame(
+		"Button", nil, TMCFrame.ModelPreview, "UIPanelCloseButton")
+TMCFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 495, -5)
+TMCFrame.ModelPreview.CloseButton:SetScript("OnClick", function(self, Button, Down)
 	TMCFrame.ModelPreview:Hide()
 end)
+
 TMCFrame.ModelPreview:SetFrameStrata("DIALOG")
-TMCFrame.ModelPreview:SetFrameLevel(5)
-TMCFrame.ModelPreview:SetBackdrop( { 
-  bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
-  insets = { left = 11, right = 12, top = 12, bottom = 11 }
+--TMCFrame.ModelPreview:SetFrameLevel(5)
+TMCFrame.ModelPreview:SetBackdrop({
+    bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+    insets = {left = 11, right = 12, top = 12, bottom = 11}
 })
 TMCFrame.ModelPreview:SetAllPoints()
 --
-TMCFrame.ModelPreview.ModelFrame = CreateFrame("PlayerModel", nil, TMCFrame.ModelPreview)
+TMCFrame.ModelPreview.ModelFrame = CreateFrame("DressUpModel", nil, TMCFrame.ModelPreview)
 TMCFrame.ModelPreview:Hide()
+
 --
-TMCFrame.ModelPreview.FontString = TMCFrame.ModelPreview.ModelFrame:CreateFontString(nil,nil,"GameFontNormal")
-TMCFrame.ModelPreview.FontString:SetPoint("TOP",0, 22)
+TMCFrame.ModelPreview.FontString = TMCFrame.ModelPreview.ModelFrame:CreateFontString(
+		nil, nil, "GameFontNormal")
+TMCFrame.ModelPreview.FontString:SetPoint("TOP", 0, -22)
+
 --
 TMCFrame.ModelPreview.ModelFrame.DisplayInfo = 0
-TMCFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth / 3) 
-TMCFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight / 2)
-TMCFrame.ModelPreview.ModelFrame:SetPoint("CENTER",0,0)
-TMCFrame.ModelPreview.ModelFrame:SetBackdrop( { 
-  bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
-  insets={bottom=-50, top=-40, left=-20, right=-20}
+TMCFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth / 2)
+TMCFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
+TMCFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 500, 0)
+TMCFrame.ModelPreview.ModelFrame:SetBackdrop({
+	bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
+	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+    insets = {left = 11, right = 12, top = 12, bottom = 11}
 })
+
 --
-TMCFrame.ModelPreview.Favorite=TMCFrame.ModelPreview.ModelFrame:CreateTexture(nil,"ARTWORK")
-TMCFrame.ModelPreview.Favorite:SetPoint("TOPLEFT",-20,30)
-TMCFrame.ModelPreview.Favorite:SetSize(40,40)
+TMCFrame.ModelPreview.Favorite = TMCFrame.ModelPreview.ModelFrame:CreateTexture(nil, "ARTWORK")
+TMCFrame.ModelPreview.Favorite:SetPoint("TOPLEFT", 0, -11)
+TMCFrame.ModelPreview.Favorite:SetSize(40, 40)
 TMCFrame.ModelPreview.Favorite:SetTexture("Interface\\Collections\\Collections")
 TMCFrame.ModelPreview.Favorite:SetTexCoord(0.18, 0.02, 0.18, 0.07, 0.23, 0.02, 0.23, 0.07)
+
 --
-TMCFrame.ModelPreview.AddToFavorite = CreateFrame("Button",nil,TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
-TMCFrame.ModelPreview.AddToFavorite:SetSize(120,30)
-TMCFrame.ModelPreview.AddToFavorite:SetPoint("BOTTOMLEFT",-10,-40)
+TMCFrame.ModelPreview.AddToFavorite = CreateFrame(
+		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
+TMCFrame.ModelPreview.AddToFavorite:SetSize(120, 30)
+TMCFrame.ModelPreview.AddToFavorite:SetPoint("BOTTOMLEFT", 11, 11)
 TMCFrame.ModelPreview.AddToFavorite:SetText("Add to Favorite")
 TMCFrame.ModelPreview.AddToFavorite:SetScript("OnClick", function(self, Button, Down)
 	TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = 1
@@ -117,10 +137,12 @@ TMCFrame.ModelPreview.AddToFavorite:SetScript("OnClick", function(self, Button, 
 	ModelID = OffsetModelID
 	TMCFrame.Gallery:Load()
 end)
+
 --
-TMCFrame.ModelPreview.RemoveFavorite = CreateFrame("Button",nil,TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
-TMCFrame.ModelPreview.RemoveFavorite:SetSize(120,30)
-TMCFrame.ModelPreview.RemoveFavorite:SetPoint("BOTTOMLEFT",-10,-40)
+TMCFrame.ModelPreview.RemoveFavorite = CreateFrame(
+		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
+TMCFrame.ModelPreview.RemoveFavorite:SetSize(120, 30)
+TMCFrame.ModelPreview.RemoveFavorite:SetPoint("BOTTOMLEFT", 11, 11)
 TMCFrame.ModelPreview.RemoveFavorite:SetText("Remove Favorite")
 TMCFrame.ModelPreview.RemoveFavorite:SetScript("OnClick", function(self, Button, Down)
 	TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = nil
@@ -130,16 +152,29 @@ TMCFrame.ModelPreview.RemoveFavorite:SetScript("OnClick", function(self, Button,
 	ModelID = OffsetModelID
 	TMCFrame.Gallery:Load()
 end)
+
 --
-TMCFrame.ModelPreview.CopyID = CreateFrame("Button",nil,TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
-TMCFrame.ModelPreview.CopyID:SetSize(70,30)
-TMCFrame.ModelPreview.CopyID:SetPoint("BOTTOMLEFT",120,-40)
-TMCFrame.ModelPreview.CopyID:SetText("Copy ID")
+TMCFrame.ModelPreview.CopyID = CreateFrame(
+		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
+TMCFrame.ModelPreview.CopyID:SetSize(70, 30)
+TMCFrame.ModelPreview.CopyID:SetPoint("BOTTOMLEFT", 131, 11)
+TMCFrame.ModelPreview.CopyID:SetText("PLAY AS")
 TMCFrame.ModelPreview.CopyID:SetScript("OnClick", function(self, Button, Down)
-	ChatFrame1EditBox:Show()
-	ChatFrame1EditBox:SetFocus()
-	ChatFrame1EditBox:SetText(TMCFrame.ModelPreview.ModelFrame.DisplayInfo)
-	ChatFrame1EditBox:HighlightText()
+	msg = ".morph " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
+	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
+	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+end)
+
+--
+TMCFrame.ModelPreview.MountAs = CreateFrame(
+		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
+TMCFrame.ModelPreview.MountAs:SetSize(85, 30)
+TMCFrame.ModelPreview.MountAs:SetPoint("BOTTOMLEFT", 201, 11)
+TMCFrame.ModelPreview.MountAs:SetText("MOUNT AS")
+TMCFrame.ModelPreview.MountAs:SetScript("OnClick", function(self, Button, Down)
+	msg = ".mount " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
+	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
+	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
 -- end ModelPreview
 
@@ -147,10 +182,10 @@ end)
 TMCFrame.TitleFrame = CreateFrame("Frame", nil, TMCFrame)
 TMCFrame.TitleFrame:SetSize(TMCFrame:GetWidth(), 40)
 TMCFrame.TitleFrame:SetPoint("TOP")
-TMCFrame.TitleFrame.Background = TMCFrame.TitleFrame:CreateTexture(nil,"BACKGROUND")
-TMCFrame.TitleFrame.Background:SetColorTexture(1,0,0,0)
+TMCFrame.TitleFrame.Background = TMCFrame.TitleFrame:CreateTexture(nil, "BACKGROUND")
+TMCFrame.TitleFrame.Background:SetColorTexture(1, 0, 0, 0)
 TMCFrame.TitleFrame.Background:SetAllPoints(TMCFrame.TitleFrame)
-TMCFrame.TitleFrame.FontString = TMCFrame.TitleFrame:CreateFontString(nil,nil,"GameFontNormal")
+TMCFrame.TitleFrame.FontString = TMCFrame.TitleFrame:CreateFontString(nil, nil, "GameFontNormal")
 TMCFrame.TitleFrame.FontString:SetText("Taku's Morph Catalog")
 TMCFrame.TitleFrame.FontString:SetAllPoints(TMCFrame.TitleFrame)
 TMCFrame.TitleFrame.CloseButton = CreateFrame("Button", nil, TMCFrame.TitleFrame, "UIPanelCloseButton")
@@ -166,74 +201,51 @@ TMCFrame.TitleFrame:SetScript("OnMouseUp", function(self, Button)
 end)
 -- end TitleFrame
 
---[[local ResizeFrame = CreateFrame("Button", nil, TMCFrame)
-ResizeFrame:SetSize(20,20)
-ResizeFrame.Texture = ResizeFrame:CreateTexture(nil,"ARTWORK")
-ResizeFrame.Texture:SetTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
-ResizeFrame.Texture:SetAllPoints(ResizeFrame)
-ResizeFrame:SetPoint("BOTTOMRIGHT", -10, 10)
-ResizeFrame:SetScript("OnMouseDown", function(self, Button)
-	TMCFrame:StartSizing("BOTTOMRIGHT")
-end)
-ResizeFrame:SetScript("OnMouseUp", function(self, Button)
-	TMCFrame:StopMovingOrSizing()
-end)--]]
-
---[[TMCFrame:SetScript("OnSizeChanged", function(self, Width, Height)
-	WindowWidth = Width
-	WindowHeight = Height
-	TMCFrame.Gallery:Load()
-	TitleFrame:SetSize(TMCFrame:GetWidth(), 40)
-	TitleFrame:SetPoint("TOP")
-	TMCFrame.PageController:SetSize(TMCFrame:GetWidth(), 75)
-	TMCFrame.PageController:SetPoint("BOTTOM")
-end)--]]
-
 -- PageController
 TMCFrame.PageController = CreateFrame("Frame", nil, TMCFrame)
 TMCFrame.PageController:SetSize(TMCFrame:GetWidth(), 75)
 TMCFrame.PageController:SetPoint("BOTTOM")
-TMCFrame.PageController.FontString = TMCFrame.PageController:CreateFontString(nil,nil,"GameFontWhite")
+TMCFrame.PageController.FontString = TMCFrame.PageController:CreateFontString(
+		nil, nil, "GameFontWhite")
 TMCFrame.PageController.FontString:SetAllPoints(TMCFrame.PageController)
 
 function TMCFrame.PageController:UpdateButtons()
 	if (ModelID >= MaxModelID) then
-		TMCFrame.NextPageButton:SetBackdrop( { 
-		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Disabled", 
+		TMCFrame.NextPageButton:SetBackdrop({
+		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Disabled",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
 	else
-		TMCFrame.NextPageButton:SetBackdrop( { 
-		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up", 
+		TMCFrame.NextPageButton:SetBackdrop( {
+		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
 	end
 	if (GoBackDepth == 0) then
-		TMCFrame.PreviousPageButton:SetBackdrop( { 
-		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled", 
+		TMCFrame.PreviousPageButton:SetBackdrop( {
+		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
 	else
-		TMCFrame.PreviousPageButton:SetBackdrop( { 
-		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Up", 
+		TMCFrame.PreviousPageButton:SetBackdrop( {
+		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Up",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
-	end	
+	end
 end
-
 -- end PageController
 
 -- NextPageButton
 TMCFrame.NextPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
 --
 TMCFrame.NextPageButton:SetSize(45, 45)
-TMCFrame.NextPageButton:SetPoint("Center",100,0)
-TMCFrame.NextPageButton:SetBackdrop( { 
-  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up", 
+TMCFrame.NextPageButton:SetPoint("Center", 100, 0)
+TMCFrame.NextPageButton:SetBackdrop( {
+  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up",
   insets = { left = 4, right = 4, top = 4, bottom = 4 }
 })
 --
-TMCFrame.NextPageButton.HoverGlow = TMCFrame.NextPageButton:CreateTexture(nil,"BACKGROUND")
+TMCFrame.NextPageButton.HoverGlow = TMCFrame.NextPageButton:CreateTexture(nil, "BACKGROUND")
 TMCFrame.NextPageButton.HoverGlow:SetTexture("Interface\\Buttons\\CheckButtonGlow")
 TMCFrame.NextPageButton.HoverGlow:SetAllPoints(TMCFrame.NextPageButton)
 TMCFrame.NextPageButton.HoverGlow:SetAlpha(0)
@@ -265,18 +277,17 @@ end)
 -- GoToEditBox
 TMCFrame.GoToEditBox = CreateFrame('EditBox', nil, TMCFrame.PageController, "InputBoxTemplate")
 --
-TMCFrame.GoToEditBox.FontString = TMCFrame.GoToEditBox:CreateFontString(nil,nil,"GameFontWhite")
+TMCFrame.GoToEditBox.FontString = TMCFrame.GoToEditBox:CreateFontString(nil, nil, "GameFontWhite")
 TMCFrame.GoToEditBox.FontString:SetPoint("LEFT", -50, 0)
-TMCFrame.GoToEditBox.FontString:SetText("Go to :")
+TMCFrame.GoToEditBox.FontString:SetText("Go to ")
 --
 TMCFrame.GoToEditBox:SetPoint("LEFT", 150, 0)
 TMCFrame.GoToEditBox:SetMultiLine(false)
 TMCFrame.GoToEditBox:SetAutoFocus(false)
 TMCFrame.GoToEditBox:EnableMouse(true)
-TMCFrame.GoToEditBox:SetMaxLetters(5)
---[[TMCFrame.GoToEditBox:SetTextColor(0,0,0,1)--]]
-TMCFrame.GoToEditBox:SetTextInsets(0,0,0,0)
-TMCFrame.GoToEditBox:SetFont('Fonts\\ARIALN.ttf', 12, '')	
+TMCFrame.GoToEditBox:SetMaxLetters(6)
+TMCFrame.GoToEditBox:SetTextInsets(0, 0, 0, 0)
+TMCFrame.GoToEditBox:SetFont('Fonts\\ARIALN.ttf', 12, '')
 TMCFrame.GoToEditBox:SetWidth(70)
 TMCFrame.GoToEditBox:SetHeight(20)
 TMCFrame.GoToEditBox:SetScript('OnEscapePressed', function() TMCFrame.GoToEditBox:ClearFocus() end)
@@ -296,12 +307,12 @@ end)
 -- PreviousPageButton
 TMCFrame.PreviousPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
 TMCFrame.PreviousPageButton:SetSize(45, 45)
-TMCFrame.PreviousPageButton:SetPoint("Center",-100,0)
-TMCFrame.PreviousPageButton:SetBackdrop( { 
-  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled", 
+TMCFrame.PreviousPageButton:SetPoint("Center", -100, 0)
+TMCFrame.PreviousPageButton:SetBackdrop({
+  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled",
   insets = { left = 4, right = 4, top = 4, bottom = 4 }
 })
-TMCFrame.PreviousPageButton.HoverGlow = TMCFrame.PreviousPageButton:CreateTexture(nil,"BACKGROUND")
+TMCFrame.PreviousPageButton.HoverGlow = TMCFrame.PreviousPageButton:CreateTexture(nil, "BACKGROUND")
 TMCFrame.PreviousPageButton.HoverGlow:SetTexture("Interface\\Buttons\\CheckButtonGlow")
 TMCFrame.PreviousPageButton.HoverGlow:SetAllPoints(TMCFrame.PreviousPageButton)
 TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
@@ -314,15 +325,15 @@ TMCFrame.PreviousPageButton:SetScript("OnLeave", function()
 	TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
 end);
 TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
-	OffsetModelID = GoBackStack[GoBackDepth - 1].LastMaxModelID
+	OffsetModelID = GoBackStack[GoBackDepth-1].LastMaxModelID
 	--
 	ModelID = OffsetModelID
 	NumberOfColumn = MaxNumberOfColumn
 	TMCFrame.Gallery:Load(true)
 	--
 	ModelID = OffsetModelID
-	NumberOfColumn = GoBackStack[GoBackDepth - 1].Zoom
-	GoBackStack[GoBackDepth - 1] = nil
+	NumberOfColumn = GoBackStack[GoBackDepth-1].Zoom
+	GoBackStack[GoBackDepth-1] = nil
 	GoBackDepth = GoBackDepth - 1
 	TMCFrame.Gallery:Load()
 	--
@@ -348,7 +359,7 @@ TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
 		end
 	else
 		if (NumberOfColumn == MinNumberOfColumn) then
-			return 
+			return
 		end
 		NewNumberOfColumn = NumberOfColumn / 2
 	end
@@ -379,15 +390,17 @@ function TMCFrame.Gallery:Load(Reset)
 		local bNewWidget = (Cells[CellIndex] == nil)
 		if bNewWidget then
 			Cells[CellIndex] = CreateFrame("Button", nil, TMCFrame.Gallery)
-			Cells[CellIndex].Favorite=Cells[CellIndex]:CreateTexture(nil,"ARTWORK")
-			Cells[CellIndex].Favorite:SetPoint("TOPLEFT",-5,0)
-			Cells[CellIndex].Favorite:SetSize(20,20)
+			Cells[CellIndex].Favorite=Cells[CellIndex]:CreateTexture(nil, "ARTWORK")
+			Cells[CellIndex].Favorite:SetPoint("TOPLEFT", -5, 0)
+			Cells[CellIndex].Favorite:SetSize(20, 20)
 			Cells[CellIndex].Favorite:SetTexture("Interface\\Collections\\Collections")
 			Cells[CellIndex].Favorite:SetTexCoord(0.18, 0.02, 0.18, 0.07, 0.23, 0.02, 0.23, 0.07)
 			Cells[CellIndex]:SetFrameStrata("DIALOG")
-			Cells[CellIndex].HighlightBackground = Cells[CellIndex]:CreateTexture(nil,"BACKGROUND")
-			Cells[CellIndex].HighlightBackground:SetColorTexture(1,1,1,0.5)
+			Cells[CellIndex].HighlightBackground = Cells[CellIndex]:CreateTexture(nil, "BACKGROUND")
+			Cells[CellIndex].HighlightBackground:SetColorTexture(50, 50, 50, 0.2)
 			Cells[CellIndex].HighlightBackground:SetAllPoints(Cells[CellIndex])
+			Cells[CellIndex].DisplayFontString = Cells[CellIndex]:CreateFontString(nil, nil, "GameFontWhite")
+			Cells[CellIndex].DisplayFontString:SetPoint("TOP", 0, 0)
 			Cells[CellIndex]:SetHighlightTexture(Cells[CellIndex].HighlightBackground)
 			Cells[CellIndex]:RegisterForClicks("AnyUp")
 			Cells[CellIndex].ModelFrame = CreateFrame("PlayerModel", nil, Cells[CellIndex])
@@ -424,8 +437,10 @@ function TMCFrame.Gallery:Load(Reset)
 			else
 				while ModelID <= MaxModelID do
 					Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+					Cells[CellIndex].DisplayFontString:SetText(ModelID)
 					ModelID = ModelID + 1
-					if Cells[CellIndex].ModelFrame:GetModelFileID() ~= nil and Cells[CellIndex].ModelFrame:GetModelFileID() ~= BlankModelFileID then
+					if Cells[CellIndex].ModelFrame:GetModelFileID() ~= nil and
+							Cells[CellIndex].ModelFrame:GetModelFileID() ~= BlankModelFileID then
 						break
 					end
 				end
@@ -439,7 +454,7 @@ function TMCFrame.Gallery:Load(Reset)
 		end
 		Cells[CellIndex]:SetWidth(ColumnWidth)
 		Cells[CellIndex]:SetHeight(ColumnWidth)
-		Cells[CellIndex]:SetPoint("TOPLEFT",OffsetX * ColumnWidth,OffsetY * -ColumnWidth)
+		Cells[CellIndex]:SetPoint("TOPLEFT", OffsetX * ColumnWidth, OffsetY * - ColumnWidth)
 		if (TakusMorphCatalogDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
 			Cells[CellIndex].Favorite:Show()
 		else
