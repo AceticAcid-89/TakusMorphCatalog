@@ -122,9 +122,13 @@ local lastY = 520
 local function OnUpdate(self, elapsed)
 	local x, y = GetCursorPosition()
 	if x > 1140 or x < 780 then
+		self:SetFacing(0)
+		self:SetModelScale(1)
 		return
 	end
 	if y > 700 or y < 340 then
+		self:SetFacing(0)
+		self:SetModelScale(1)
 		return
 	end
 	offsetX = x - lastX
