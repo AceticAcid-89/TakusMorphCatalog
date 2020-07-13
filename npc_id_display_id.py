@@ -93,7 +93,7 @@ def set_data(npc_id, display_id, npc_name):
                     }
                 }
             )
-            f.write(json.dumps(data))
+            f.write(json.dumps(data, indent=4))
 
 
 def main():
@@ -104,4 +104,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print(json.dumps(get_data(), indent=4))
+    main()
