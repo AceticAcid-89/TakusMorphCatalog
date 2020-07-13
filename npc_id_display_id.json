@@ -35414,5 +35414,37 @@
     "17996": {
         "display_id": "17405",
         "npc_name": "Lordaeron Fighter"
+    },
+    "2586": {
+        "display_id": "3984",
+        "npc_name": "Syndicate Highwayman"
+    },
+    "3000": {
+        "display_id": "7218",
+        "npc_name": "Gibbert"
+    },
+    "2587": {
+        "display_id": "3982",
+        "npc_name": "Syndicate Pathstalker"
+    },
+    "10201": {
+        "display_id": "10925",
+        "npc_name": "Lady Hederine"
+    },
+    "2588": {
+        "display_id": "4016",
+        "npc_name": "Syndicate Prowler"
+    },
+    "3001": {
+        "display_id": "2083",
+        "npc_name": "Brek Stonehoof"
+    },
+    "2589": {
+        "display_id": "3987",
+        "npc_name": "Syndicate Mercenary"
+    },
+    "3002": {
+        "display_id": "2092",
+        "npc_name": "Kurm Stonehoof"
     }
 }

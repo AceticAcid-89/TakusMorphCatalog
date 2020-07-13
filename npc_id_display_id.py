@@ -1,67 +1,82 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 from collections import defaultdict
 import html
+import json
 import re
 import requests
-import json
 import threading
 
 
 MAX_NPC_ID = 120000
+THREAD_NUM = 200
 BASE_URL = "https://classic.wowhead.com/npc=%d"
 DISPLAY_REGEX = re.compile(r'^onclick.+\"displayId\":(\d+)\}\)')
-NPC_NAME_REGEX = re.compile(r'\<meta.+content=\"(.+)\"\>')
+NPC_NAME_REGEX = re.compile(r'<meta.+content=\"(.+)\">')
 NPC_ID_DISPLAY_ID_DICT = defaultdict(list)
 JSON_FILE = "npc_id_display_id.json"
+INVALID_JSON_FILE = "invalid_npc_id_display_id.json"
 
-update_lock = threading.Lock()
+# global dict
+npc_display_dict = json.load(open(JSON_FILE))
+invalid_npc_dict = json.load(open(INVALID_JSON_FILE))
 
 
 def get_display_id(response):
-    xx = html.unescape(response.decode()).split()
-    for x in xx:
-        if "displayId" not in x:
+    lines = response.split()
+    for line in lines:
+        if "displayId" not in line:
             continue
-        return re.match(DISPLAY_REGEX, html.unescape(x)).group(1)
+        return re.match(DISPLAY_REGEX, line).group(1)
     else:
         return None
 
 
 def get_npc_name(response):
-    xx = html.unescape(response.decode()).split("\n")
-    for x in xx:
-        if '<meta property="twitter:title" content=' not in x:
+    lines = response.split("\n")
+    for line in lines:
+        if '<meta property="twitter:title" content=' not in line:
             continue
-        return re.match(NPC_NAME_REGEX, html.unescape(x)).group(1)
+        return re.match(NPC_NAME_REGEX, line).group(1)
     else:
         return "UNKNOWN"
 
 
 def get_response(npc_id):
     full_url = BASE_URL % npc_id
-    print(full_url)
     try:
         data = requests.get(full_url)
     except ConnectionError:
+        print(full_url, "ConnectionError")
         return None
     except requests.exceptions.ProxyError:
+        print(full_url, "requests.exceptions.ProxyError")
         return None
-    skip_str = "NPC #%d doesn't exist. It may have" \
-               " been removed from the game." % npc_id
-    if skip_str in data:
+    except Exception:
+        print(full_url, "unknown Exception")
         return None
-    return data.content
+
+    return html.unescape(data.content.decode())
 
 
-def update_ret_file(index, thread_num):
-    global update_lock
+def update_global_dict(index, thread_num):
+    global npc_display_dict
+    global invalid_npc_dict
     scope = MAX_NPC_ID // thread_num
-    for k in range(index * scope, index * scope + scope):
-        exist_data = get_data()
-        if k in exist_data:
+    for npc_id in range(index * scope, index * scope + scope):
+        if str(npc_id) in npc_display_dict:
+            continue
+        if str(npc_id) in invalid_npc_dict:
             continue
 
-        resp = get_response(k)
+        resp = get_response(npc_id)
         if resp is None:
+            set_data(npc_id, None, None, "invalid")
+            continue
+
+        skip_str = "NPC #%d doesn't exist. It may have" \
+                   " been removed from the game." % npc_id
+        if skip_str in resp:
+            set_data(npc_id, None, None, "invalid")
             continue
 
         display_id = get_display_id(resp)
@@ -69,37 +84,50 @@ def update_ret_file(index, thread_num):
 
         if display_id is None:
             continue
-        set_data(k, display_id, npc_name)
+        print("success, npc_id %s" % npc_id)
+        set_data(npc_id, display_id, npc_name, "valid")
 
 
-def get_data():
-    global update_lock
-    with update_lock:
-        with open(JSON_FILE) as f:
-            return json.load(f)
-
-
-def set_data(npc_id, display_id, npc_name):
-    global update_lock
-    with update_lock:
-        with open(JSON_FILE, "r") as f:
-            data = json.load(f)
-        with open(JSON_FILE, "w") as f:
-            data.update(
-                {
-                    npc_id: {
-                        "display_id": display_id,
-                        "npc_name": npc_name
-                    }
+def set_data(npc_id, display_id, npc_name, dict_type):
+    global npc_display_dict
+    global invalid_npc_dict
+    if dict_type == "valid":
+        npc_display_dict.update(
+            {
+                npc_id: {
+                    "display_id": display_id,
+                    "npc_name": npc_name
                 }
-            )
-            f.write(json.dumps(data, indent=4))
+            }
+        )
+    else:
+        invalid_npc_dict[npc_id] = {}
+
+
+def update_file_to_disk():
+    global npc_display_dict
+    global invalid_npc_dict
+
+    with open(JSON_FILE, "w") as f:
+        f.write(json.dumps(npc_display_dict, indent=4))
+        # print(npc_display_dict)
+        print("update %s ends" % JSON_FILE)
+
+    with open(INVALID_JSON_FILE, "w") as f:
+        f.write(json.dumps(invalid_npc_dict, indent=4))
+        # print(invalid_npc_dict)
+        print("update %s ends" % INVALID_JSON_FILE)
 
 
 def main():
-    thread_num = 100
-    for i in range(thread_num):
-        t = threading.Thread(target=update_ret_file, args=(i, thread_num))
+    # non blocking timer every 10s to update file on disk
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(update_file_to_disk, 'interval', seconds=10)
+    scheduler.start()
+
+    # request thread job
+    for i in range(THREAD_NUM):
+        t = threading.Thread(target=update_global_dict, args=(i, THREAD_NUM))
         t.start()
 
 
