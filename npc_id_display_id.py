@@ -20,6 +20,10 @@ INVALID_JSON_FILE = "invalid_npc_id_display_id.json"
 npc_display_dict = json.load(open(JSON_FILE))
 invalid_npc_dict = json.load(open(INVALID_JSON_FILE))
 
+# global_lock
+valid_lock = threading.Lock()
+invalid_lock = threading.Lock()
+
 
 def get_display_id(response):
     lines = response.split()
@@ -92,31 +96,35 @@ def set_data(npc_id, display_id, npc_name, dict_type):
     global npc_display_dict
     global invalid_npc_dict
     if dict_type == "valid":
-        npc_display_dict.update(
-            {
-                npc_id: {
-                    "display_id": display_id,
-                    "npc_name": npc_name
+        with valid_lock:
+            npc_display_dict.update(
+                {
+                    npc_id: {
+                        "display_id": display_id,
+                        "npc_name": npc_name
+                    }
                 }
-            }
-        )
+            )
     else:
-        invalid_npc_dict[npc_id] = {}
+        with invalid_lock:
+            invalid_npc_dict[npc_id] = {}
 
 
 def update_file_to_disk():
     global npc_display_dict
     global invalid_npc_dict
 
-    with open(JSON_FILE, "w") as f:
-        f.write(json.dumps(npc_display_dict, indent=4))
-        # print(npc_display_dict)
-        print("update %s ends" % JSON_FILE)
+    with valid_lock:
+        with open(JSON_FILE, "w") as f:
+            f.write(json.dumps(npc_display_dict, indent=4))
+            # print(npc_display_dict)
+            print("update %s ends" % JSON_FILE)
 
-    with open(INVALID_JSON_FILE, "w") as f:
-        f.write(json.dumps(invalid_npc_dict, indent=4))
-        # print(invalid_npc_dict)
-        print("update %s ends" % INVALID_JSON_FILE)
+    with invalid_lock:
+        with open(INVALID_JSON_FILE, "w") as f:
+            f.write(json.dumps(invalid_npc_dict, indent=4))
+            # print(invalid_npc_dict)
+            print("update %s ends" % INVALID_JSON_FILE)
 
 
 def main():

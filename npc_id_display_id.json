@@ -35446,5 +35446,3589 @@
     "3002": {
         "display_id": "2092",
         "npc_name": "Kurm Stonehoof"
+    },
+    "3003": {
+        "display_id": "2109",
+        "npc_name": "Fyr Mistrunner"
+    },
+    "2590": {
+        "display_id": "4014",
+        "npc_name": "Syndicate Conjuror"
+    },
+    "2591": {
+        "display_id": "4018",
+        "npc_name": "Syndicate Magus"
+    },
+    "2592": {
+        "display_id": "9587",
+        "npc_name": "Rumbling Exile"
+    },
+    "2593": {
+        "display_id": "4766",
+        "npc_name": "Rough Stone Elemental"
+    },
+    "2594": {
+        "display_id": "7212",
+        "npc_name": "Sprogger"
+    },
+    "2595": {
+        "display_id": "11254",
+        "npc_name": "Daggerspine Raider"
+    },
+    "3004": {
+        "display_id": "2126",
+        "npc_name": "Tepa"
+    },
+    "3005": {
+        "display_id": "2093",
+        "npc_name": "Mahu"
+    },
+    "2596": {
+        "display_id": "5765",
+        "npc_name": "Daggerspine Sorceress"
+    },
+    "2597": {
+        "display_id": "3985",
+        "npc_name": "Lord Falconcrest"
+    },
+    "2598": {
+        "display_id": "4027",
+        "npc_name": "Darbel Montrose"
+    },
+    "3007": {
+        "display_id": "2127",
+        "npc_name": "Una"
+    },
+    "2599": {
+        "display_id": "3971",
+        "npc_name": "Otto"
+    },
+    "3008": {
+        "display_id": "2094",
+        "npc_name": "Mak"
+    },
+    "3009": {
+        "display_id": "2108",
+        "npc_name": "Bena Winterhoof"
+    },
+    "3010": {
+        "display_id": "2116",
+        "npc_name": "Mani Winterhoof"
+    },
+    "3011": {
+        "display_id": "2101",
+        "npc_name": "Teg Dawnstrider"
+    },
+    "2600": {
+        "display_id": "4026",
+        "npc_name": "Singer"
+    },
+    "3012": {
+        "display_id": "2118",
+        "npc_name": "Nata Dawnstrider"
+    },
+    "2601": {
+        "display_id": "11551",
+        "npc_name": "Foulbelly"
+    },
+    "12616": {
+        "display_id": "12974",
+        "npc_name": "Vhulgra"
+    },
+    "3013": {
+        "display_id": "2091",
+        "npc_name": "Komin Winterhoof"
+    },
+    "12617": {
+        "display_id": "12549",
+        "npc_name": "Khaelyn Steelwing"
+    },
+    "3014": {
+        "display_id": "2119",
+        "npc_name": "Nida Winterhoof"
+    },
+    "2602": {
+        "display_id": "11572",
+        "npc_name": "Ruul Onestone"
+    },
+    "2603": {
+        "display_id": "610",
+        "npc_name": "Kovork"
+    },
+    "4896": {
+        "display_id": "4854",
+        "npc_name": "Charity Mipsy"
+    },
+    "3015": {
+        "display_id": "2114",
+        "npc_name": "Kuna Thunderhorn"
+    },
+    "2604": {
+        "display_id": "536",
+        "npc_name": "Molok the Crusher"
+    },
+    "3016": {
+        "display_id": "2099",
+        "npc_name": "Tand"
+    },
+    "2605": {
+        "display_id": "4003",
+        "npc_name": "Zalas Witherbark"
+    },
+    "3017": {
+        "display_id": "2117",
+        "npc_name": "Nan Mistrunner"
+    },
+    "2606": {
+        "display_id": "4033",
+        "npc_name": "Nimar the Slayer"
+    },
+    "3018": {
+        "display_id": "2086",
+        "npc_name": "Hogor Thunderhoof"
+    },
+    "2607": {
+        "display_id": "1364",
+        "npc_name": "Prince Galen Trollbane"
+    },
+    "3019": {
+        "display_id": "2084",
+        "npc_name": "Delgo Ragetotem"
+    },
+    "3020": {
+        "display_id": "2085",
+        "npc_name": "Etu Ragetotem"
+    },
+    "2608": {
+        "display_id": "4146",
+        "npc_name": "Commander Amaren"
+    },
+    "3021": {
+        "display_id": "2089",
+        "npc_name": "Kard Ragetotem"
+    },
+    "2609": {
+        "display_id": "10911",
+        "npc_name": "Geomancer Flintdagger"
+    },
+    "3022": {
+        "display_id": "2124",
+        "npc_name": "Sunn Ragetotem"
+    },
+    "2610": {
+        "display_id": "11358",
+        "npc_name": "Shakes O'Breen"
+    },
+    "3023": {
+        "display_id": "2125",
+        "npc_name": "Sura Wildmane"
+    },
+    "2611": {
+        "display_id": "1918",
+        "npc_name": "Fozruk"
+    },
+    "2612": {
+        "display_id": "4141",
+        "npc_name": "Lieutenant Valorcall"
+    },
+    "3024": {
+        "display_id": "2097",
+        "npc_name": "Tah Winterhoof"
+    },
+    "3025": {
+        "display_id": "2111",
+        "npc_name": "Kaga Mistrunner"
+    },
+    "2614": {
+        "display_id": "1545",
+        "npc_name": "[UNUSED] Stromgarde Horseman"
+    },
+    "3026": {
+        "display_id": "2107",
+        "npc_name": "Aska Mistrunner"
+    },
+    "2616": {
+        "display_id": "1926",
+        "npc_name": "Privateer Groy"
+    },
+    "2617": {
+        "display_id": "263",
+        "npc_name": "[UNUSED] Archmage Detrae"
+    },
+    "2618": {
+        "display_id": "4030",
+        "npc_name": "Hammerfall Peon"
+    },
+    "3028": {
+        "display_id": "2088",
+        "npc_name": "Kah Mistrunner"
+    },
+    "3029": {
+        "display_id": "2120",
+        "npc_name": "Sewa Mistrunner"
+    },
+    "2619": {
+        "display_id": "4032",
+        "npc_name": "Hammerfall Grunt"
+    },
+    "3030": {
+        "display_id": "2123",
+        "npc_name": "Siln Skychaser"
+    },
+    "2620": {
+        "display_id": "1072",
+        "npc_name": "Prairie Dog"
+    },
+    "3031": {
+        "display_id": "2102",
+        "npc_name": "Tigor Skychaser"
+    },
+    "3032": {
+        "display_id": "2082",
+        "npc_name": "Beram Skychaser"
+    },
+    "2621": {
+        "display_id": "4034",
+        "npc_name": "Hammerfall Guardian"
+    },
+    "2622": {
+        "display_id": "4489",
+        "npc_name": "Sly Garrett"
+    },
+    "3033": {
+        "display_id": "2106",
+        "npc_name": "Turak Runetotem"
+    },
+    "2623": {
+        "display_id": "146",
+        "npc_name": "Spirit of Old"
+    },
+    "3034": {
+        "display_id": "2121",
+        "npc_name": "Sheal Runetotem"
+    },
+    "2624": {
+        "display_id": "7210",
+        "npc_name": "Gazban"
+    },
+    "2625": {
+        "display_id": "7160",
+        "npc_name": "Viznik Goldgrubber"
+    },
+    "3035": {
+        "display_id": "1059",
+        "npc_name": "Flatland Cougar"
+    },
+    "2626": {
+        "display_id": "4491",
+        "npc_name": "Old Man Heming"
+    },
+    "3036": {
+        "display_id": "2115",
+        "npc_name": "Kym Wildmane"
+    },
+    "2627": {
+        "display_id": "7176",
+        "npc_name": "Grarnik Goodstitch"
+    },
+    "12636": {
+        "display_id": "12569",
+        "npc_name": "Georgia"
+    },
+    "2628": {
+        "display_id": "3720",
+        "npc_name": "Dalaran Worker"
+    },
+    "3037": {
+        "display_id": "2122",
+        "npc_name": "Sheza Wildmane"
+    },
+    "3038": {
+        "display_id": "2112",
+        "npc_name": "Kary Thunderhorn"
+    },
+    "2630": {
+        "display_id": "4588",
+        "npc_name": "Earthbind Totem"
+    },
+    "3039": {
+        "display_id": "2087",
+        "npc_name": "Holt Thunderhorn"
+    },
+    "3040": {
+        "display_id": "2105",
+        "npc_name": "Urek Thunderhorn"
+    },
+    "3041": {
+        "display_id": "2103",
+        "npc_name": "Torm Ragetotem"
+    },
+    "3042": {
+        "display_id": "2096",
+        "npc_name": "Sark Ragetotem"
+    },
+    "3043": {
+        "display_id": "2113",
+        "npc_name": "Ker Ragetotem"
+    },
+    "3044": {
+        "display_id": "2139",
+        "npc_name": "Miles Welsh"
+    },
+    "2634": {
+        "display_id": "2178",
+        "npc_name": "Princess Poobah"
+    },
+    "3045": {
+        "display_id": "2138",
+        "npc_name": "Malakai Cross"
+    },
+    "3046": {
+        "display_id": "2137",
+        "npc_name": "Father Cobb"
+    },
+    "3047": {
+        "display_id": "2134",
+        "npc_name": "Archmage Shymm"
+    },
+    "2635": {
+        "display_id": "1038",
+        "npc_name": "Elder Saltwater Crocolisk"
+    },
+    "3048": {
+        "display_id": "6058",
+        "npc_name": "Ursyn Ghull"
+    },
+    "2636": {
+        "display_id": "11357",
+        "npc_name": "Blackwater Deckhand"
+    },
+    "3049": {
+        "display_id": "2135",
+        "npc_name": "Thurston Xane"
+    },
+    "2637": {
+        "display_id": "277",
+        "npc_name": "Syndicate Bomb"
+    },
+    "3050": {
+        "display_id": "4517",
+        "npc_name": "Veren Tallstrider"
+    },
+    "3051": {
+        "display_id": "7134",
+        "npc_name": "Supervisor Fizsprocket"
+    },
+    "2638": {
+        "display_id": "4869",
+        "npc_name": "Syndicate Spectre"
+    },
+    "3052": {
+        "display_id": "3823",
+        "npc_name": "Skorn Whitecloud"
+    },
+    "2639": {
+        "display_id": "6491",
+        "npc_name": "Vilebranch Axe Thrower"
+    },
+    "3053": {
+        "display_id": "7219",
+        "npc_name": "Synge"
+    },
+    "2640": {
+        "display_id": "6542",
+        "npc_name": "Vilebranch Witch Doctor"
+    },
+    "3054": {
+        "display_id": "3814",
+        "npc_name": "Zarlman Two-Moons"
+    },
+    "2641": {
+        "display_id": "6497",
+        "npc_name": "Vilebranch Headhunter"
+    },
+    "2642": {
+        "display_id": "6514",
+        "npc_name": "Vilebranch Shadowcaster"
+    },
+    "2643": {
+        "display_id": "6493",
+        "npc_name": "Vilebranch Berserker"
+    },
+    "3056": {
+        "display_id": "720",
+        "npc_name": "Ghost Howl"
+    },
+    "3057": {
+        "display_id": "4307",
+        "npc_name": "Cairne Bloodhoof"
+    },
+    "2644": {
+        "display_id": "6510",
+        "npc_name": "Vilebranch Hideskinner"
+    },
+    "3058": {
+        "display_id": "10916",
+        "npc_name": "Arra'chea"
+    },
+    "3059": {
+        "display_id": "3793",
+        "npc_name": "Harutt Thunderhorn"
+    },
+    "3060": {
+        "display_id": "3819",
+        "npc_name": "Gart Mistrunner"
+    },
+    "2645": {
+        "display_id": "6538",
+        "npc_name": "Vilebranch Shadow Hunter"
+    },
+    "3061": {
+        "display_id": "3810",
+        "npc_name": "Lanka Farshot"
+    },
+    "2646": {
+        "display_id": "6495",
+        "npc_name": "Vilebranch Blood Drinker"
+    },
+    "2647": {
+        "display_id": "6540",
+        "npc_name": "Vilebranch Soul Eater"
+    },
+    "3062": {
+        "display_id": "10180",
+        "npc_name": "Meela Dawnstrider"
+    },
+    "2648": {
+        "display_id": "6997",
+        "npc_name": "Vilebranch Aman'zasi Guard"
+    },
+    "3063": {
+        "display_id": "3794",
+        "npc_name": "Krang Stonehoof"
+    },
+    "3064": {
+        "display_id": "3820",
+        "npc_name": "Gennia Runetotem"
+    },
+    "3065": {
+        "display_id": "3811",
+        "npc_name": "Yaw Sharpmane"
+    },
+    "3066": {
+        "display_id": "3816",
+        "npc_name": "Narm Skychaser"
+    },
+    "2649": {
+        "display_id": "6479",
+        "npc_name": "Witherbark Scalper"
+    },
+    "3067": {
+        "display_id": "3795",
+        "npc_name": "Pyall Silentstride"
+    },
+    "2650": {
+        "display_id": "6480",
+        "npc_name": "Witherbark Zealot"
+    },
+    "3068": {
+        "display_id": "1961",
+        "npc_name": "Mazzranache"
+    },
+    "12656": {
+        "display_id": "14954",
+        "npc_name": "Thamarian"
+    },
+    "2651": {
+        "display_id": "6483",
+        "npc_name": "Witherbark Hideskinner"
+    },
+    "3069": {
+        "display_id": "3796",
+        "npc_name": "Chaw Stronghide"
+    },
+    "12657": {
+        "display_id": "12610",
+        "npc_name": "Don Pompa"
+    },
+    "2652": {
+        "display_id": "6485",
+        "npc_name": "Witherbark Venomblood"
+    },
+    "3070": {
+        "display_id": "2578",
+        "npc_name": "[UNUSED] [PH] Mulgore Alchemy Trainer"
+    },
+    "12658": {
+        "display_id": "12609",
+        "npc_name": "Adam Lind"
+    },
+    "2653": {
+        "display_id": "6489",
+        "npc_name": "Witherbark Sadist"
+    },
+    "3071": {
+        "display_id": "2578",
+        "npc_name": "[UNUSED] [PH] Mulgore Herbalism Trainer"
+    },
+    "2654": {
+        "display_id": "6487",
+        "npc_name": "Witherbark Caller"
+    },
+    "2655": {
+        "display_id": "1145",
+        "npc_name": "Green Sludge"
+    },
+    "3072": {
+        "display_id": "3797",
+        "npc_name": "Kawnie Softbreeze"
+    },
+    "3073": {
+        "display_id": "3799",
+        "npc_name": "Marjak Keenblade"
+    },
+    "3074": {
+        "display_id": "3798",
+        "npc_name": "Varia Hardhide"
+    },
+    "3075": {
+        "display_id": "3801",
+        "npc_name": "Bronk Steelrage"
+    },
+    "2656": {
+        "display_id": "11137",
+        "npc_name": "Jade Ooze"
+    },
+    "3076": {
+        "display_id": "3800",
+        "npc_name": "Moorat Longstride"
+    },
+    "3077": {
+        "display_id": "3802",
+        "npc_name": "Mahnott Roughwound"
+    },
+    "2657": {
+        "display_id": "1149",
+        "npc_name": "Trained Razorbeak"
+    },
+    "3078": {
+        "display_id": "3803",
+        "npc_name": "Kennah Hawkseye"
+    },
+    "2658": {
+        "display_id": "935",
+        "npc_name": "Razorbeak Gryphon"
+    },
+    "3079": {
+        "display_id": "10182",
+        "npc_name": "Varg Windwhisper"
+    },
+    "3080": {
+        "display_id": "3804",
+        "npc_name": "Harant Ironbrace"
+    },
+    "3081": {
+        "display_id": "3806",
+        "npc_name": "Wunna Darkmane"
+    },
+    "2659": {
+        "display_id": "1148",
+        "npc_name": "Razorbeak Skylord"
+    },
+    "3082": {
+        "display_id": "3772",
+        "npc_name": "[UNUSED] Narache Guard"
+    },
+    "3083": {
+        "display_id": "2140",
+        "npc_name": "Honor Guard"
+    },
+    "3084": {
+        "display_id": "2141",
+        "npc_name": "Bluffwatcher"
+    },
+    "2662": {
+        "display_id": "7189",
+        "npc_name": "Port Master Szik"
+    },
+    "2663": {
+        "display_id": "7190",
+        "npc_name": "Narkk"
+    },
+    "2664": {
+        "display_id": "4482",
+        "npc_name": "Kelsey Yance"
+    },
+    "2665": {
+        "display_id": "277",
+        "npc_name": "Proximity Bomb"
+    },
+    "3085": {
+        "display_id": "3375",
+        "npc_name": "Gloria Femmel"
+    },
+    "2667": {
+        "display_id": "2420",
+        "npc_name": "Ward of Laze"
+    },
+    "3086": {
+        "display_id": "3378",
+        "npc_name": "Gretchen Vogel"
+    },
+    "2668": {
+        "display_id": "4273",
+        "npc_name": "Danielle Zipstitch"
+    },
+    "3087": {
+        "display_id": "3379",
+        "npc_name": "Crystal Boughman"
+    },
+    "2669": {
+        "display_id": "4274",
+        "npc_name": "Sheri Zipstitch"
+    },
+    "2670": {
+        "display_id": "7177",
+        "npc_name": "Xizk Goodstitch"
+    },
+    "2671": {
+        "display_id": "7937",
+        "npc_name": "Mechanical Squirrel"
+    },
+    "2672": {
+        "display_id": "4397",
+        "npc_name": "Cowardly Crosby"
+    },
+    "3088": {
+        "display_id": "3380",
+        "npc_name": "Henry Chapal"
+    },
+    "2673": {
+        "display_id": "1555",
+        "npc_name": "Target Dummy"
+    },
+    "3089": {
+        "display_id": "3373",
+        "npc_name": "Sherman Femmel"
+    },
+    "3090": {
+        "display_id": "3381",
+        "npc_name": "Gerald Crawley"
+    },
+    "3091": {
+        "display_id": "3376",
+        "npc_name": "Franklin Hamar"
+    },
+    "2674": {
+        "display_id": "1555",
+        "npc_name": "Advanced Target Dummy"
+    },
+    "3092": {
+        "display_id": "2133",
+        "npc_name": "Tagain"
+    },
+    "2675": {
+        "display_id": "3886",
+        "npc_name": "Explosive Sheep"
+    },
+    "3093": {
+        "display_id": "2129",
+        "npc_name": "Grod"
+    },
+    "12676": {
+        "display_id": "12589",
+        "npc_name": "Sharptalon"
+    },
+    "2676": {
+        "display_id": "1159",
+        "npc_name": "Compact Harvest Reaper"
+    },
+    "12677": {
+        "display_id": "11452",
+        "npc_name": "Shadumbra"
+    },
+    "12678": {
+        "display_id": "2281",
+        "npc_name": "Ursangous"
+    },
+    "3094": {
+        "display_id": "146",
+        "npc_name": "Unseen"
+    },
+    "2678": {
+        "display_id": "4465",
+        "npc_name": "Mechanical Dragonling"
+    },
+    "2679": {
+        "display_id": "1620",
+        "npc_name": "Wenna Silkbeard"
+    },
+    "3095": {
+        "display_id": "2132",
+        "npc_name": "Fela"
+    },
+    "2680": {
+        "display_id": "781",
+        "npc_name": "Vilebranch Wolf Pup"
+    },
+    "3096": {
+        "display_id": "5015",
+        "npc_name": "Captured Servant of Azora"
+    },
+    "2681": {
+        "display_id": "782",
+        "npc_name": "Vilebranch Raiding Wolf"
+    },
+    "3097": {
+        "display_id": "5013",
+        "npc_name": "Bernard Brubaker"
+    },
+    "3098": {
+        "display_id": "503",
+        "npc_name": "Mottled Boar"
+    },
+    "2682": {
+        "display_id": "3482",
+        "npc_name": "Fradd Swiftgear"
+    },
+    "3099": {
+        "display_id": "381",
+        "npc_name": "Dire Mottled Boar"
+    },
+    "2683": {
+        "display_id": "4953",
+        "npc_name": "Namdo Bizzfizzle"
+    },
+    "3100": {
+        "display_id": "193",
+        "npc_name": "Elder Mottled Boar"
+    },
+    "2684": {
+        "display_id": "3733",
+        "npc_name": "Rizz Loosebolt"
+    },
+    "3101": {
+        "display_id": "1185",
+        "npc_name": "Vile Familiar"
+    },
+    "2685": {
+        "display_id": "7179",
+        "npc_name": "Mazk Snipeshot"
+    },
+    "3102": {
+        "display_id": "850",
+        "npc_name": "Felstalker"
+    },
+    "3103": {
+        "display_id": "1940",
+        "npc_name": "Makrura Clacker"
+    },
+    "3104": {
+        "display_id": "1246",
+        "npc_name": "Makrura Shellhide"
+    },
+    "2686": {
+        "display_id": "1157",
+        "npc_name": "Witherbark Broodguard"
+    },
+    "3105": {
+        "display_id": "1248",
+        "npc_name": "Makrura Snapclaw"
+    },
+    "2687": {
+        "display_id": "4493",
+        "npc_name": "Gnaz Blunderflame"
+    },
+    "2688": {
+        "display_id": "6545",
+        "npc_name": "Ruppo Zipcoil"
+    },
+    "3106": {
+        "display_id": "1307",
+        "npc_name": "Pygmy Surf Crawler"
+    },
+    "2689": {
+        "display_id": "10040",
+        "npc_name": "Hill Giant"
+    },
+    "3107": {
+        "display_id": "1938",
+        "npc_name": "Surf Crawler"
+    },
+    "3108": {
+        "display_id": "999",
+        "npc_name": "Encrusted Surf Crawler"
+    },
+    "2690": {
+        "display_id": "6910",
+        "npc_name": "Hill Giant Warden"
+    },
+    "2691": {
+        "display_id": "6547",
+        "npc_name": "Highvale Outrunner"
+    },
+    "3110": {
+        "display_id": "1250",
+        "npc_name": "Dreadmaw Crocolisk"
+    },
+    "2692": {
+        "display_id": "6549",
+        "npc_name": "Highvale Scout"
+    },
+    "3111": {
+        "display_id": "1218",
+        "npc_name": "Razormane Quilboar"
+    },
+    "3112": {
+        "display_id": "1252",
+        "npc_name": "Razormane Scout"
+    },
+    "2693": {
+        "display_id": "6546",
+        "npc_name": "Highvale Marksman"
+    },
+    "12696": {
+        "display_id": "12970",
+        "npc_name": "Senani Thunderheart"
+    },
+    "2694": {
+        "display_id": "6548",
+        "npc_name": "Highvale Ranger"
+    },
+    "2695": {
+        "display_id": "1670",
+        "npc_name": "Sara Balloo"
+    },
+    "2696": {
+        "display_id": "1668",
+        "npc_name": "Foggy MacKreel"
+    },
+    "2697": {
+        "display_id": "3357",
+        "npc_name": "Clyde Ranthal"
+    },
+    "3113": {
+        "display_id": "6088",
+        "npc_name": "Razormane Dustrunner"
+    },
+    "2698": {
+        "display_id": "3680",
+        "npc_name": "George Candarte"
+    },
+    "3114": {
+        "display_id": "1964",
+        "npc_name": "Razormane Battleguard"
+    },
+    "2699": {
+        "display_id": "7170",
+        "npc_name": "Rikqiz"
+    },
+    "3115": {
+        "display_id": "3012",
+        "npc_name": "Dustwind Harpy"
+    },
+    "3116": {
+        "display_id": "6814",
+        "npc_name": "Dustwind Pillager"
+    },
+    "2700": {
+        "display_id": "4147",
+        "npc_name": "Captain Nials"
+    },
+    "3117": {
+        "display_id": "2166",
+        "npc_name": "Dustwind Savage"
+    },
+    "2701": {
+        "display_id": "10704",
+        "npc_name": "Dustbelcher Ogre"
+    },
+    "2702": {
+        "display_id": "312",
+        "npc_name": "Felhunter Trainer"
+    },
+    "3118": {
+        "display_id": "6815",
+        "npc_name": "Dustwind Storm Witch"
+    },
+    "2703": {
+        "display_id": "4013",
+        "npc_name": "Zengu"
+    },
+    "2704": {
+        "display_id": "12989",
+        "npc_name": "Hanashi"
+    },
+    "2705": {
+        "display_id": "1663",
+        "npc_name": "Brewmeister Bilger"
+    },
+    "2706": {
+        "display_id": "4047",
+        "npc_name": "Tor'gan"
+    },
+    "3119": {
+        "display_id": "9442",
+        "npc_name": "Kolkar Drudge"
+    },
+    "2707": {
+        "display_id": "7536",
+        "npc_name": "Shadra"
+    },
+    "3120": {
+        "display_id": "9443",
+        "npc_name": "Kolkar Outrunner"
+    },
+    "2708": {
+        "display_id": "2968",
+        "npc_name": "Archmage Malin"
+    },
+    "2709": {
+        "display_id": "1176",
+        "npc_name": "Imp Trainer"
+    },
+    "3121": {
+        "display_id": "598",
+        "npc_name": "Durotar Tiger"
+    },
+    "3122": {
+        "display_id": "1960",
+        "npc_name": "Bloodtalon Taillasher"
+    },
+    "2710": {
+        "display_id": "312",
+        "npc_name": "Voidwalker Trainer"
+    },
+    "3123": {
+        "display_id": "1959",
+        "npc_name": "Bloodtalon Scythemaw"
+    },
+    "2711": {
+        "display_id": "3666",
+        "npc_name": "Phin Odelic"
+    },
+    "2712": {
+        "display_id": "1853",
+        "npc_name": "Quae"
+    },
+    "3124": {
+        "display_id": "2485",
+        "npc_name": "Scorpid Worker"
+    },
+    "3125": {
+        "display_id": "2486",
+        "npc_name": "Clattering Scorpid"
+    },
+    "2713": {
+        "display_id": "1716",
+        "npc_name": "Kinelory"
+    },
+    "3126": {
+        "display_id": "2487",
+        "npc_name": "Armored Scorpid"
+    },
+    "3127": {
+        "display_id": "2732",
+        "npc_name": "Venomtail Scorpid"
+    },
+    "2714": {
+        "display_id": "4041",
+        "npc_name": "Forsaken Courier"
+    },
+    "3128": {
+        "display_id": "3734",
+        "npc_name": "Kul Tiras Sailor"
+    },
+    "2715": {
+        "display_id": "10714",
+        "npc_name": "Dustbelcher Brute"
+    },
+    "3129": {
+        "display_id": "1860",
+        "npc_name": "Kul Tiras Marine"
+    },
+    "2716": {
+        "display_id": "11548",
+        "npc_name": "Dustbelcher Wyrmhunter"
+    },
+    "2717": {
+        "display_id": "1120",
+        "npc_name": "Dustbelcher Mauler"
+    },
+    "3130": {
+        "display_id": "2179",
+        "npc_name": "Thunder Lizard"
+    },
+    "2718": {
+        "display_id": "11545",
+        "npc_name": "Dustbelcher Shaman"
+    },
+    "3131": {
+        "display_id": "1532",
+        "npc_name": "Lightning Hide"
+    },
+    "2719": {
+        "display_id": "1120",
+        "npc_name": "Dustbelcher Lord"
+    },
+    "2720": {
+        "display_id": "11546",
+        "npc_name": "Dustbelcher Ogre Mage"
+    },
+    "12716": {
+        "display_id": "7330",
+        "npc_name": "Decedra Willham"
+    },
+    "2721": {
+        "display_id": "4037",
+        "npc_name": "Forsaken Bodyguard"
+    },
+    "12717": {
+        "display_id": "12961",
+        "npc_name": "Muglash"
+    },
+    "3133": {
+        "display_id": "4286",
+        "npc_name": "Herble Baubbletump"
+    },
+    "2723": {
+        "display_id": "10804",
+        "npc_name": "Stone Golem"
+    },
+    "3134": {
+        "display_id": "7131",
+        "npc_name": "Kzixx"
+    },
+    "12718": {
+        "display_id": "12946",
+        "npc_name": "Gurda Ragescar"
+    },
+    "3135": {
+        "display_id": "4337",
+        "npc_name": "Malissa"
+    },
+    "12719": {
+        "display_id": "12958",
+        "npc_name": "Marukai"
+    },
+    "12720": {
+        "display_id": "12936",
+        "npc_name": "Framnali"
+    },
+    "16008": {
+        "display_id": "15955",
+        "npc_name": "Temma of the Wells"
+    },
+    "2725": {
+        "display_id": "715",
+        "npc_name": "Scalding Whelp"
+    },
+    "12721": {
+        "display_id": "12960",
+        "npc_name": "Mitsuwa"
+    },
+    "3136": {
+        "display_id": "4330",
+        "npc_name": "Clarise Gnarltree"
+    },
+    "2726": {
+        "display_id": "9586",
+        "npc_name": "Scorched Guardian"
+    },
+    "12722": {
+        "display_id": "12973",
+        "npc_name": "Vera Nightshade"
+    },
+    "3137": {
+        "display_id": "4333",
+        "npc_name": "Matt Johnson"
+    },
+    "12245": {
+        "display_id": "1159",
+        "npc_name": "Vendor-Tron 1000"
+    },
+    "2727": {
+        "display_id": "161",
+        "npc_name": "Crag Coyote"
+    },
+    "3138": {
+        "display_id": "4339",
+        "npc_name": "Scott Carevin"
+    },
+    "12246": {
+        "display_id": "1159",
+        "npc_name": "Super-Seller 680"
+    },
+    "12723": {
+        "display_id": "12948",
+        "npc_name": "Har'alen"
+    },
+    "2728": {
+        "display_id": "557",
+        "npc_name": "Feral Crag Coyote"
+    },
+    "12247": {
+        "display_id": "12271",
+        "npc_name": "Scourge Structure"
+    },
+    "12724": {
+        "display_id": "12968",
+        "npc_name": "Pixel"
+    },
+    "3139": {
+        "display_id": "3736",
+        "npc_name": "Gar'Thok"
+    },
+    "3140": {
+        "display_id": "4070",
+        "npc_name": "Lar Prowltusk"
+    },
+    "12248": {
+        "display_id": "12390",
+        "npc_name": "Infiltrator Hameya"
+    },
+    "3141": {
+        "display_id": "1818",
+        "npc_name": "Makrura Elder"
+    },
+    "2729": {
+        "display_id": "1164",
+        "npc_name": "Elder Crag Coyote"
+    },
+    "12249": {
+        "display_id": "7804",
+        "npc_name": "Mark of Detonation (SW)"
+    },
+    "2730": {
+        "display_id": "161",
+        "npc_name": "Rabid Crag Coyote"
+    },
+    "3142": {
+        "display_id": "1877",
+        "npc_name": "Orgnil Soulscar"
+    },
+    "12250": {
+        "display_id": "10275",
+        "npc_name": "Zaeldarr the Outcast"
+    },
+    "2731": {
+        "display_id": "632",
+        "npc_name": "Ridge Stalker"
+    },
+    "12251": {
+        "display_id": "7804",
+        "npc_name": "Mark of Detonation (CLS)"
+    },
+    "2732": {
+        "display_id": "1055",
+        "npc_name": "Ridge Huntress"
+    },
+    "3143": {
+        "display_id": "1653",
+        "npc_name": "Gornek"
+    },
+    "12252": {
+        "display_id": "7804",
+        "npc_name": "Mark of Detonation (CRS)"
+    },
+    "2733": {
+        "display_id": "4040",
+        "npc_name": "Apothecary Jorell"
+    },
+    "12253": {
+        "display_id": "7804",
+        "npc_name": "Mark of Detonation (CSH)"
+    },
+    "3144": {
+        "display_id": "1619",
+        "npc_name": "Eitrigg"
+    },
+    "2734": {
+        "display_id": "917",
+        "npc_name": "Ridge Stalker Patriarch"
+    },
+    "3145": {
+        "display_id": "1875",
+        "npc_name": "Zureetha Fargaze"
+    },
+    "2735": {
+        "display_id": "1161",
+        "npc_name": "Lesser Rock Elemental"
+    },
+    "12254": {
+        "display_id": "7804",
+        "npc_name": "Mark of Detonation (NESH)"
+    },
+    "3146": {
+        "display_id": "1867",
+        "npc_name": "Gurek"
+    },
+    "12255": {
+        "display_id": "7804",
+        "npc_name": "Mark of Detonation (NE)"
+    },
+    "2736": {
+        "display_id": "14328",
+        "npc_name": "Greater Rock Elemental"
+    },
+    "3147": {
+        "display_id": "1275",
+        "npc_name": "Furl Scornbrow"
+    },
+    "12256": {
+        "display_id": "7804",
+        "npc_name": "Mark of Detonation (SE)"
+    },
+    "2737": {
+        "display_id": "9817",
+        "npc_name": "Durtham Greldon"
+    },
+    "3148": {
+        "display_id": "2576",
+        "npc_name": "[UNUSED] Torc the Orc"
+    },
+    "12257": {
+        "display_id": "10269",
+        "npc_name": "Mechanical Yeti"
+    },
+    "3149": {
+        "display_id": "9352",
+        "npc_name": "Nez'raz"
+    },
+    "2738": {
+        "display_id": "4145",
+        "npc_name": "Stromgarde Cavalryman"
+    },
+    "12258": {
+        "display_id": "12389",
+        "npc_name": "Razorlash"
+    },
+    "2739": {
+        "display_id": "4932",
+        "npc_name": "Shadowforge Tunneler"
+    },
+    "12736": {
+        "display_id": "12953",
+        "npc_name": "Je'neu Sancrea"
+    },
+    "12259": {
+        "display_id": "13030",
+        "npc_name": "Gehennas"
+    },
+    "3150": {
+        "display_id": "11911",
+        "npc_name": "Hin Denburg"
+    },
+    "12260": {
+        "display_id": "6369",
+        "npc_name": "Onyxian Drake"
+    },
+    "12737": {
+        "display_id": "12959",
+        "npc_name": "Mastok Wrilehiss"
+    },
+    "2740": {
+        "display_id": "4933",
+        "npc_name": "Shadowforge Darkweaver"
+    },
+    "12261": {
+        "display_id": "4769",
+        "npc_name": "Infected Mossflayer"
+    },
+    "3151": {
+        "display_id": "1233",
+        "npc_name": "Captain Obvious"
+    },
+    "12738": {
+        "display_id": "12967",
+        "npc_name": "Nori Pridedrift"
+    },
+    "12739": {
+        "display_id": "2554",
+        "npc_name": "Onyxia's Elite Guard"
+    },
+    "12262": {
+        "display_id": "10627",
+        "npc_name": "Ziggurat Protector"
+    },
+    "3152": {
+        "display_id": "1233",
+        "npc_name": "Cap'n Copyright"
+    },
+    "2741": {
+        "display_id": "4934",
+        "npc_name": "Shadowforge Excavator"
+    },
+    "12740": {
+        "display_id": "12629",
+        "npc_name": "Faustron"
+    },
+    "12741": {
+        "display_id": "143",
+        "npc_name": "Warrior 40 (More Leash)"
+    },
+    "2742": {
+        "display_id": "4935",
+        "npc_name": "Shadowforge Chanter"
+    },
+    "3153": {
+        "display_id": "1880",
+        "npc_name": "Frang"
+    },
+    "12263": {
+        "display_id": "7864",
+        "npc_name": "Slaughterhouse Protector"
+    },
+    "2743": {
+        "display_id": "4936",
+        "npc_name": "Shadowforge Warrior"
+    },
+    "3154": {
+        "display_id": "1882",
+        "npc_name": "Jen'shan"
+    },
+    "12264": {
+        "display_id": "13032",
+        "npc_name": "Shazzrah"
+    },
+    "2781": {
+        "display_id": "2436",
+        "npc_name": "Caretaker Weston"
+    },
+    "3165": {
+        "display_id": "3739",
+        "npc_name": "Ghrawt"
+    },
+    "2782": {
+        "display_id": "2434",
+        "npc_name": "Caretaker Alaric"
+    },
+    "3166": {
+        "display_id": "3740",
+        "npc_name": "Cutac"
+    },
+    "2783": {
+        "display_id": "4031",
+        "npc_name": "Marez Cowl"
+    },
+    "3167": {
+        "display_id": "3742",
+        "npc_name": "Wuark"
+    },
+    "3168": {
+        "display_id": "3741",
+        "npc_name": "Flakk"
+    },
+    "2784": {
+        "display_id": "3597",
+        "npc_name": "King Magni Bronzebeard"
+    },
+    "3169": {
+        "display_id": "3743",
+        "npc_name": "Tarshaw Jaggedscar"
+    },
+    "3170": {
+        "display_id": "3749",
+        "npc_name": "Kaplak"
+    },
+    "2785": {
+        "display_id": "4903",
+        "npc_name": "Theldurin the Lost"
+    },
+    "2786": {
+        "display_id": "3599",
+        "npc_name": "Gerrig Bonegrip"
+    },
+    "3171": {
+        "display_id": "3744",
+        "npc_name": "Thotar"
+    },
+    "2787": {
+        "display_id": "4463",
+        "npc_name": "Zaruk"
+    },
+    "12276": {
+        "display_id": "10056",
+        "npc_name": "Hive'Zora Egg"
+    },
+    "2788": {
+        "display_id": "4043",
+        "npc_name": "Apprentice Kryten"
+    },
+    "3172": {
+        "display_id": "3745",
+        "npc_name": "Dhugru Gorelust"
+    },
+    "2789": {
+        "display_id": "4042",
+        "npc_name": "Skuerto"
+    },
+    "3173": {
+        "display_id": "3746",
+        "npc_name": "Swart"
+    },
+    "12277": {
+        "display_id": "12409",
+        "npc_name": "Melizza Brimbuzzle"
+    },
+    "2790": {
+        "display_id": "5410",
+        "npc_name": "Grand Mason Marblesten"
+    },
+    "3174": {
+        "display_id": "3747",
+        "npc_name": "Dwukk"
+    },
+    "3175": {
+        "display_id": "3748",
+        "npc_name": "Krunn"
+    },
+    "12776": {
+        "display_id": "14371",
+        "npc_name": "Hraug"
+    },
+    "2791": {
+        "display_id": "8550",
+        "npc_name": "Enraged Rock Elemental"
+    },
+    "12777": {
+        "display_id": "12917",
+        "npc_name": "Captain Dirgehammer"
+    },
+    "2792": {
+        "display_id": "4048",
+        "npc_name": "Gor'mul"
+    },
+    "3176": {
+        "display_id": "1139",
+        "npc_name": "[UNUSED] [PH] Durotar Engineering Trainer"
+    },
+    "12778": {
+        "display_id": "9811",
+        "npc_name": "Lieutenant Rachel Vaccar"
+    },
+    "3177": {
+        "display_id": "3411",
+        "npc_name": "Turuk Amberstill"
+    },
+    "12779": {
+        "display_id": "12910",
+        "npc_name": "Archmage Gaiman"
+    },
+    "2793": {
+        "display_id": "6168",
+        "npc_name": "Kor'gresh Coldrage"
+    },
+    "3178": {
+        "display_id": "3468",
+        "npc_name": "Stuart Fleming"
+    },
+    "2794": {
+        "display_id": "4606",
+        "npc_name": "Summoned Guardian"
+    },
+    "12780": {
+        "display_id": "12924",
+        "npc_name": "Sergeant Major Skyshadow"
+    },
+    "2795": {
+        "display_id": "1505",
+        "npc_name": "Lenny \"Fingers\" McCoy"
+    },
+    "3179": {
+        "display_id": "3470",
+        "npc_name": "Harold Riggs"
+    },
+    "12781": {
+        "display_id": "12669",
+        "npc_name": "Master Sergeant Biggins"
+    },
+    "3180": {
+        "display_id": "3471",
+        "npc_name": "Dark Iron Entrepreneur"
+    },
+    "12782": {
+        "display_id": "12918",
+        "npc_name": "Captain O'Neal"
+    },
+    "3181": {
+        "display_id": "3469",
+        "npc_name": "Fremal Doohickey"
+    },
+    "2796": {
+        "display_id": "2232",
+        "npc_name": "Faelyssa"
+    },
+    "12783": {
+        "display_id": "12922",
+        "npc_name": "Lieutenant Karter"
+    },
+    "3182": {
+        "display_id": "3481",
+        "npc_name": "Junder Brokk"
+    },
+    "2797": {
+        "display_id": "14948",
+        "npc_name": "Hovrak Gutrender"
+    },
+    "3183": {
+        "display_id": "1876",
+        "npc_name": "Yarrog Baneshadow"
+    },
+    "2798": {
+        "display_id": "2131",
+        "npc_name": "Pand Stonebinder"
+    },
+    "12784": {
+        "display_id": "12921",
+        "npc_name": "Lieutenant Jackspring"
+    },
+    "2799": {
+        "display_id": "2610",
+        "npc_name": "Lucian Fenner"
+    },
+    "3184": {
+        "display_id": "4071",
+        "npc_name": "Miao'zan"
+    },
+    "12785": {
+        "display_id": "12925",
+        "npc_name": "Sergeant Major Clate"
+    },
+    "3185": {
+        "display_id": "4085",
+        "npc_name": "Mishiki"
+    },
+    "12786": {
+        "display_id": "12920",
+        "npc_name": "Guard Quine"
+    },
+    "3186": {
+        "display_id": "4089",
+        "npc_name": "K'waii"
+    },
+    "2801": {
+        "display_id": "14946",
+        "npc_name": "Tresa MacGregor"
+    },
+    "12787": {
+        "display_id": "12919",
+        "npc_name": "Guard Hammon"
+    },
+    "2802": {
+        "display_id": "10563",
+        "npc_name": "Susan Tillinghast"
+    },
+    "3187": {
+        "display_id": "4087",
+        "npc_name": "Tai'tasi"
+    },
+    "12788": {
+        "display_id": "12670",
+        "npc_name": "Legionnaire Teena"
+    },
+    "2803": {
+        "display_id": "2241",
+        "npc_name": "Malygen"
+    },
+    "12789": {
+        "display_id": "12671",
+        "npc_name": "Blood Guard Hini'wana"
+    },
+    "3188": {
+        "display_id": "4072",
+        "npc_name": "Master Gadrin"
+    },
+    "2804": {
+        "display_id": "1871",
+        "npc_name": "Kurden Bloodclaw"
+    },
+    "12790": {
+        "display_id": "12672",
+        "npc_name": "Advisor Willington"
+    },
+    "2805": {
+        "display_id": "1506",
+        "npc_name": "Deneb Walker"
+    },
+    "12791": {
+        "display_id": "12673",
+        "npc_name": "Chieftain Earthbind"
+    },
+    "3189": {
+        "display_id": "4073",
+        "npc_name": "Kor'ghan"
+    },
+    "12792": {
+        "display_id": "12674",
+        "npc_name": "Lady Palanseer"
+    },
+    "2806": {
+        "display_id": "2128",
+        "npc_name": "Bale"
+    },
+    "3190": {
+        "display_id": "4075",
+        "npc_name": "Rhinag"
+    },
+    "2807": {
+        "display_id": "4910",
+        "npc_name": "Daggerspine Wavecaller"
+    },
+    "12793": {
+        "display_id": "12675",
+        "npc_name": "Brave Stonehide"
+    },
+    "2808": {
+        "display_id": "3966",
+        "npc_name": "Vikki Lonsav"
+    },
+    "12794": {
+        "display_id": "12676",
+        "npc_name": "Stone Guard Zarg"
+    },
+    "3191": {
+        "display_id": "3751",
+        "npc_name": "Cook Torka"
+    },
+    "12795": {
+        "display_id": "12677",
+        "npc_name": "First Sergeant Hola'mahi"
+    },
+    "12796": {
+        "display_id": "12678",
+        "npc_name": "Raider Bork"
+    },
+    "2809": {
+        "display_id": "1167",
+        "npc_name": "Boar"
+    },
+    "3192": {
+        "display_id": "1276",
+        "npc_name": "Lieutenant Benedict"
+    },
+    "3193": {
+        "display_id": "3750",
+        "npc_name": "Misha Tor'kren"
+    },
+    "12797": {
+        "display_id": "12679",
+        "npc_name": "Grunt Korf"
+    },
+    "2810": {
+        "display_id": "3967",
+        "npc_name": "Hammon Karwn"
+    },
+    "12798": {
+        "display_id": "12680",
+        "npc_name": "Grunt Bek'rah"
+    },
+    "3194": {
+        "display_id": "4074",
+        "npc_name": "Vel'rin Fang"
+    },
+    "12799": {
+        "display_id": "12681",
+        "npc_name": "Sergeant Ba'sha"
+    },
+    "3195": {
+        "display_id": "4188",
+        "npc_name": "Burning Blade Thug"
+    },
+    "12800": {
+        "display_id": "4269",
+        "npc_name": "Chimaerok"
+    },
+    "3196": {
+        "display_id": "4186",
+        "npc_name": "Burning Blade Neophyte"
+    },
+    "2812": {
+        "display_id": "3964",
+        "npc_name": "Drovnar Strongbrew"
+    },
+    "2813": {
+        "display_id": "3968",
+        "npc_name": "[UNUSED] Thurgas"
+    },
+    "12296": {
+        "display_id": "14951",
+        "npc_name": "Sickly Gazelle"
+    },
+    "3197": {
+        "display_id": "4192",
+        "npc_name": "Burning Blade Fanatic"
+    },
+    "2814": {
+        "display_id": "3962",
+        "npc_name": "Narj Deepslice"
+    },
+    "12297": {
+        "display_id": "1547",
+        "npc_name": "Cured Gazelle"
+    },
+    "12801": {
+        "display_id": "10810",
+        "npc_name": "Arcane Chimaerok"
+    },
+    "2815": {
+        "display_id": "3949",
+        "npc_name": "[UNUSED] Teresa Shore"
+    },
+    "12298": {
+        "display_id": "10091",
+        "npc_name": "Sickly Deer"
+    },
+    "12802": {
+        "display_id": "9560",
+        "npc_name": "Chimaerok Devourer"
+    },
+    "3198": {
+        "display_id": "4190",
+        "npc_name": "Burning Blade Apprentice"
+    },
+    "2816": {
+        "display_id": "3965",
+        "npc_name": "Androd Fadran"
+    },
+    "12299": {
+        "display_id": "347",
+        "npc_name": "Cured Deer"
+    },
+    "12803": {
+        "display_id": "12683",
+        "npc_name": "Lord Lakmaeran"
+    },
+    "2817": {
+        "display_id": "7033",
+        "npc_name": "Rigglefuzz"
+    },
+    "2818": {
+        "display_id": "3950",
+        "npc_name": "Slagg"
+    },
+    "12804": {
+        "display_id": "11121",
+        "npc_name": "[PH] TEST Fire God"
+    },
+    "3199": {
+        "display_id": "4194",
+        "npc_name": "Burning Blade Cultist"
+    },
+    "2819": {
+        "display_id": "3951",
+        "npc_name": "Tunkk"
+    },
+    "3200": {
+        "display_id": "1233",
+        "npc_name": "Eric's AAA Special Vendor"
+    },
+    "12805": {
+        "display_id": "12923",
+        "npc_name": "Officer Areyn"
+    },
+    "2820": {
+        "display_id": "3952",
+        "npc_name": "Graud"
+    },
+    "3201": {
+        "display_id": "2582",
+        "npc_name": "SM Test Mob"
+    },
+    "12806": {
+        "display_id": "4759",
+        "npc_name": "Magmakin"
+    },
+    "3202": {
+        "display_id": "1261",
+        "npc_name": "[UNUSED] Josh Test"
+    },
+    "2821": {
+        "display_id": "3953",
+        "npc_name": "Keena"
+    },
+    "12807": {
+        "display_id": "12689",
+        "npc_name": "Greshka"
+    },
+    "3203": {
+        "display_id": "7128",
+        "npc_name": "Fizzle Darkstorm"
+    },
+    "2829": {
+        "display_id": "10824",
+        "npc_name": "Starving Buzzard"
+    },
+    "12816": {
+        "display_id": "12709",
+        "npc_name": "Xen'Zilla"
+    },
+    "2830": {
+        "display_id": "1105",
+        "npc_name": "Buzzard"
+    },
+    "2831": {
+        "display_id": "1106",
+        "npc_name": "Giant Buzzard"
+    },
+    "12818": {
+        "display_id": "12969",
+        "npc_name": "Ruul Snowhoof"
+    },
+    "12819": {
+        "display_id": "8842",
+        "npc_name": "Ruul Snowhoof Bear Form"
+    },
+    "2832": {
+        "display_id": "7180",
+        "npc_name": "Nixxrax Fillamug"
+    },
+    "2833": {
+        "display_id": "2582",
+        "npc_name": "DEBUG - Gossip Gryphon Master"
+    },
+    "2834": {
+        "display_id": "7172",
+        "npc_name": "Myizz Luckycatch"
+    },
+    "2835": {
+        "display_id": "4044",
+        "npc_name": "Cedrik Prose"
+    },
+    "12317": {
+        "display_id": "2467",
+        "npc_name": "Unkillable Test Dummy 60 Low AC"
+    },
+    "2836": {
+        "display_id": "7161",
+        "npc_name": "Brikk Keencraft"
+    },
+    "2837": {
+        "display_id": "7174",
+        "npc_name": "Jaxin Chong"
+    },
+    "2838": {
+        "display_id": "7181",
+        "npc_name": "Crazk Sparks"
+    },
+    "2839": {
+        "display_id": "4478",
+        "npc_name": "Haren Kanmae"
+    },
+    "12319": {
+        "display_id": "4196",
+        "npc_name": "Burning Blade Toxicologist"
+    },
+    "2840": {
+        "display_id": "7183",
+        "npc_name": "Kizz Bluntstrike"
+    },
+    "12320": {
+        "display_id": "4198",
+        "npc_name": "Burning Blade Crusher"
+    },
+    "2842": {
+        "display_id": "7184",
+        "npc_name": "Wigcik"
+    },
+    "12321": {
+        "display_id": "4980",
+        "npc_name": "Stormscale Toxicologist"
+    },
+    "2843": {
+        "display_id": "4481",
+        "npc_name": "Jutak"
+    },
+    "2844": {
+        "display_id": "4477",
+        "npc_name": "Hurklor"
+    },
+    "12322": {
+        "display_id": "10375",
+        "npc_name": "Quel'Lithien Protector"
+    },
+    "2845": {
+        "display_id": "4476",
+        "npc_name": "Fargon Mortalak"
+    },
+    "2846": {
+        "display_id": "7186",
+        "npc_name": "Blixrez Goodstitch"
+    },
+    "2847": {
+        "display_id": "4479",
+        "npc_name": "Jansen Underwood"
+    },
+    "2848": {
+        "display_id": "7178",
+        "npc_name": "Glyx Brewright"
+    },
+    "2849": {
+        "display_id": "7187",
+        "npc_name": "Qixdi Goodstitch"
+    },
+    "12836": {
+        "display_id": "12750",
+        "npc_name": "Wandering Protector"
+    },
+    "2850": {
+        "display_id": "6082",
+        "npc_name": "Broken Tooth"
+    },
+    "12837": {
+        "display_id": "12976",
+        "npc_name": "Yama Snowhoof"
+    },
+    "2851": {
+        "display_id": "3972",
+        "npc_name": "Urda"
+    },
+    "2852": {
+        "display_id": "4246",
+        "npc_name": "Enslaved Druid of the Talon"
+    },
+    "2853": {
+        "display_id": "1192",
+        "npc_name": "Freed Druid of the Talon"
+    },
+    "2855": {
+        "display_id": "4384",
+        "npc_name": "Snang"
+    },
+    "2856": {
+        "display_id": "4364",
+        "npc_name": "Angrun"
+    },
+    "2857": {
+        "display_id": "4386",
+        "npc_name": "Thund"
+    },
+    "2858": {
+        "display_id": "12938",
+        "npc_name": "Gringer"
+    },
+    "2859": {
+        "display_id": "12945",
+        "npc_name": "Gyll"
+    },
+    "2860": {
+        "display_id": "1568",
+        "npc_name": "Sigrun Ironhew"
+    },
+    "2861": {
+        "display_id": "4148",
+        "npc_name": "Gorrik"
+    },
+    "2862": {
+        "display_id": "143",
+        "npc_name": "Warrior 21"
+    },
+    "12336": {
+        "display_id": "13049",
+        "npc_name": "Brother Crowley"
+    },
+    "2863": {
+        "display_id": "143",
+        "npc_name": "Warrior 22"
+    },
+    "2864": {
+        "display_id": "143",
+        "npc_name": "Warrior 23"
+    },
+    "12337": {
+        "display_id": "10502",
+        "npc_name": "Crimson Courier"
+    },
+    "2865": {
+        "display_id": "143",
+        "npc_name": "Warrior 24"
+    },
+    "12338": {
+        "display_id": "12829",
+        "npc_name": "Shadowprey Guardian"
+    },
+    "2866": {
+        "display_id": "143",
+        "npc_name": "Warrior 26"
+    },
+    "12339": {
+        "display_id": "10507",
+        "npc_name": "Demetria"
+    },
+    "2867": {
+        "display_id": "143",
+        "npc_name": "Warrior 27"
+    },
+    "2868": {
+        "display_id": "143",
+        "npc_name": "Warrior 28"
+    },
+    "2615": {
+        "display_id": "10952",
+        "npc_name": "[UNUSED] Stromgarde Roughrider"
+    },
+    "3027": {
+        "display_id": "2095",
+        "npc_name": "Naal Mistrunner"
+    },
+    "3055": {
+        "display_id": "1678",
+        "npc_name": "Maur Raincaller"
+    },
+    "3155": {
+        "display_id": "1886",
+        "npc_name": "Rwag"
+    },
+    "3156": {
+        "display_id": "1884",
+        "npc_name": "Nartok"
+    },
+    "3157": {
+        "display_id": "1878",
+        "npc_name": "Shikrik"
+    },
+    "3158": {
+        "display_id": "1879",
+        "npc_name": "Duokna"
+    },
+    "3159": {
+        "display_id": "1883",
+        "npc_name": "Kzan Thornslash"
+    },
+    "3160": {
+        "display_id": "1881",
+        "npc_name": "Huklah"
+    },
+    "3161": {
+        "display_id": "1885",
+        "npc_name": "Rarc"
+    },
+    "3162": {
+        "display_id": "3408",
+        "npc_name": "Burdrak Harglhelm"
+    },
+    "3163": {
+        "display_id": "3738",
+        "npc_name": "Uhgar"
+    },
+    "2744": {
+        "display_id": "4937",
+        "npc_name": "Shadowforge Commander"
+    },
+    "3164": {
+        "display_id": "3737",
+        "npc_name": "Jark"
+    },
+    "3204": {
+        "display_id": "240",
+        "npc_name": "Gazz'uz"
+    },
+    "3205": {
+        "display_id": "4078",
+        "npc_name": "Zalazane"
+    },
+    "3206": {
+        "display_id": "4076",
+        "npc_name": "Voodoo Troll"
+    },
+    "2745": {
+        "display_id": "5488",
+        "npc_name": "Ambassador Infernus"
+    },
+    "3207": {
+        "display_id": "4079",
+        "npc_name": "Hexed Troll"
+    },
+    "3208": {
+        "display_id": "3752",
+        "npc_name": "Margoz"
+    },
+    "3209": {
+        "display_id": "3770",
+        "npc_name": "Brave Windfeather"
+    },
+    "3210": {
+        "display_id": "3771",
+        "npc_name": "Brave Proudsnout"
+    },
+    "2746": {
+        "display_id": "5753",
+        "npc_name": "Stonevault Warden"
+    },
+    "3211": {
+        "display_id": "3774",
+        "npc_name": "Brave Lightninghorn"
+    },
+    "3212": {
+        "display_id": "3775",
+        "npc_name": "Brave Ironhorn"
+    },
+    "3213": {
+        "display_id": "3776",
+        "npc_name": "Brave Running Wolf"
+    },
+    "2748": {
+        "display_id": "5988",
+        "npc_name": "Archaedas"
+    },
+    "3214": {
+        "display_id": "3778",
+        "npc_name": "Brave Greathoof"
+    },
+    "2749": {
+        "display_id": "13869",
+        "npc_name": "Siege Golem"
+    },
+    "3215": {
+        "display_id": "3777",
+        "npc_name": "Brave Strongbash"
+    },
+    "3216": {
+        "display_id": "3754",
+        "npc_name": "Neeru Fireblade"
+    },
+    "2751": {
+        "display_id": "5747",
+        "npc_name": "War Golem"
+    },
+    "3217": {
+        "display_id": "3780",
+        "npc_name": "Brave Dawneagle"
+    },
+    "2752": {
+        "display_id": "8550",
+        "npc_name": "Rumbler"
+    },
+    "3218": {
+        "display_id": "3779",
+        "npc_name": "Brave Swiftwind"
+    },
+    "2753": {
+        "display_id": "9372",
+        "npc_name": "Barnabus"
+    },
+    "2754": {
+        "display_id": "10040",
+        "npc_name": "Anathemus"
+    },
+    "3219": {
+        "display_id": "3781",
+        "npc_name": "Brave Leaping Deer"
+    },
+    "3220": {
+        "display_id": "3782",
+        "npc_name": "Brave Darksky"
+    },
+    "2755": {
+        "display_id": "1165",
+        "npc_name": "Myzrael"
+    },
+    "3221": {
+        "display_id": "3783",
+        "npc_name": "Brave Rockhorn"
+    },
+    "2756": {
+        "display_id": "3428",
+        "npc_name": "UNUSED Grund Drokda"
+    },
+    "3222": {
+        "display_id": "4265",
+        "npc_name": "Brave Wildrunner"
+    },
+    "2757": {
+        "display_id": "6369",
+        "npc_name": "Blacklash"
+    },
+    "3223": {
+        "display_id": "3784",
+        "npc_name": "Brave Rainchaser"
+    },
+    "3224": {
+        "display_id": "10181",
+        "npc_name": "Brave Cloudmane"
+    },
+    "3225": {
+        "display_id": "744",
+        "npc_name": "Corrupted Mottled Boar"
+    },
+    "3226": {
+        "display_id": "2488",
+        "npc_name": "Corrupted Scorpid"
+    },
+    "3227": {
+        "display_id": "787",
+        "npc_name": "Corrupted Bloodtalon Scythemaw"
+    },
+    "3228": {
+        "display_id": "1000",
+        "npc_name": "Corrupted Surf Crawler"
+    },
+    "3229": {
+        "display_id": "1254",
+        "npc_name": "\"Squealer\" Thornmantle"
+    },
+    "2759": {
+        "display_id": "6377",
+        "npc_name": "Hematus"
+    },
+    "3230": {
+        "display_id": "1872",
+        "npc_name": "Nazgrel"
+    },
+    "3231": {
+        "display_id": "1034",
+        "npc_name": "Corrupted Dreadmaw Crocolisk"
+    },
+    "3232": {
+        "display_id": "1274",
+        "npc_name": "Bristleback Interloper"
+    },
+    "2760": {
+        "display_id": "2172",
+        "npc_name": "Burning Exile"
+    },
+    "3233": {
+        "display_id": "3817",
+        "npc_name": "Lorekeeper Raintotem"
+    },
+    "2761": {
+        "display_id": "5561",
+        "npc_name": "Cresting Exile"
+    },
+    "3234": {
+        "display_id": "10918",
+        "npc_name": "Lost Barrens Kodo"
+    },
+    "3235": {
+        "display_id": "1232",
+        "npc_name": "Greater Barrens Kodo"
+    },
+    "3236": {
+        "display_id": "1453",
+        "npc_name": "Barrens Kodo"
+    },
+    "3237": {
+        "display_id": "10914",
+        "npc_name": "Wooly Kodo"
+    },
+    "2762": {
+        "display_id": "5490",
+        "npc_name": "Thundering Exile"
+    },
+    "3238": {
+        "display_id": "1539",
+        "npc_name": "Stormhide"
+    },
+    "3239": {
+        "display_id": "1538",
+        "npc_name": "Thunderhead"
+    },
+    "2763": {
+        "display_id": "10040",
+        "npc_name": "Thenan"
+    },
+    "3240": {
+        "display_id": "1537",
+        "npc_name": "Stormsnout"
+    },
+    "2764": {
+        "display_id": "2299",
+        "npc_name": "Sleeby"
+    },
+    "3241": {
+        "display_id": "1977",
+        "npc_name": "Savannah Patriarch"
+    },
+    "3242": {
+        "display_id": "6087",
+        "npc_name": "Zhevra Runner"
+    },
+    "3243": {
+        "display_id": "1973",
+        "npc_name": "Savannah Highmane"
+    },
+    "2765": {
+        "display_id": "373",
+        "npc_name": "Znort"
+    },
+    "2766": {
+        "display_id": "610",
+        "npc_name": "Lolo the Lookout"
+    },
+    "3244": {
+        "display_id": "178",
+        "npc_name": "Greater Plainstrider"
+    },
+    "2767": {
+        "display_id": "7032",
+        "npc_name": "First Mate Nilzlix"
+    },
+    "2768": {
+        "display_id": "4049",
+        "npc_name": "Professor Phizzlethorpe"
+    },
+    "3245": {
+        "display_id": "6076",
+        "npc_name": "Ornery Plainstrider"
+    },
+    "2769": {
+        "display_id": "1280",
+        "npc_name": "Captain Steelgut"
+    },
+    "2770": {
+        "display_id": "3671",
+        "npc_name": "Tallow"
+    },
+    "3246": {
+        "display_id": "1284",
+        "npc_name": "Fleeting Plainstrider"
+    },
+    "3247": {
+        "display_id": "1742",
+        "npc_name": "Thunderhawk Hatchling"
+    },
+    "2771": {
+        "display_id": "4045",
+        "npc_name": "Drum Fel"
+    },
+    "2772": {
+        "display_id": "4046",
+        "npc_name": "Korin Fel"
+    },
+    "3248": {
+        "display_id": "4473",
+        "npc_name": "Barrens Giraffe"
+    },
+    "2773": {
+        "display_id": "11568",
+        "npc_name": "Or'Kalar"
+    },
+    "3249": {
+        "display_id": "1974",
+        "npc_name": "Greater Thunderhawk"
+    },
+    "2774": {
+        "display_id": "4051",
+        "npc_name": "Doctor Draxlegauge"
+    },
+    "3261": {
+        "display_id": "6077",
+        "npc_name": "Bristleback Thornweaver"
+    },
+    "3262": {
+        "display_id": "6092",
+        "npc_name": "Bristleback Mystic"
+    },
+    "3263": {
+        "display_id": "6091",
+        "npc_name": "Bristleback Geomancer"
+    },
+    "3265": {
+        "display_id": "6094",
+        "npc_name": "Razormane Hunter"
+    },
+    "2869": {
+        "display_id": "143",
+        "npc_name": "Warrior 29"
+    },
+    "3266": {
+        "display_id": "1253",
+        "npc_name": "Razormane Defender"
+    },
+    "3267": {
+        "display_id": "1964",
+        "npc_name": "Razormane Water Seeker"
+    },
+    "3268": {
+        "display_id": "6096",
+        "npc_name": "Razormane Thornweaver"
+    },
+    "3269": {
+        "display_id": "6093",
+        "npc_name": "Razormane Geomancer"
+    },
+    "2870": {
+        "display_id": "2585",
+        "npc_name": "[UNUSED] Henria Derth"
+    },
+    "3270": {
+        "display_id": "6095",
+        "npc_name": "Elder Mystic Razorsnout"
+    },
+    "2871": {
+        "display_id": "428",
+        "npc_name": "[PH] Tallstrider Trainer"
+    },
+    "3271": {
+        "display_id": "4643",
+        "npc_name": "Razormane Mystic"
+    },
+    "2872": {
+        "display_id": "5044",
+        "npc_name": "[UNUSED] Whaldak Darbenk"
+    },
+    "2873": {
+        "display_id": "428",
+        "npc_name": "[PH] Raptor Trainer"
+    },
+    "3272": {
+        "display_id": "9442",
+        "npc_name": "Kolkar Wrangler"
+    },
+    "2874": {
+        "display_id": "428",
+        "npc_name": "[PH] Horse Trainer"
+    },
+    "2875": {
+        "display_id": "428",
+        "npc_name": "[PH] Gorilla Trainer"
+    },
+    "3273": {
+        "display_id": "9443",
+        "npc_name": "Kolkar Stormer"
+    },
+    "3274": {
+        "display_id": "9445",
+        "npc_name": "Kolkar Pack Runner"
+    },
+    "3275": {
+        "display_id": "4874",
+        "npc_name": "Kolkar Marauder"
+    },
+    "2876": {
+        "display_id": "5090",
+        "npc_name": "Grunenstur Balindom"
+    },
+    "3276": {
+        "display_id": "3218",
+        "npc_name": "Witchwing Harpy"
+    },
+    "2877": {
+        "display_id": "428",
+        "npc_name": "[PH] Crawler Trainer"
+    },
+    "3277": {
+        "display_id": "2162",
+        "npc_name": "Witchwing Roguefeather"
+    },
+    "2878": {
+        "display_id": "5040",
+        "npc_name": "Peria Lamenur"
+    },
+    "2879": {
+        "display_id": "5043",
+        "npc_name": "Karrina Mekenda"
+    },
+    "3278": {
+        "display_id": "2163",
+        "npc_name": "Witchwing Slayer"
+    },
+    "2880": {
+        "display_id": "5041",
+        "npc_name": "[UNUSED] Hurom Juggendolf"
+    },
+    "3279": {
+        "display_id": "2143",
+        "npc_name": "Witchwing Ambusher"
+    },
+    "2881": {
+        "display_id": "5227",
+        "npc_name": "[UNUSED] Durdek Karrin"
+    },
+    "3280": {
+        "display_id": "1350",
+        "npc_name": "Witchwing Windcaller"
+    },
+    "3281": {
+        "display_id": "2864",
+        "npc_name": "Sarkoth"
+    },
+    "3282": {
+        "display_id": "7237",
+        "npc_name": "Venture Co. Mercenary"
+    },
+    "3283": {
+        "display_id": "7234",
+        "npc_name": "Venture Co. Enforcer"
+    },
+    "3284": {
+        "display_id": "3918",
+        "npc_name": "Venture Co. Drudger"
+    },
+    "3285": {
+        "display_id": "7241",
+        "npc_name": "Venture Co. Peon"
+    },
+    "3286": {
+        "display_id": "7238",
+        "npc_name": "Venture Co. Overseer"
+    },
+    "3287": {
+        "display_id": "2025",
+        "npc_name": "Hana'zua"
+    },
+    "3289": {
+        "display_id": "4081",
+        "npc_name": "Spirit of Minshina"
+    },
+    "3290": {
+        "display_id": "1832",
+        "npc_name": "Deek Fizzlebizz"
+    },
+    "3291": {
+        "display_id": "1837",
+        "npc_name": "Greishan Ironstove"
+    },
+    "3292": {
+        "display_id": "3851",
+        "npc_name": "Brewmaster Drohn"
+    },
+    "3293": {
+        "display_id": "7129",
+        "npc_name": "Rezlak"
+    },
+    "3294": {
+        "display_id": "1654",
+        "npc_name": "Ophek"
+    },
+    "3295": {
+        "display_id": "360",
+        "npc_name": "Sludge Beast"
+    },
+    "3296": {
+        "display_id": "4259",
+        "npc_name": "Orgrimmar Grunt"
+    },
+    "3297": {
+        "display_id": "4083",
+        "npc_name": "Sen'jin Watcher"
+    },
+    "3298": {
+        "display_id": "1442",
+        "npc_name": "Gabrielle Chase"
+    },
+    "3299": {
+        "display_id": "1424",
+        "npc_name": "[UNUSED] Antione LeMarca"
+    },
+    "3300": {
+        "display_id": "1986",
+        "npc_name": "Adder"
+    },
+    "3301": {
+        "display_id": "3231",
+        "npc_name": "Morgan Ladimore"
+    },
+    "2883": {
+        "display_id": "832",
+        "npc_name": "[UNUSED] [PH] Monster Slayer Trainer"
+    },
+    "3302": {
+        "display_id": "3889",
+        "npc_name": "[UNUSED] Korl"
+    },
+    "12265": {
+        "display_id": "2172",
+        "npc_name": "Lava Spawn"
+    },
+    "3303": {
+        "display_id": "3893",
+        "npc_name": "[UNUSED] Marna"
+    },
+    "2885": {
+        "display_id": "832",
+        "npc_name": "[UNUSED] [PH] Magic Skills Trainer"
+    },
+    "2886": {
+        "display_id": "832",
+        "npc_name": "Ranged Skills Trainer"
+    },
+    "3304": {
+        "display_id": "4086",
+        "npc_name": "Master Vornal"
+    },
+    "3305": {
+        "display_id": "1874",
+        "npc_name": "Grisha"
+    },
+    "2887": {
+        "display_id": "9588",
+        "npc_name": "Prismatic Exile"
+    },
+    "3306": {
+        "display_id": "12729",
+        "npc_name": "Keldas"
+    },
+    "2888": {
+        "display_id": "9752",
+        "npc_name": "Garek"
+    },
+    "3307": {
+        "display_id": "3888",
+        "npc_name": "[UNUSED] Orgrun Blacktusk"
+    },
+    "2889": {
+        "display_id": "721",
+        "npc_name": "Stonevault Trogg"
+    },
+    "3309": {
+        "display_id": "1310",
+        "npc_name": "Karus"
+    },
+    "2890": {
+        "display_id": "722",
+        "npc_name": "Stonevault Scout"
+    },
+    "3310": {
+        "display_id": "1311",
+        "npc_name": "Doras"
+    },
+    "2891": {
+        "display_id": "721",
+        "npc_name": "Stonevault Skullthumper"
+    },
+    "2892": {
+        "display_id": "722",
+        "npc_name": "Stonevault Seer"
+    },
+    "2893": {
+        "display_id": "1194",
+        "npc_name": "Stonevault Bonesnapper"
+    },
+    "2894": {
+        "display_id": "721",
+        "npc_name": "Stonevault Shaman"
+    },
+    "3312": {
+        "display_id": "1312",
+        "npc_name": "Olvia"
+    },
+    "2896": {
+        "display_id": "754",
+        "npc_name": "[PH] Alliance Magic Skills Trainer"
+    },
+    "3313": {
+        "display_id": "1313",
+        "npc_name": "Trak'gen"
+    },
+    "2899": {
+        "display_id": "2584",
+        "npc_name": "[PH] Alliance Toughness/Resist Trainer"
+    },
+    "3314": {
+        "display_id": "1314",
+        "npc_name": "Urtharo"
+    },
+    "3315": {
+        "display_id": "1315",
+        "npc_name": "Tor'phan"
+    },
+    "3316": {
+        "display_id": "1316",
+        "npc_name": "Handor"
+    },
+    "3317": {
+        "display_id": "1317",
+        "npc_name": "Ollanus"
+    },
+    "3318": {
+        "display_id": "1318",
+        "npc_name": "Koma"
+    },
+    "3319": {
+        "display_id": "1319",
+        "npc_name": "Sana"
+    },
+    "3320": {
+        "display_id": "1320",
+        "npc_name": "Soran"
+    },
+    "3321": {
+        "display_id": "1321",
+        "npc_name": "Morgum"
+    },
+    "3322": {
+        "display_id": "1322",
+        "npc_name": "Kaja"
+    },
+    "3323": {
+        "display_id": "1323",
+        "npc_name": "Horthus"
+    },
+    "2906": {
+        "display_id": "5782",
+        "npc_name": "Dustbelcher Warrior"
+    },
+    "3324": {
+        "display_id": "1324",
+        "npc_name": "Grol'dar"
+    },
+    "2907": {
+        "display_id": "1122",
+        "npc_name": "Dustbelcher Mystic"
+    },
+    "3325": {
+        "display_id": "1325",
+        "npc_name": "Mirket"
+    },
+    "2908": {
+        "display_id": "4902",
+        "npc_name": "Grawl"
+    },
+    "2909": {
+        "display_id": "4899",
+        "npc_name": "Hammertoe Grez"
+    },
+    "3326": {
+        "display_id": "1326",
+        "npc_name": "Zevrost"
+    },
+    "3327": {
+        "display_id": "1327",
+        "npc_name": "Gest"
+    },
+    "2910": {
+        "display_id": "4900",
+        "npc_name": "Prospector Ryedol"
+    },
+    "3328": {
+        "display_id": "1328",
+        "npc_name": "Ormok"
+    },
+    "3329": {
+        "display_id": "1329",
+        "npc_name": "Kor'jus"
+    },
+    "3330": {
+        "display_id": "1330",
+        "npc_name": "Muragus"
+    },
+    "3331": {
+        "display_id": "1331",
+        "npc_name": "Kareth"
+    },
+    "11875": {
+        "display_id": "1555",
+        "npc_name": "Mortar Team Target Dummy"
+    },
+    "2911": {
+        "display_id": "1650",
+        "npc_name": "Archaeologist Flagongut"
+    },
+    "11876": {
+        "display_id": "4427",
+        "npc_name": "Demon Spirit"
+    },
+    "3332": {
+        "display_id": "1332",
+        "npc_name": "Lumak"
+    },
+    "2912": {
+        "display_id": "1665",
+        "npc_name": "Chief Archaeologist Greywhisker"
+    },
+    "2913": {
+        "display_id": "1286",
+        "npc_name": "Archaeologist Hollee"
+    },
+    "3333": {
+        "display_id": "1333",
+        "npc_name": "Shankys"
+    },
+    "11877": {
+        "display_id": "11852",
+        "npc_name": "Roon Wildmane"
+    },
+    "2914": {
+        "display_id": "1206",
+        "npc_name": "Snake"
+    },
+    "11878": {
+        "display_id": "11814",
+        "npc_name": "Nathanos Blightcaller"
+    },
+    "2915": {
+        "display_id": "4901",
+        "npc_name": "Hammertoe's Spirit"
+    },
+    "3334": {
+        "display_id": "1334",
+        "npc_name": "Rekkul"
+    },
+    "3335": {
+        "display_id": "1335",
+        "npc_name": "Hagrus"
+    },
+    "2916": {
+        "display_id": "3595",
+        "npc_name": "Historian Karnik"
+    },
+    "3336": {
+        "display_id": "3884",
+        "npc_name": "Takrin Pathseeker"
+    },
+    "2917": {
+        "display_id": "1277",
+        "npc_name": "Prospector Remtravel"
+    },
+    "11880": {
+        "display_id": "11811",
+        "npc_name": "Twilight Avenger"
+    },
+    "3337": {
+        "display_id": "3852",
+        "npc_name": "Kargal Battlescar"
+    },
+    "11881": {
+        "display_id": "11819",
+        "npc_name": "Twilight Geolord"
+    },
+    "2918": {
+        "display_id": "3598",
+        "npc_name": "Advisor Belgrum"
+    },
+    "3338": {
+        "display_id": "3850",
+        "npc_name": "Sergra Darkthorn"
+    },
+    "11882": {
+        "display_id": "11815",
+        "npc_name": "Twilight Stonecaller"
+    },
+    "2919": {
+        "display_id": "1162",
+        "npc_name": "Fam'retor Guardian"
+    },
+    "3339": {
+        "display_id": "4245",
+        "npc_name": "Captain Thalo'thas Brightsun"
+    },
+    "2920": {
+        "display_id": "4895",
+        "npc_name": "Lucien Tosselwrench"
+    },
+    "11883": {
+        "display_id": "11824",
+        "npc_name": "Twilight Master"
+    },
+    "2921": {
+        "display_id": "4896",
+        "npc_name": "Lotwil Veriatus"
+    },
+    "11884": {
+        "display_id": "6468",
+        "npc_name": "Obi"
+    },
+    "3341": {
+        "display_id": "3844",
+        "npc_name": "Gann Stonespire"
+    },
+    "11885": {
+        "display_id": "2715",
+        "npc_name": "Blighthound"
+    },
+    "3342": {
+        "display_id": "1358",
+        "npc_name": "Shan'ti"
+    },
+    "3343": {
+        "display_id": "1359",
+        "npc_name": "Grelkor"
+    },
+    "3344": {
+        "display_id": "1360",
+        "npc_name": "Kardris Dreamseeker"
+    },
+    "11886": {
+        "display_id": "11830",
+        "npc_name": "Mercutio Filthgorger"
+    },
+    "3345": {
+        "display_id": "1366",
+        "npc_name": "Godan"
+    },
+    "3346": {
+        "display_id": "1367",
+        "npc_name": "Kithas"
+    },
+    "2922": {
+        "display_id": "1150",
+        "npc_name": "Servo"
+    },
+    "3347": {
+        "display_id": "1368",
+        "npc_name": "Yelmak"
+    },
+    "2923": {
+        "display_id": "11413",
+        "npc_name": "Mangy Silvermane"
+    },
+    "3348": {
+        "display_id": "1369",
+        "npc_name": "Kor'geld"
+    },
+    "5356": {
+        "display_id": "780",
+        "npc_name": "Snarler"
+    },
+    "2924": {
+        "display_id": "11419",
+        "npc_name": "Silvermane Wolf"
+    },
+    "3349": {
+        "display_id": "1370",
+        "npc_name": "Ukra'nor"
+    },
+    "2925": {
+        "display_id": "11417",
+        "npc_name": "Silvermane Howler"
+    },
+    "3350": {
+        "display_id": "1371",
+        "npc_name": "Asoran"
+    },
+    "2926": {
+        "display_id": "11418",
+        "npc_name": "Silvermane Stalker"
+    },
+    "3351": {
+        "display_id": "1372",
+        "npc_name": "Magenius"
+    },
+    "2927": {
+        "display_id": "12238",
+        "npc_name": "Vicious Owlbeast"
+    },
+    "11887": {
+        "display_id": "11831",
+        "npc_name": "Crypt Robber"
+    },
+    "2928": {
+        "display_id": "12238",
+        "npc_name": "Primitive Owlbeast"
+    },
+    "3352": {
+        "display_id": "1373",
+        "npc_name": "Ormak Grimshot"
+    },
+    "2929": {
+        "display_id": "12238",
+        "npc_name": "Savage Owlbeast"
+    },
+    "3353": {
+        "display_id": "1374",
+        "npc_name": "Grezz Ragefist"
+    },
+    "2930": {
+        "display_id": "2865",
+        "npc_name": "Sentinel Glynda Nal'Shea"
+    },
+    "3354": {
+        "display_id": "1375",
+        "npc_name": "Sorek"
+    },
+    "3355": {
+        "display_id": "1377",
+        "npc_name": "Saru Steelfury"
+    },
+    "2931": {
+        "display_id": "1210",
+        "npc_name": "Zaricotl"
+    },
+    "3356": {
+        "display_id": "1378",
+        "npc_name": "Sumi"
+    },
+    "2932": {
+        "display_id": "4938",
+        "npc_name": "Magregan Deepshadow"
+    },
+    "3357": {
+        "display_id": "1379",
+        "npc_name": "Makaru"
+    },
+    "3358": {
+        "display_id": "1380",
+        "npc_name": "Gorina"
+    },
+    "2934": {
+        "display_id": "5751",
+        "npc_name": "Keeper Bel'dugur"
+    },
+    "3359": {
+        "display_id": "1381",
+        "npc_name": "Kiro"
+    },
+    "3360": {
+        "display_id": "1382",
+        "npc_name": "Koru"
+    },
+    "2935": {
+        "display_id": "433",
+        "npc_name": "[PH] Demon Master"
+    },
+    "3361": {
+        "display_id": "1383",
+        "npc_name": "Shoma"
+    },
+    "11896": {
+        "display_id": "11828",
+        "npc_name": "Borelgore"
+    },
+    "2937": {
+        "display_id": "10043",
+        "npc_name": "Dagun the Ravenous"
+    },
+    "11897": {
+        "display_id": "11829",
+        "npc_name": "Duskwing"
+    },
+    "3362": {
+        "display_id": "1384",
+        "npc_name": "Ogunaro Wolfrunner"
+    },
+    "2938": {
+        "display_id": "5088",
+        "npc_name": "Aldric Hunter"
+    },
+    "11898": {
+        "display_id": "11836",
+        "npc_name": "Crusader Lord Valdelmar"
+    },
+    "2939": {
+        "display_id": "5089",
+        "npc_name": "Jackson Bayne"
+    },
+    "11899": {
+        "display_id": "11850",
+        "npc_name": "Shardi"
+    },
+    "2940": {
+        "display_id": "7914",
+        "npc_name": "[UNUSED] Frank Ward"
+    },
+    "11900": {
+        "display_id": "11849",
+        "npc_name": "Brakkar"
+    },
+    "2941": {
+        "display_id": "5091",
+        "npc_name": "Lanie Reed"
+    },
+    "11901": {
+        "display_id": "11851",
+        "npc_name": "Andruk"
+    },
+    "2942": {
+        "display_id": "5010",
+        "npc_name": "Dylan Bissel"
+    },
+    "11902": {
+        "display_id": "262",
+        "npc_name": "Aiden"
+    },
+    "2943": {
+        "display_id": "7916",
+        "npc_name": "Ransin Donner"
+    },
+    "11903": {
+        "display_id": "221",
+        "npc_name": "Alexander"
+    },
+    "11904": {
+        "display_id": "338",
+        "npc_name": "Noah"
+    },
+    "2944": {
+        "display_id": "10170",
+        "npc_name": "Boss Tho'grun"
+    },
+    "11905": {
+        "display_id": "338",
+        "npc_name": "Jordan"
+    },
+    "11906": {
+        "display_id": "11873",
+        "npc_name": "Sophia"
+    },
+    "2945": {
+        "display_id": "1194",
+        "npc_name": "Murdaloc"
+    },
+    "11907": {
+        "display_id": "344",
+        "npc_name": "Alanna"
+    },
+    "2946": {
+        "display_id": "200",
+        "npc_name": "Puppet of Helcular"
+    },
+    "2947": {
+        "display_id": "3821",
+        "npc_name": "Harken Windtotem"
+    },
+    "11908": {
+        "display_id": "11873",
+        "npc_name": "Mirah"
+    },
+    "11909": {
+        "display_id": "257",
+        "npc_name": "Penelope"
+    },
+    "11910": {
+        "display_id": "11878",
+        "npc_name": "Grimtotem Ruffian"
+    },
+    "11911": {
+        "display_id": "11882",
+        "npc_name": "Grimtotem Mercenary"
+    },
+    "2948": {
+        "display_id": "3826",
+        "npc_name": "Mull Thunderhorn"
+    },
+    "11912": {
+        "display_id": "11874",
+        "npc_name": "Grimtotem Brute"
+    },
+    "2949": {
+        "display_id": "550",
+        "npc_name": "Palemane Tanner"
+    },
+    "11913": {
+        "display_id": "11886",
+        "npc_name": "Grimtotem Sorcerer"
+    },
+    "2950": {
+        "display_id": "1216",
+        "npc_name": "Palemane Skinner"
+    },
+    "2951": {
+        "display_id": "1217",
+        "npc_name": "Palemane Poacher"
+    },
+    "11914": {
+        "display_id": "10225",
+        "npc_name": "Gorehoof the Black"
+    },
+    "2952": {
+        "display_id": "1967",
+        "npc_name": "Bristleback Quilboar"
+    },
+    "11915": {
+        "display_id": "26",
+        "npc_name": "Gogger Rock Keeper"
+    },
+    "3363": {
+        "display_id": "1385",
+        "npc_name": "Magar"
+    },
+    "3364": {
+        "display_id": "1386",
+        "npc_name": "Borya"
+    },
+    "11916": {
+        "display_id": "1471",
+        "npc_name": "Imelda"
+    },
+    "3365": {
+        "display_id": "1387",
+        "npc_name": "Karolek"
+    },
+    "2953": {
+        "display_id": "6090",
+        "npc_name": "Bristleback Shaman"
+    },
+    "3366": {
+        "display_id": "1388",
+        "npc_name": "Tamar"
+    },
+    "11917": {
+        "display_id": "26",
+        "npc_name": "Gogger Geomancer"
+    },
+    "2954": {
+        "display_id": "6807",
+        "npc_name": "Bristleback Battleboar"
+    },
+    "2955": {
+        "display_id": "1219",
+        "npc_name": "Plainstrider"
+    },
+    "3367": {
+        "display_id": "1389",
+        "npc_name": "Felika"
+    },
+    "11918": {
+        "display_id": "26",
+        "npc_name": "Gogger Stonepounder"
+    },
+    "2956": {
+        "display_id": "1220",
+        "npc_name": "Adult Plainstrider"
+    },
+    "3368": {
+        "display_id": "1390",
+        "npc_name": "Borstan"
+    },
+    "2957": {
+        "display_id": "1221",
+        "npc_name": "Elder Plainstrider"
+    },
+    "3369": {
+        "display_id": "1391",
+        "npc_name": "Gotri"
+    },
+    "11919": {
+        "display_id": "1471",
+        "npc_name": "Claudia"
+    },
+    "3370": {
+        "display_id": "1392",
+        "npc_name": "Urtrun Clanbringer"
+    },
+    "2958": {
+        "display_id": "1100",
+        "npc_name": "Prairie Wolf"
+    },
+    "11920": {
+        "display_id": "6025",
+        "npc_name": "Goggeroc"
+    },
+    "3371": {
+        "display_id": "1393",
+        "npc_name": "Tamaro"
+    },
+    "2959": {
+        "display_id": "643",
+        "npc_name": "Prairie Stalker"
+    },
+    "11921": {
+        "display_id": "11348",
+        "npc_name": "Besseleth"
+    },
+    "3372": {
+        "display_id": "1394",
+        "npc_name": "Sarlek"
+    },
+    "2960": {
+        "display_id": "161",
+        "npc_name": "Prairie Wolf Alpha"
+    },
+    "2961": {
+        "display_id": "11451",
+        "npc_name": "Mountain Cougar"
+    },
+    "3373": {
+        "display_id": "1395",
+        "npc_name": "Arnok"
+    },
+    "2962": {
+        "display_id": "10877",
+        "npc_name": "Windfury Harpy"
+    },
+    "3374": {
+        "display_id": "1968",
+        "npc_name": "Bael'dun Excavator"
+    },
+    "2963": {
+        "display_id": "1351",
+        "npc_name": "Windfury Wind Witch"
+    },
+    "2964": {
+        "display_id": "1255",
+        "npc_name": "Windfury Sorceress"
+    },
+    "3375": {
+        "display_id": "1970",
+        "npc_name": "Bael'dun Foreman"
+    },
+    "2965": {
+        "display_id": "10869",
+        "npc_name": "Windfury Matriarch"
+    },
+    "2966": {
+        "display_id": "8869",
+        "npc_name": "Battleboar"
+    },
+    "11926": {
+        "display_id": "2392",
+        "npc_name": "[PH] Northshire Gift Dispenser"
+    },
+    "2967": {
+        "display_id": "9410",
+        "npc_name": "Galak Centaur"
+    },
+    "2968": {
+        "display_id": "9409",
+        "npc_name": "Galak Outrunner"
+    },
+    "3376": {
+        "display_id": "3839",
+        "npc_name": "Bael'dun Soldier"
+    },
+    "2969": {
+        "display_id": "1228",
+        "npc_name": "Wiry Swoop"
+    },
+    "3377": {
+        "display_id": "3837",
+        "npc_name": "Bael'dun Rifleman"
+    },
+    "2970": {
+        "display_id": "1229",
+        "npc_name": "Swoop"
+    },
+    "3378": {
+        "display_id": "3870",
+        "npc_name": "Bael'dun Officer"
+    },
+    "2971": {
+        "display_id": "10824",
+        "npc_name": "Taloned Swoop"
+    },
+    "2972": {
+        "display_id": "1451",
+        "npc_name": "Kodo Calf"
+    },
+    "3379": {
+        "display_id": "4198",
+        "npc_name": "Burning Blade Bruiser"
+    },
+    "2973": {
+        "display_id": "1230",
+        "npc_name": "Kodo Bull"
+    },
+    "3380": {
+        "display_id": "4196",
+        "npc_name": "Burning Blade Acolyte"
+    },
+    "2974": {
+        "display_id": "10918",
+        "npc_name": "Kodo Matriarch"
+    },
+    "3381": {
+        "display_id": "3829",
+        "npc_name": "Southsea Brigand"
+    },
+    "3382": {
+        "display_id": "3827",
+        "npc_name": "Southsea Cannoneer"
+    },
+    "2975": {
+        "display_id": "7243",
+        "npc_name": "Venture Co. Hireling"
+    },
+    "3383": {
+        "display_id": "3835",
+        "npc_name": "Southsea Cutthroat"
+    },
+    "2976": {
+        "display_id": "7244",
+        "npc_name": "Venture Co. Laborer"
+    },
+    "3384": {
+        "display_id": "3833",
+        "npc_name": "Southsea Privateer"
+    },
+    "2977": {
+        "display_id": "7246",
+        "npc_name": "Venture Co. Taskmaster"
+    },
+    "11936": {
+        "display_id": "11890",
+        "npc_name": "Artist Renfray"
+    },
+    "2978": {
+        "display_id": "7247",
+        "npc_name": "Venture Co. Worker"
+    },
+    "11937": {
+        "display_id": "9017",
+        "npc_name": "Demon Portal Guardian"
+    },
+    "3385": {
+        "display_id": "1858",
+        "npc_name": "Theramore Marine"
+    },
+    "2979": {
+        "display_id": "7245",
+        "npc_name": "Venture Co. Supervisor"
+    },
+    "3386": {
+        "display_id": "1856",
+        "npc_name": "Theramore Preserver"
+    },
+    "11938": {
+        "display_id": "11949",
+        "npc_name": "Young Tirion"
+    },
+    "3387": {
+        "display_id": "3845",
+        "npc_name": "Jorn Skyseer"
+    },
+    "2980": {
+        "display_id": "3808",
+        "npc_name": "Grull Hawkwind"
+    },
+    "2981": {
+        "display_id": "3809",
+        "npc_name": "Chief Hawkwind"
+    },
+    "11939": {
+        "display_id": "11893",
+        "npc_name": "Umber"
+    },
+    "2982": {
+        "display_id": "3813",
+        "npc_name": "Seer Graytongue"
+    },
+    "11940": {
+        "display_id": "11898",
+        "npc_name": "Merissa Stilwell"
+    },
+    "11941": {
+        "display_id": "11899",
+        "npc_name": "Yori Crackhelm"
+    },
+    "2983": {
+        "display_id": "1236",
+        "npc_name": "The Plains Vision"
+    },
+    "2984": {
+        "display_id": "3815",
+        "npc_name": "Seer Wiserunner"
+    },
+    "11942": {
+        "display_id": "11900",
+        "npc_name": "Orenthil Whisperwind"
+    },
+    "2985": {
+        "display_id": "3822",
+        "npc_name": "Ruul Eagletalon"
+    },
+    "11943": {
+        "display_id": "11901",
+        "npc_name": "Magga"
+    },
+    "2986": {
+        "display_id": "10969",
+        "npc_name": "Dorn Plainstalker"
+    },
+    "11944": {
+        "display_id": "11902",
+        "npc_name": "Vorn Skyseer"
+    },
+    "2987": {
+        "display_id": "4516",
+        "npc_name": "Eyahn Eagletalon"
+    },
+    "11945": {
+        "display_id": "11904",
+        "npc_name": "Claire Willower"
+    },
+    "2988": {
+        "display_id": "1624",
+        "npc_name": "Morin Cloudstalker"
+    },
+    "11946": {
+        "display_id": "11894",
+        "npc_name": "Drek'Thar"
+    },
+    "2989": {
+        "display_id": "3785",
+        "npc_name": "Bael'dun Digger"
+    },
+    "2990": {
+        "display_id": "3787",
+        "npc_name": "Bael'dun Appraiser"
+    },
+    "11947": {
+        "display_id": "11895",
+        "npc_name": "Captain Galvangar"
+    },
+    "2991": {
+        "display_id": "3841",
+        "npc_name": "Greatmother Hawkwind"
+    },
+    "2992": {
+        "display_id": "2030",
+        "npc_name": "Healing Ward V"
+    },
+    "11948": {
+        "display_id": "11896",
+        "npc_name": "Vanndar Stormpike"
+    },
+    "2993": {
+        "display_id": "3792",
+        "npc_name": "Baine Bloodhoof"
+    },
+    "11949": {
+        "display_id": "12823",
+        "npc_name": "Captain Balinda Stonehearth"
+    },
+    "2994": {
+        "display_id": "3824",
+        "npc_name": "Ancestral Spirit"
+    },
+    "2995": {
+        "display_id": "2098",
+        "npc_name": "Tal"
+    },
+    "2996": {
+        "display_id": "2104",
+        "npc_name": "Torn"
+    },
+    "2997": {
+        "display_id": "2110",
+        "npc_name": "Jyn Stonehoof"
+    },
+    "2998": {
+        "display_id": "2090",
+        "npc_name": "Karn Stonehoof"
+    },
+    "2999": {
+        "display_id": "2100",
+        "npc_name": "Taur Stonehoof"
+    },
+    "11956": {
+        "display_id": "11909",
+        "npc_name": "Great Bear Spirit"
+    },
+    "11957": {
+        "display_id": "11910",
+        "npc_name": "Great Cat Spirit"
+    },
+    "11958": {
+        "display_id": "11913",
+        "npc_name": "Gracchus Spiritlight"
+    },
+    "11959": {
+        "display_id": "15346",
+        "npc_name": "[UNUSED] Obsidian Watcher"
+    },
+    "11978": {
+        "display_id": "12869",
+        "npc_name": "[NOT USED] Neltharion"
+    },
+    "11979": {
+        "display_id": "11929",
+        "npc_name": "Kim Bridenbecker"
+    },
+    "11980": {
+        "display_id": "11996",
+        "npc_name": "[NOT USED] Zuluhed the Whacked"
+    },
+    "11981": {
+        "display_id": "6377",
+        "npc_name": "Flamegor"
+    },
+    "11982": {
+        "display_id": "10193",
+        "npc_name": "Magmadar"
+    },
+    "7726": {
+        "display_id": "6831",
+        "npc_name": "Grimtotem Naturalist"
     }
 }
