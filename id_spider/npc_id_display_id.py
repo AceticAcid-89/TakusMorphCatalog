@@ -7,8 +7,9 @@ import requests
 import threading
 
 
-MAX_NPC_ID = 120000
-THREAD_NUM = 20
+MAX_NPC_ID = 200000
+OFFSET = 120000
+THREAD_NUM = 50
 BASE_URL = "https://wowhead.com/npc=%d"
 DISPLAY_REGEX = re.compile(r'^onclick.+\"displayId\":(\d+)\}\)')
 NPC_NAME_REGEX = re.compile(r'<meta.+content=\"(.+)\">')
@@ -65,8 +66,10 @@ def get_response(npc_id):
 def update_global_dict(index, thread_num):
     global npc_display_dict
     global invalid_npc_dict
-    scope = MAX_NPC_ID // thread_num
-    for npc_id in range(index * scope, index * scope + scope):
+    scope = (MAX_NPC_ID - OFFSET) // thread_num
+    start = index * scope + OFFSET
+    end = index * scope + scope + OFFSET
+    for npc_id in range(start, end):
         if str(npc_id) in npc_display_dict:
             continue
         if str(npc_id) in invalid_npc_dict:
