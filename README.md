@@ -3,5 +3,5 @@
 
 You can contribute to this add-on by submitting pull requests !
 
-![Test Image 1](morph.png)
+![Test Image 1](resource/morph.png)
 
