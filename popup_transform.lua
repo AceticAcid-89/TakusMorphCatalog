@@ -7,12 +7,23 @@ UnitPopupButtons["PLAY_AS"] = {
 	func = function()
         local npc_name, npc_guid = getTargetInfo()
         local npc_id = common.split(npc_guid, "-")[6]
-        if ns.npc_id_table["npc_id_" .. npc_id] then
-            local display_id = ns.npc_id_table["npc_id_" .. npc_id].display_id
-            msg = ".morph " .. display_id
-            DEFAULT_CHAT_FRAME.editBox:SetText(msg)
-            ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-        else
+        local found
+        for _, k in ipairs({0, 1, 2}) do
+            tableId = "npc_id_table_" .. k
+            if ns[tableId]["npc_id_" .. npc_id] then
+                local display_id = ns[tableId]["npc_id_" .. npc_id].display_id
+                if IsAltKeyDown() then
+                    msg = ".mount " .. display_id
+                else
+                    msg = ".morph " .. display_id
+                end
+                DEFAULT_CHAT_FRAME.editBox:SetText(msg)
+                ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+                found = true
+                break
+            end
+        end
+        if not found then
             print("not found npc_id " .. npc_id .. " with npc_name " .. npc_name .. " in database")
         end
 	end

@@ -6,6 +6,8 @@
 ## DefaultState: Enabled
 ## SavedVariables: TakusMorphCatalogDB
 
-npc.lua
+npc_0.lua
+npc_1.lua
+npc_2.lua
 popup_transform.lua
 TakusMorphCatalog.lua

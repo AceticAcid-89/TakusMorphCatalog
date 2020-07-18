@@ -8,8 +8,8 @@ import threading
 
 
 MAX_NPC_ID = 200000
-OFFSET = 120000
-THREAD_NUM = 50
+OFFSET = 0
+THREAD_NUM = 40
 BASE_URL = "https://wowhead.com/npc=%d"
 DISPLAY_REGEX = re.compile(r'^onclick.+\"displayId\":(\d+)\}\)')
 NPC_NAME_REGEX = re.compile(r'<meta.+content=\"(.+)\">')
