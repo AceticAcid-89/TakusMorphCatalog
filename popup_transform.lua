@@ -19,13 +19,16 @@ UnitPopupButtons["PLAY_AS"] = {
                 if IsShiftKeyDown() then
                     ns.display_favorite = {}
                     table.insert(ns.display_favorite, display_id)
+                    print("add " .. npc_name .. " to favorites")
                 -- transform
 
                 else
                     if IsAltKeyDown() then
                         msg = ".mount " .. display_id
+                        print("Mount as " .. npc_name)
                     else
                         msg = ".morph " .. display_id
+                        print("Play as " .. npc_name)
                     end
                     DEFAULT_CHAT_FRAME.editBox:SetText(msg)
                     ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)

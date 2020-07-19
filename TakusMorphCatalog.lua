@@ -5,7 +5,7 @@ local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
-local MaxModelID = 97000
+local MaxModelID = 200000
 local WindowWidth = 1000
 local WindowHeight = 700
 
@@ -17,7 +17,8 @@ local LastMaxModelID = 0
 local GoBackStack = {}
 local GoBackDepth = 0
 local DisplayFavorites = false
-
+local SearchResult = {}
+local InSearchFlag = false
 --
 TakusMorphCatalogDB = {
 	FavoriteList = {}
@@ -62,6 +63,7 @@ TMCFrame.Collection:SetScript("OnClick", function(self, Button, Down)
 	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = false
+	InSearchFlag = false
 	NumberOfColumn = MaxNumberOfColumn
 	TMCFrame.Gallery:Load(true)
 end)
@@ -76,6 +78,7 @@ TMCFrame.Favorites:SetScript("OnClick", function(self, Button, Down)
 	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = true
+	InSearchFlag = false
 	GoBackDepth = 0
 	TMCFrame.Gallery:Load(true)
 end)
@@ -296,7 +299,11 @@ TMCFrame.NextPageButton:SetScript("OnClick", function(self, Button, Down)
 	GoBackStack[GoBackDepth] = {LastMaxModelID=LastMaxModelID, Zoom=NumberOfColumn}
 	GoBackDepth = GoBackDepth + 1
 	--
-	TMCFrame.Gallery:Load()
+	if InSearchFlag then
+		TMCFrame.Gallery:Load(false, true)
+	else
+		TMCFrame.Gallery:Load()
+	end
 	--
 end)
 -- end NextPageButton
@@ -306,9 +313,9 @@ TMCFrame.GoToEditBox = CreateFrame('EditBox', nil, TMCFrame.PageController, "Inp
 --
 TMCFrame.GoToEditBox.FontString = TMCFrame.GoToEditBox:CreateFontString(nil, nil, "GameFontWhite")
 TMCFrame.GoToEditBox.FontString:SetPoint("LEFT", -50, 0)
-TMCFrame.GoToEditBox.FontString:SetText("Go to ")
+TMCFrame.GoToEditBox.FontString:SetText("GotoID")
 --
-TMCFrame.GoToEditBox:SetPoint("LEFT", 150, 0)
+TMCFrame.GoToEditBox:SetPoint("LEFT", 100, 0)
 TMCFrame.GoToEditBox:SetMultiLine(false)
 TMCFrame.GoToEditBox:SetAutoFocus(false)
 TMCFrame.GoToEditBox:EnableMouse(true)
@@ -327,9 +334,39 @@ TMCFrame.GoToEditBox:SetScript('OnEnterPressed', function()
 	end
 	NumberOfColumn = MaxNumberOfColumn
 	ModelID = OffsetModelID
+	InSearchFlag = false
 	TMCFrame.Gallery:Load(true)
 end)
 -- end GoToEditBox
+
+-- search editBox
+TMCFrame.searchEditBox = CreateFrame(
+		'EditBox', nil, TMCFrame.PageController, "InputBoxTemplate")
+--
+TMCFrame.searchEditBox.FontString =
+	TMCFrame.searchEditBox:CreateFontString(nil, nil, "GameFontWhite")
+TMCFrame.searchEditBox.FontString:SetPoint("LEFT", -50, 0)
+TMCFrame.searchEditBox.FontString:SetText("Search")
+--
+TMCFrame.searchEditBox:SetPoint("RIGHT", -50, 0)
+TMCFrame.searchEditBox:SetMultiLine(false)
+TMCFrame.searchEditBox:SetAutoFocus(false)
+TMCFrame.searchEditBox:EnableMouse(true)
+TMCFrame.searchEditBox:SetMaxLetters(50)
+TMCFrame.searchEditBox:SetTextInsets(0, 0, 0, 0)
+TMCFrame.searchEditBox:SetFont('Fonts\\ARIALN.ttf', 12, '')
+TMCFrame.searchEditBox:SetWidth(70)
+TMCFrame.searchEditBox:SetHeight(20)
+TMCFrame.searchEditBox:SetScript(
+		'OnEscapePressed', function() TMCFrame.searchEditBox:ClearFocus() end)
+TMCFrame.searchEditBox:SetScript('OnEnterPressed', function()
+	TMCFrame.searchEditBox:ClearFocus()
+	InSearchFlag = true
+	--
+	SearchResult = doSearch(TMCFrame.searchEditBox:GetText())
+	TMCFrame.Gallery:Load(true, true)
+end)
+-- end editBox
 
 -- PreviousPageButton
 TMCFrame.PreviousPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
@@ -339,7 +376,8 @@ TMCFrame.PreviousPageButton:SetBackdrop({
   bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled",
   insets = { left = 4, right = 4, top = 4, bottom = 4 }
 })
-TMCFrame.PreviousPageButton.HoverGlow = TMCFrame.PreviousPageButton:CreateTexture(nil, "BACKGROUND")
+TMCFrame.PreviousPageButton.HoverGlow =
+	TMCFrame.PreviousPageButton:CreateTexture(nil, "BACKGROUND")
 TMCFrame.PreviousPageButton.HoverGlow:SetTexture("Interface\\Buttons\\CheckButtonGlow")
 TMCFrame.PreviousPageButton.HoverGlow:SetAllPoints(TMCFrame.PreviousPageButton)
 TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
@@ -365,11 +403,28 @@ TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
 	TMCFrame.Gallery:Load()
 	--
 end)
+
+function doSearch(inputStr)
+	local result = {}
+	for _, k in ipairs({0, 1, 2}) do
+		tableId = "npc_id_table_" .. k
+		for npc_id, info in pairs(ns[tableId]) do
+			npc_name = info["name"]
+			--print(npc_name)
+			if string.match(string.lower(npc_name), string.lower(inputStr)) then
+				result[tonumber(info["display_id"])] = 1
+			end
+		end
+	end
+	return result
+end
+
 -- end PreviousPageButton
 
 -- Gallery
 TMCFrame.Gallery = CreateFrame("Frame", nil, TMCFrame)
 TMCFrame.Gallery:SetPoint("TOP", 0, -50)
+TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
 TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
 	NewNumberOfColumn = NumberOfColumn
 	if (delta < 0) then
@@ -395,7 +450,7 @@ TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
 	TMCFrame.Gallery:Load()
 end)
 
-function TMCFrame.Gallery:Load(Reset)
+function TMCFrame.Gallery:Load(Reset, is_search)
 	if Debug then
 		print("--- TMCFrame.Gallery:Load ---")
 		print("ModelID .. " .. ModelID)
@@ -414,7 +469,7 @@ function TMCFrame.Gallery:Load(Reset)
 	ModelID = OffsetModelID
 	local CellIndex = 0
 	while CellIndex < NumberOfColumn * MaxNumberOfRowsOnSinglePage do
-		OffsetX = CellIndex % NumberOfColumn 
+		OffsetX = CellIndex % NumberOfColumn
 		OffsetY = floor(CellIndex / NumberOfColumn)
 		if (OffsetY == MaxNumberOfRowsOnSinglePage) then
 			break
@@ -454,13 +509,14 @@ function TMCFrame.Gallery:Load(Reset)
 		end
 		-- always do
 		Cells[CellIndex]:Show()
-		if bNewWidget or Cells[CellIndex].ModelFrame.DisplayInfo < ModelID or Reset then
+		if bNewWidget or Cells[CellIndex].ModelFrame.DisplayInfo < ModelID or Reset or is_search then
 			Cells[CellIndex].ModelFrame:SetDisplayInfo(2418)
 			BlankModelFileID = Cells[CellIndex].ModelFrame:GetModelFileID()
 			if (DisplayFavorites) then
 				while ModelID <= MaxModelID do
 					if (TakusMorphCatalogDB.FavoriteList[ModelID]) then
 						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+						Cells[CellIndex].DisplayFontString:SetText(ModelID)
 						ModelID = ModelID + 1
 						break
 					end
@@ -468,8 +524,15 @@ function TMCFrame.Gallery:Load(Reset)
 				end
 			else
 				while ModelID <= MaxModelID do
-					Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-					Cells[CellIndex].DisplayFontString:SetText(ModelID)
+					if is_search then
+						if SearchResult[ModelID] then
+							Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+							Cells[CellIndex].DisplayFontString:SetText(ModelID)
+						end
+					else
+						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+						Cells[CellIndex].DisplayFontString:SetText(ModelID)
+					end
 					ModelID = ModelID + 1
 					if Cells[CellIndex].ModelFrame:GetModelFileID() ~= nil and
 							Cells[CellIndex].ModelFrame:GetModelFileID() ~= BlankModelFileID then
