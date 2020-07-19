@@ -1,3 +1,5 @@
+local _, ns = ...
+
 -- settings
 local Debug = false
 local MaxNumberOfColumn = 5
@@ -399,6 +401,11 @@ function TMCFrame.Gallery:Load(Reset)
 		print("ModelID .. " .. ModelID)
 		print("LastMaxModelID .. " .. LastMaxModelID)
 		print("OffsetModelID .. " .. OffsetModelID)
+	end
+	--update FavoriteList from popup_transform
+	for k, v in ipairs(ns.display_favorite) do
+		TakusMorphCatalogDB.FavoriteList[tonumber(v)] = 1
+		ns.display_favorite = {}
 	end
 	TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
 	local ColumnWidth = TMCFrame.Gallery:GetWidth() / NumberOfColumn

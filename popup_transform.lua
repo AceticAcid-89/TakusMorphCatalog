@@ -1,5 +1,7 @@
 local _, ns = ...
 
+ns.display_favorite = {}
+
 UnitPopupButtons["PLAY_AS"] = {
 	text = "play as",
     value = "play as",
@@ -12,13 +14,23 @@ UnitPopupButtons["PLAY_AS"] = {
             tableId = "npc_id_table_" .. k
             if ns[tableId]["npc_id_" .. npc_id] then
                 local display_id = ns[tableId]["npc_id_" .. npc_id].display_id
-                if IsAltKeyDown() then
-                    msg = ".mount " .. display_id
+
+                -- add to display_favorite
+                if IsShiftKeyDown() then
+                    ns.display_favorite = {}
+                    table.insert(ns.display_favorite, display_id)
+                -- transform
+
                 else
-                    msg = ".morph " .. display_id
+                    if IsAltKeyDown() then
+                        msg = ".mount " .. display_id
+                    else
+                        msg = ".morph " .. display_id
+                    end
+                    DEFAULT_CHAT_FRAME.editBox:SetText(msg)
+                    ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
                 end
-                DEFAULT_CHAT_FRAME.editBox:SetText(msg)
-                ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+
                 found = true
                 break
             end
