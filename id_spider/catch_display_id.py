@@ -34,18 +34,19 @@ class Spider(object):
 
         self.valid_dict = self.get_cur_ret_dict("valid")
         self.invalid_dict = self.get_cur_ret_dict("invalid")
+        valid_keys = list(self.valid_dict.keys())
+        invalid_keys = list(self.invalid_dict.keys())
 
         if not hasattr(self, "max_id_num"):
-            self.source_data = json.load(open(self.source_file))
+            total = json.load(open(self.source_file))
         else:
-            valid_keys = list(self.valid_dict.keys())
-            invalid_keys = list(self.invalid_dict.keys())
             total = list(map(str, range(1, self.max_id_num + 1)))
-            self.source_data = \
-                list(set(total).difference(set(valid_keys + invalid_keys)))
+
+        self.to_catch_data = \
+            list(set(total).difference(set(valid_keys + invalid_keys)))
         if self.debug:
-            print(self.source_data)
-        self.max_id = len(self.source_data)
+            print(self.to_catch_data)
+        self.max_id = len(self.to_catch_data)
 
     def get_cur_ret_dict(self, file_type):
         if file_type == "valid":
@@ -77,9 +78,7 @@ class Spider(object):
         for line in lines:
             if '<link rel="alternate" hreflang=' not in line:
                 continue
-            # print(line)
             for item in line.split(">"):
-                # print(item)
                 en_name_ret = re.findall(self.en_name_regex, item)
                 if en_name_ret:
                     en_name = en_name_ret[0].replace("-", " ")
@@ -114,7 +113,7 @@ class Spider(object):
         end = (index + 1) * scope + self.offset
         if index == self.thread_num -1:
             end = (index + 2) * scope + self.offset
-        for catch_id in self.source_data[start:end]:
+        for catch_id in self.to_catch_data[start:end]:
             if str(catch_id) in self.valid_dict:
                 if self.debug:
                     print("%s in %s, skip" % (catch_id, self.valid_target))

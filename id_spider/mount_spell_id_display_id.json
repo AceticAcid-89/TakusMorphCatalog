@@ -3933,5 +3933,25 @@
         "display_id": "91877",
         "en_name": "springfur alpaca",
         "cn_name": "春裘羊驼"
+    },
+    "69820": {
+        "display_id": "30366",
+        "en_name": "summon sunwalker kodo",
+        "cn_name": "召唤烈日行者科多兽"
+    },
+    "215545": {
+        "display_id": "43708",
+        "en_name": "fel bat test",
+        "cn_name": "魔蝠"
+    },
+    "34769": {
+        "display_id": "19296",
+        "en_name": "summon thalassian warhorse",
+        "cn_name": "召唤萨拉斯战马"
+    },
+    "13819": {
+        "display_id": "8469",
+        "en_name": "summon warhorse",
+        "cn_name": "召唤战马"
     }
 }
