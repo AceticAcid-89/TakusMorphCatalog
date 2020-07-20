@@ -28,16 +28,24 @@ class Spider(object):
             else:
                 self.__setattr__(k, v)
 
-        if not hasattr(self, "max_id"):
-            self.source_data = json.load(open(self.source_file))
-            self.max_id = len(self.source_data)
-
         # global lock
         self.valid_lock = threading.Lock()
         self.invalid_lock = threading.Lock()
 
         self.valid_dict = self.get_cur_ret_dict("valid")
         self.invalid_dict = self.get_cur_ret_dict("invalid")
+
+        if not hasattr(self, "max_id_num"):
+            self.source_data = json.load(open(self.source_file))
+        else:
+            valid_keys = list(self.valid_dict.keys())
+            invalid_keys = list(self.invalid_dict.keys())
+            total = list(map(str, range(1, self.max_id_num + 1)))
+            self.source_data = \
+                list(set(total).difference(set(valid_keys + invalid_keys)))
+        if self.debug:
+            print(self.source_data)
+        self.max_id = len(self.source_data)
 
     def get_cur_ret_dict(self, file_type):
         if file_type == "valid":
@@ -104,11 +112,9 @@ class Spider(object):
         scope = (self.max_id - self.offset) // self.thread_num
         start = index * scope + self.offset
         end = (index + 1) * scope + self.offset
-        for catch_id in range(start, end):
-            if self.debug:
-                print(catch_id)
-            if hasattr(self, "source_data"):
-                catch_id = self.source_data[catch_id]
+        if index == self.thread_num -1:
+            end = (index + 2) * scope + self.offset
+        for catch_id in self.source_data[start:end]:
             if str(catch_id) in self.valid_dict:
                 if self.debug:
                     print("%s in %s, skip" % (catch_id, self.valid_target))
@@ -132,10 +138,8 @@ class Spider(object):
                 self.set_data(catch_id, "invalid")
                 continue
             en_name, cn_name = self.get_name(resp)
-            # if self.debug:
-            print("result", display_id, en_name, cn_name)
 
-            print("success, catch_id %s" % catch_id)
+            print("result", display_id, en_name, cn_name)
             self.set_data(catch_id, "valid", display_id, (en_name, cn_name))
 
     def set_data(self, catch_id, dict_type,
