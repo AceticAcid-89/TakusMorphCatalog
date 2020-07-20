@@ -102,13 +102,17 @@ TMCFrame.ModelPreview:SetBackdrop({
 })
 TMCFrame.ModelPreview:SetAllPoints()
 --
-TMCFrame.ModelPreview.ModelFrame = CreateFrame("DressUpModel", nil, TMCFrame.ModelPreview)
+TMCFrame.ModelPreview.ModelFrame = CreateFrame(
+		"DressUpModel", "OVERLAY", TMCFrame.ModelPreview)
+TMCFrame.ModelPreview.ModelFrame:SetFrameLevel(105)
 TMCFrame.ModelPreview:Hide()
 
 --
 TMCFrame.ModelPreview.FontString = TMCFrame.ModelPreview.ModelFrame:CreateFontString(
-		nil, nil, "GameFontNormal")
-TMCFrame.ModelPreview.FontString:SetPoint("TOP", 0, -22)
+		nil, "BACKGROUND", "GameFontWhite")
+TMCFrame.ModelPreview.FontString:SetJustifyV("TOP")
+TMCFrame.ModelPreview.FontString:SetJustifyH("LEFT")
+TMCFrame.ModelPreview.FontString:SetPoint("TOPLEFT", 15, -15)
 
 --
 TMCFrame.ModelPreview.ModelFrame.DisplayInfo = 0
@@ -362,6 +366,10 @@ TMCFrame.searchEditBox:SetScript(
 TMCFrame.searchEditBox:SetScript('OnEnterPressed', function()
 	TMCFrame.searchEditBox:ClearFocus()
 	InSearchFlag = true
+	OffsetModelID = 0
+	ModelID = 0
+	DisplayFavorites = false
+	NumberOfColumn = MaxNumberOfColumn
 	--
 	SearchResult = doSearch(TMCFrame.searchEditBox:GetText())
 	TMCFrame.Gallery:Load(true, true)
@@ -407,12 +415,11 @@ end)
 function doSearch(inputStr)
 	local result = {}
 	for _, k in ipairs({0, 1, 2}) do
-		tableId = "npc_id_table_" .. k
+		local tableId = "npc_id_table_" .. k
 		for npc_id, info in pairs(ns[tableId]) do
-			npc_en_name = info["en_name"]
-			npc_cn_name = info["cn_name"]
-			--print(npc_name)
-			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
+			local npc_en_name = info["en_name"]
+			local npc_cn_name = info["cn_name"]
+			if string.match(string.lower(npc_en_name), string.lower(inputStr)) then
 				result[tonumber(info["display_id"])] = 1
 			end
 			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
@@ -424,6 +431,25 @@ function doSearch(inputStr)
 end
 
 -- end PreviousPageButton
+
+function doGetDisplayInfo(inputDisplayID)
+	local result = ""
+	for _, k in ipairs({0, 1, 2}) do
+		local tableId = "display_id_table_" .. k
+		for display_id, items in pairs(ns[tableId]) do
+			if display_id == "display_id_" .. inputDisplayID then
+				for _, item in ipairs(items) do
+					local npc_id = item.npc_id
+					local en_name = item.en_name
+					local cn_name = item.cn_name
+					local item_str = npc_id .. " " .. en_name .. " " .. cn_name .. "\n"
+					result = table.concat({result, item_str})
+				end
+			end
+		end
+	end
+	return result
+end
 
 -- Gallery
 TMCFrame.Gallery = CreateFrame("Frame", nil, TMCFrame)
@@ -498,7 +524,9 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 			Cells[CellIndex]:SetScript("OnClick", function(self, Button, Down)
 				TMCFrame.ModelPreview.ModelFrame:SetDisplayInfo(self.ModelFrame.DisplayInfo)
 				TMCFrame.ModelPreview.ModelFrame.DisplayInfo = self.ModelFrame.DisplayInfo
-				TMCFrame.ModelPreview.FontString:SetText(TMCFrame.ModelPreview.ModelFrame.DisplayInfo)
+				local displayResult = doGetDisplayInfo(TMCFrame.ModelPreview.ModelFrame.DisplayInfo)
+				TMCFrame.ModelPreview.FontString:SetText(displayResult)
+				local ret = doGetDisplayInfo(TMCFrame.ModelPreview.ModelFrame.DisplayInfo)
 				if TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] then
 					TMCFrame.ModelPreview.Favorite:Show()
 					TMCFrame.ModelPreview.AddToFavorite:Hide()

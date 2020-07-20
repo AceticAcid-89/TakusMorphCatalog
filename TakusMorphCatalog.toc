@@ -9,5 +9,8 @@
 npc_0.lua
 npc_1.lua
 npc_2.lua
+display_0.lua
+display_1.lua
+display_2.lua
 popup_transform.lua
 TakusMorphCatalog.lua
