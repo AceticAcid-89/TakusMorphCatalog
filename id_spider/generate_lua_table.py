@@ -4,7 +4,7 @@ import json
 
 NPC_JSON_FILE = "npc_id_display_id.json"
 MOUNT_JSON_FILE = "mount_spell_id_display_id.json"
-target_lua = "..\\npc_%s.lua"
+target_lua = "..\\database\\npc_%s.lua"
 
 with open(NPC_JSON_FILE, encoding="utf-8") as f:
     data = json.load(f)

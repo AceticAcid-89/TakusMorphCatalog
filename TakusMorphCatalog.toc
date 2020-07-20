@@ -1,16 +1,9 @@
 ﻿## Interface: 80300
 ## Title: Taku's Morph Catalog
-## Version: 1.0.0
+## Version: 1.0.1
 ## Author: Taku @Druidsmoker
 ## Notes: An in-game model viewer made for morphing
 ## DefaultState: Enabled
 ## SavedVariables: TakusMorphCatalogDB
 
-npc_0.lua
-npc_1.lua
-npc_2.lua
-display_0.lua
-display_1.lua
-display_2.lua
-popup_transform.lua
-TakusMorphCatalog.lua
+addon.xml

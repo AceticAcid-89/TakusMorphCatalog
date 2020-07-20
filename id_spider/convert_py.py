@@ -25,7 +25,7 @@ for npc_id in data:
 with open("display_id_npc_id.json", "w",  encoding="utf-8") as f:
     f.write(json.dumps(display_id_npc_id_dict, indent=4, ensure_ascii=False))
 
-target_lua = "..\\display_%s.lua"
+target_lua = "..\\database\\display_%s.lua"
 
 full_list = []
 

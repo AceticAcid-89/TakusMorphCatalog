@@ -94,7 +94,6 @@ TMCFrame.ModelPreview.CloseButton:SetScript("OnClick", function(self, Button, Do
 end)
 
 TMCFrame.ModelPreview:SetFrameStrata("DIALOG")
---TMCFrame.ModelPreview:SetFrameLevel(5)
 TMCFrame.ModelPreview:SetBackdrop({
     bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
@@ -104,7 +103,6 @@ TMCFrame.ModelPreview:SetAllPoints()
 --
 TMCFrame.ModelPreview.ModelFrame = CreateFrame(
 		"DressUpModel", "OVERLAY", TMCFrame.ModelPreview)
-TMCFrame.ModelPreview.ModelFrame:SetFrameLevel(105)
 TMCFrame.ModelPreview:Hide()
 
 --
@@ -152,7 +150,7 @@ TMCFrame.ModelPreview.ModelFrame:SetScript("OnUpdate", OnUpdate)
 TMCFrame.ModelPreview.ModelFrame:Show()
 --
 TMCFrame.ModelPreview.Favorite = TMCFrame.ModelPreview.ModelFrame:CreateTexture(nil, "ARTWORK")
-TMCFrame.ModelPreview.Favorite:SetPoint("TOPLEFT", 0, -11)
+TMCFrame.ModelPreview.Favorite:SetPoint("BOTTOMRIGHT", -10, 0)
 TMCFrame.ModelPreview.Favorite:SetSize(40, 40)
 TMCFrame.ModelPreview.Favorite:SetTexture("Interface\\Collections\\Collections")
 TMCFrame.ModelPreview.Favorite:SetTexCoord(0.18, 0.02, 0.18, 0.07, 0.23, 0.02, 0.23, 0.07)
@@ -398,6 +396,9 @@ TMCFrame.PreviousPageButton:SetScript("OnLeave", function()
 	TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
 end);
 TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
+	if (GoBackDepth == 0) then
+		return
+	end
 	OffsetModelID = GoBackStack[GoBackDepth-1].LastMaxModelID
 	--
 	ModelID = OffsetModelID
@@ -442,7 +443,8 @@ function doGetDisplayInfo(inputDisplayID)
 					local npc_id = item.npc_id
 					local en_name = item.en_name
 					local cn_name = item.cn_name
-					local item_str = npc_id .. " " .. en_name .. " " .. cn_name .. "\n"
+					local item_str = en_name .. " " .. cn_name .. " " .. npc_id  ..
+							 "\n"
 					result = table.concat({result, item_str})
 				end
 			end
