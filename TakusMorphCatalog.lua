@@ -409,9 +409,13 @@ function doSearch(inputStr)
 	for _, k in ipairs({0, 1, 2}) do
 		tableId = "npc_id_table_" .. k
 		for npc_id, info in pairs(ns[tableId]) do
-			npc_name = info["name"]
+			npc_en_name = info["en_name"]
+			npc_cn_name = info["cn_name"]
 			--print(npc_name)
-			if string.match(string.lower(npc_name), string.lower(inputStr)) then
+			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
+				result[tonumber(info["display_id"])] = 1
+			end
+			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
 				result[tonumber(info["display_id"])] = 1
 			end
 		end
