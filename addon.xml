@@ -5,6 +5,6 @@
 	<Script file="database\display_0.lua"/>
 	<Script file="database\display_1.lua"/>
 	<Script file="database\display_2.lua"/>
-	<Script file="main\popup_transform.lua"/>
-	<Script file="main\TakusMorphCatalog.lua"/>
+	<Script file="core\popup_transform.lua"/>
+	<Script file="core\TakusMorphCatalog.lua"/>
 </Ui>
