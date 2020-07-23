@@ -7,15 +7,14 @@ local NumberOfColumn = 5
 local MaxModelID = 200000
 local WindowWidth = 1000
 local WindowHeight = 700
+local MaxNumberOfRowsOnSinglePage = floor(700 * 5 / 1000)
+local pageTotalNum = NumberOfColumn * MaxNumberOfRowsOnSinglePage
 
 -- vars
 local Cells = {}
-local OffsetModelID = 0
-local ModelID = OffsetModelID
+local ModelID = 0
 local LastMaxModelID = 0
-local lastStartID = 0
-local GoBackStack = {}
-local GoBackDepth = 0
+local LastStartID = 0
 local DisplayFavorites = false
 local SearchResult = {}
 local InSearchFlag = false
@@ -101,7 +100,7 @@ function TMCFrame.PageController:UpdateButtons()
 		})
 	end
 
-	if (GoBackDepth == 0) then
+	if (LastStartID == 0) then
 		TMCFrame.PreviousPageButton:SetBackdrop( {
 		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled",
 		  insets = {left = 4, right = 4, top = 4, bottom = 4}
@@ -133,7 +132,7 @@ TMCFrame.PreviousPageButton.HoverGlow:SetAllPoints(
 		TMCFrame.PreviousPageButton)
 TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
 TMCFrame.PreviousPageButton:SetScript("OnEnter", function()
-	if (GoBackDepth > 0) then
+	if (LastStartID > 0) then
 		TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(1)
 	end
 end);
@@ -141,17 +140,11 @@ TMCFrame.PreviousPageButton:SetScript("OnLeave", function()
 	TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
 end);
 TMCFrame.PreviousPageButton:SetScript("OnClick", function()
-	if (GoBackDepth == 0) then
-		return
-	end
-	OffsetModelID = GoBackStack[GoBackDepth-1].LastMaxModelID
-	ModelID = OffsetModelID
-	NumberOfColumn = MaxNumberOfColumn
-	TMCFrame.Gallery:Load(true)
-	ModelID = OffsetModelID
-	NumberOfColumn = GoBackStack[GoBackDepth-1].Zoom
-	GoBackStack[GoBackDepth-1] = nil
-	GoBackDepth = GoBackDepth - 1
+	--if (LastStartID == 0) then
+	--	return
+	--end
+	print(LastStartID)
+	ModelID = LastStartID
 	TMCFrame.Gallery:Load()
 end)
 -- end TMCFrame PreviousPageButton frame --------------------------------------
@@ -184,14 +177,9 @@ TMCFrame.NextPageButton:SetScript("OnClick", function()
 	if (ModelID >= MaxModelID) then
 		return
 	end
-	OffsetModelID = ModelID
-	GoBackStack[GoBackDepth] =
-		{LastMaxModelID=LastMaxModelID, Zoom=NumberOfColumn}
-	if InSearchFlag then
-		TMCFrame.Gallery:Load(false, true)
-	else
-		TMCFrame.Gallery:Load()
-	end
+	local cacheLastId = LastStartID
+	TMCFrame.Gallery:Load()
+	LastStartID = cacheLastId
 end)
 -- end TMCFrame NextPageButton frame ------------------------------------------
 
@@ -217,12 +205,7 @@ TMCFrame.GoToEditBox:SetScript('OnEscapePressed', function()
 end)
 TMCFrame.GoToEditBox:SetScript('OnEnterPressed', function()
 	TMCFrame.GoToEditBox:ClearFocus()
-	OffsetModelID = tonumber(TMCFrame.GoToEditBox:GetText())
-	if OffsetModelID >= MaxModelID then
-		OffsetModelID = MaxModelID
-	end
 	NumberOfColumn = MaxNumberOfColumn
-	ModelID = OffsetModelID
 	InSearchFlag = false
 	TMCFrame.Gallery:Load(true)
 end)
@@ -270,7 +253,6 @@ end
 TMCFrame.searchEditBox:SetScript('OnEnterPressed', function()
 	TMCFrame.searchEditBox:ClearFocus()
 	InSearchFlag = true
-	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = false
 	NumberOfColumn = MaxNumberOfColumn
@@ -287,12 +269,9 @@ TMCFrame.Collection:SetFrameStrata("TOOLTIP")
 TMCFrame.Collection:SetPoint("TOPLEFT", 10, -10)
 TMCFrame.Collection:SetText("Collection")
 TMCFrame.Collection:SetScript("OnClick", function()
-	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = false
-	InSearchFlag = false
-	NumberOfColumn = MaxNumberOfColumn
-	TMCFrame.Gallery:Load(true)
+	TMCFrame.Gallery:Load()
 end)
 -- end TMCFrame Collection ----------------------------------------------------
 
@@ -304,12 +283,9 @@ TMCFrame.Favorites:SetFrameStrata("TOOLTIP")
 TMCFrame.Favorites:SetPoint("TOPLEFT", 130, -10)
 TMCFrame.Favorites:SetText("Favorites")
 TMCFrame.Favorites:SetScript("OnClick", function()
-	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = true
-	InSearchFlag = false
-	GoBackDepth = 0
-	TMCFrame.Gallery:Load(true)
+	TMCFrame.Gallery:Load()
 end)
 -- end TMCFrame Favorites -----------------------------------------------------
 
@@ -410,7 +386,6 @@ TMCFrame.ModelPreview.AddToFavorite:SetScript("OnClick", function()
 	TMCFrame.ModelPreview.AddToFavorite:Hide()
 	TMCFrame.ModelPreview.RemoveFavorite:Show()
 	TMCFrame.ModelPreview.Favorite:Show()
-	ModelID = OffsetModelID
 	TMCFrame.Gallery:Load()
 end)
 -- end ModelPreview AddToFavorite frame ---------------------------------------
@@ -428,7 +403,6 @@ TMCFrame.ModelPreview.RemoveFavorite:SetScript("OnClick", function()
 	TMCFrame.ModelPreview.AddToFavorite:Show()
 	TMCFrame.ModelPreview.RemoveFavorite:Hide()
 	TMCFrame.ModelPreview.Favorite:Hide()
-	ModelID = OffsetModelID
 	TMCFrame.Gallery:Load()
 end)
 -- end ModelPreview RemoveFavorite frame --------------------------------------
@@ -466,30 +440,6 @@ end)
 TMCFrame.Gallery = CreateFrame("Frame", nil, TMCFrame)
 TMCFrame.Gallery:SetPoint("TOP", 0, -50)
 TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
-TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
-	NewNumberOfColumn = NumberOfColumn
-	if (delta < 0) then
-		if (NumberOfColumn == MaxNumberOfColumn) then
-			return
-		end
-		NewNumberOfColumn = NumberOfColumn * 2
-		-- pop all inferior zoom from gobackstack
-		Depth = GoBackDepth - 1
-		while Depth > 0 and GoBackStack[Depth].Zoom < NumberOfColumn do
-			GoBackStack[Depth] = nil
-			Depth = Depth - 1
-			GoBackDepth = GoBackDepth - 1
-		end
-	else
-		if (NumberOfColumn == MinNumberOfColumn) then
-			return
-		end
-		NewNumberOfColumn = NumberOfColumn / 2
-	end
-	ModelID = OffsetModelID
-	NumberOfColumn = NewNumberOfColumn
-	TMCFrame.Gallery:Load()
-end)
 
 local function doGetDisplayInfo(inputDisplayID)
 	local result = ""
@@ -511,121 +461,119 @@ local function doGetDisplayInfo(inputDisplayID)
 	return result
 end
 
-function TMCFrame.Gallery:Load(Reset, is_search, startID, endID)
+
+function createCellFrame(CellIndex)
+	Cells[CellIndex] = CreateFrame("Button", nil, TMCFrame.Gallery)
+	Cells[CellIndex]:SetFrameStrata("DIALOG")
+	Cells[CellIndex]:RegisterForClicks("AnyUp")
+	Cells[CellIndex].Favorite = Cells[CellIndex]:CreateTexture(nil, "ARTWORK")
+	Cells[CellIndex].Favorite:SetPoint("TOPLEFT", -5, 0)
+	Cells[CellIndex].Favorite:SetSize(20, 20)
+	Cells[CellIndex].Favorite:SetTexture("Interface\\Collections\\Collections")
+	Cells[CellIndex].Favorite:SetTexCoord(
+			0.18, 0.02, 0.18, 0.07, 0.23, 0.02, 0.23, 0.07)
+	Cells[CellIndex].HighlightBackground =
+		Cells[CellIndex]:CreateTexture(nil, "BACKGROUND")
+	Cells[CellIndex].HighlightBackground:SetColorTexture(50, 50, 50, 0.2)
+	Cells[CellIndex].HighlightBackground:SetAllPoints(Cells[CellIndex])
+	Cells[CellIndex]:SetHighlightTexture(Cells[CellIndex].HighlightBackground)
+	Cells[CellIndex].DisplayFontString =
+		Cells[CellIndex]:CreateFontString(nil, nil, "GameFontWhite")
+	Cells[CellIndex].DisplayFontString:SetPoint("TOP", 0, 0)
+	Cells[CellIndex].ModelFrame = CreateFrame("PlayerModel", nil, Cells[CellIndex])
+	local ColumnWidth = TMCFrame.Gallery:GetWidth() / NumberOfColumn
+	local OffsetX = CellIndex % NumberOfColumn
+	local OffsetY = floor(CellIndex / NumberOfColumn)
+	Cells[CellIndex]:SetWidth(ColumnWidth)
+	Cells[CellIndex]:SetHeight(ColumnWidth)
+	Cells[CellIndex]:SetPoint(
+			"TOPLEFT", OffsetX * ColumnWidth, OffsetY * - ColumnWidth)
+	Cells[CellIndex].ModelFrame:SetAllPoints()
+	Cells[CellIndex]:Show()
+end
+
+
+function updateFavorites()
 	--update FavoriteList from popup_transform
 	for _, v in ipairs(ns.display_favorite) do
 		TakusMorphCatalogDB.FavoriteList[tonumber(v)] = 1
 		ns.display_favorite = {}
 	end
+end
 
-	local ColumnWidth = TMCFrame.Gallery:GetWidth() / NumberOfColumn
-	local MaxNumberOfRowsOnSinglePage = floor(TMCFrame.Gallery:GetHeight() / ColumnWidth)
-	lastStartID = startID
-	ModelID = startID
-	local CellIndex = 0
-	while CellIndex < NumberOfColumn * MaxNumberOfRowsOnSinglePage do
-		OffsetX = CellIndex % NumberOfColumn
-		OffsetY = floor(CellIndex / NumberOfColumn)
-		if (OffsetY == MaxNumberOfRowsOnSinglePage) then
-			break
+
+function registerCellOnClick(CellIndex, clickModelID)
+	Cells[CellIndex]:SetScript("OnClick", function()
+		TMCFrame.ModelPreview.ModelFrame:SetDisplayInfo(clickModelID)
+		local displayResult = doGetDisplayInfo(clickModelID)
+		TMCFrame.ModelPreview.FontString:SetText(displayResult)
+		if TakusMorphCatalogDB.FavoriteList[
+				TMCFrame.ModelPreview.ModelFrame.DisplayInfo] then
+			TMCFrame.ModelPreview.Favorite:Show()
+			TMCFrame.ModelPreview.AddToFavorite:Hide()
+			TMCFrame.ModelPreview.RemoveFavorite:Show()
+		else
+			TMCFrame.ModelPreview.Favorite:Hide()
+			TMCFrame.ModelPreview.AddToFavorite:Show()
+			TMCFrame.ModelPreview.RemoveFavorite:Hide()
 		end
+		TMCFrame.ModelPreview:Show()
+	end)
+end
 
-		local bNewWidget = (Cells[CellIndex] == nil)
-		if bNewWidget then
-			Cells[CellIndex] = CreateFrame("Button", nil, TMCFrame.Gallery)
-			Cells[CellIndex]:SetFrameStrata("DIALOG")
-			Cells[CellIndex]:RegisterForClicks("AnyUp")
-			Cells[CellIndex].Favorite = Cells[CellIndex]:CreateTexture(nil, "ARTWORK")
-			Cells[CellIndex].Favorite:SetPoint("TOPLEFT", -5, 0)
-			Cells[CellIndex].Favorite:SetSize(20, 20)
-			Cells[CellIndex].Favorite:SetTexture("Interface\\Collections\\Collections")
-			Cells[CellIndex].Favorite:SetTexCoord(
-					0.18, 0.02, 0.18, 0.07, 0.23, 0.02, 0.23, 0.07)
-			Cells[CellIndex].HighlightBackground =
-				Cells[CellIndex]:CreateTexture(nil, "BACKGROUND")
-			Cells[CellIndex].HighlightBackground:SetColorTexture(50, 50, 50, 0.2)
-			Cells[CellIndex].HighlightBackground:SetAllPoints(Cells[CellIndex])
-			Cells[CellIndex]:SetHighlightTexture(Cells[CellIndex].HighlightBackground)
-			Cells[CellIndex].DisplayFontString =
-				Cells[CellIndex]:CreateFontString(nil, nil, "GameFontWhite")
-			Cells[CellIndex].DisplayFontString:SetPoint("TOP", 0, 0)
-			Cells[CellIndex].ModelFrame = CreateFrame("PlayerModel", nil, Cells[CellIndex])
-			Cells[CellIndex]:SetScript("OnClick", function(self)
-				TMCFrame.ModelPreview.ModelFrame:SetDisplayInfo(self.ModelFrame.DisplayInfo)
-				TMCFrame.ModelPreview.ModelFrame.DisplayInfo = self.ModelFrame.DisplayInfo
-				local displayResult =
-					doGetDisplayInfo(TMCFrame.ModelPreview.ModelFrame.DisplayInfo)
-				TMCFrame.ModelPreview.FontString:SetText(displayResult)
-				if TakusMorphCatalogDB.FavoriteList[
-					TMCFrame.ModelPreview.ModelFrame.DisplayInfo] then
-					TMCFrame.ModelPreview.Favorite:Show()
-					TMCFrame.ModelPreview.AddToFavorite:Hide()
-					TMCFrame.ModelPreview.RemoveFavorite:Show()
-				else
-					TMCFrame.ModelPreview.Favorite:Hide()
-					TMCFrame.ModelPreview.AddToFavorite:Show()
-					TMCFrame.ModelPreview.RemoveFavorite:Hide()
-				end
-				TMCFrame.ModelPreview:Show()
-			end)
-		end
-		Cells[CellIndex]:Show()
-
-		if bNewWidget or Cells[CellIndex].ModelFrame.DisplayInfo < ModelID or Reset or is_search then
-			Cells[CellIndex].ModelFrame:SetDisplayInfo(2418)
-			BlankModelFileID = Cells[CellIndex].ModelFrame:GetModelFileID()
-			if (DisplayFavorites) then
-				while ModelID <= MaxModelID do
-					if (TakusMorphCatalogDB.FavoriteList[ModelID]) then
-						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-						Cells[CellIndex].DisplayFontString:SetText(ModelID)
-						ModelID = ModelID + 1
-						break
-					end
-					ModelID = ModelID + 1
-				end
-			else
-				while ModelID <= MaxModelID do
-					if is_search then
-						if SearchResult[ModelID] then
-							Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-							Cells[CellIndex].DisplayFontString:SetText(ModelID)
-						end
-					else
-						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-						Cells[CellIndex].DisplayFontString:SetText(ModelID)
-					end
-					ModelID = ModelID + 1
-					if Cells[CellIndex].ModelFrame:GetModelFileID() ~= nil and
-							Cells[CellIndex].ModelFrame:GetModelFileID() ~= BlankModelFileID then
-						break
-					end
-				end
+function getModeID()
+	while true do
+		if not DisplayFavorites then
+			ModelID = ModelID + 1
+			return ModelID
+		else
+			ModelID = ModelID + 1
+			if TakusMorphCatalogDB.FavoriteList[ModelID] then
+				return ModelID
 			end
-			Cells[CellIndex].ModelFrame.DisplayInfo = ModelID - 1
-		else
-			ModelID = Cells[CellIndex].ModelFrame.DisplayInfo + 1
 		end
-		if (Cells[CellIndex].ModelFrame.DisplayInfo == MaxModelID) then
-			Cells[CellIndex]:Hide()
-		end
-		Cells[CellIndex]:SetWidth(ColumnWidth)
-		Cells[CellIndex]:SetHeight(ColumnWidth)
-		Cells[CellIndex]:SetPoint("TOPLEFT", OffsetX * ColumnWidth, OffsetY * - ColumnWidth)
-		if (TakusMorphCatalogDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
-			Cells[CellIndex].Favorite:Show()
-		else
-			Cells[CellIndex].Favorite:Hide()
-		end
-		Cells[CellIndex].ModelFrame:SetAllPoints()
-		CellIndex = CellIndex + 1
-	end --while
-
-	while Cells[CellIndex] ~= nil do
-		Cells[CellIndex]:Hide()
-		CellIndex = CellIndex + 1
 	end
-	TMCFrame.PageController.FontString:SetText(LastMaxModelID .. " - " .. ModelID - 1)
+end
+
+
+function TMCFrame.Gallery:Load()
+	local found = false
+	LastStartID = ModelID
+	updateFavorites()
+	local CellIndex = 0
+
+	while CellIndex < pageTotalNum do
+		if Cells[CellIndex] then
+			Cells[CellIndex]:Hide()
+			Cells[CellIndex] = nil
+		end
+		createCellFrame(CellIndex)
+		while ModelID <= MaxModelID do
+			ModelID = getModeID()
+			Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+			Cells[CellIndex].DisplayFontString:SetText(ModelID)
+			if (Cells[CellIndex].ModelFrame.DisplayInfo == MaxModelID) then
+				Cells[CellIndex]:Hide()
+			end
+			local BlankModelFileID = 2418
+			if Cells[CellIndex].ModelFrame:GetModelFileID() ~= nil and
+				Cells[CellIndex].ModelFrame:GetModelFileID() ~= BlankModelFileID then
+				registerCellOnClick(CellIndex, ModelID)
+				if TakusMorphCatalogDB.FavoriteList[ModelID] then
+					Cells[CellIndex].Favorite:Show()
+				else
+					Cells[CellIndex].Favorite:Hide()
+				end
+				found = true
+				print("xxx", LastStartID)
+				break
+			end
+		end
+		if found then
+			CellIndex = CellIndex + 1
+		end
+	end
+	TMCFrame.PageController.FontString:SetText(LastMaxModelID .. " - " .. ModelID)
 	TMCFrame.PageController:UpdateButtons()
 end
 -- end TMCFrame Gallery frame -------------------------------------------------
