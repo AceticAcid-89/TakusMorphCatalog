@@ -50,12 +50,13 @@ for index, cataType in ipairs(Types) do
 	buttons[index]:SetScript("OnClick", function()
 	coreFrame.FontString:Hide()
 	hideAll()
-	ns[cataType .. "TMCFrame"].TAKUSMORPHCATALOG()
+	ns[cataType .. "TMCFrame"]["TAKUSMORPHCATALOG"..cataType]()
 end)
 end
 
 -- slash commands
 SLASH_TAKUSMORPHCATALOG1 = '/tmc'
+print("TakusMorphCatalog: Type /tmc to display the morph catalog !")
 function SlashCmdList.TAKUSMORPHCATALOG()
 	hideAll()
 	coreFrame:Show()

@@ -1,11 +1,11 @@
 local _, ns = ...
 
 -- settings
-local Debug = true
+local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
-local MaxModelID = 200000
+local MaxModelID = 120000
 local WindowWidth = 1000
 local WindowHeight = 700
 
@@ -20,104 +20,139 @@ local DisplayFavorites = false
 local SearchResult = {}
 local InSearchFlag = false
 --
-TakusMorphCatalogDB = {
+TakusMorphCatalogArmorDB = {
 	FavoriteList = {}
 }
-print("TakusMorphCatalog: Type /tmc to display the morph catalog !")
+local armorSlot = {}
+for i = 1, 11 do
+	armorSlot[i] = 1
+end
+
+local ArmorSlotSourceType = {
+	[1] = 1, [2] = 3, [3] = 15, [4] = 5, [5] = 4,
+	[6] = 19, [7] = 9, [8] = 10, [10] = 7, [11] = 8
+}
 -- end
 
--- TMCFrame (main)
-local TMCFrame = CreateFrame("Frame", nil, UIParent)
-TMCFrame:Hide()
-TMCFrame:SetFrameStrata("DIALOG")
-TMCFrame:SetWidth(WindowWidth)
-TMCFrame:SetHeight(WindowHeight)
-TMCFrame:SetPoint("TOPLEFT",0,0)
-TMCFrame:SetMovable(true)
-TMCFrame:SetMinResize(400, 400)
-TMCFrame:SetClampedToScreen(true)
-TMCFrame:SetBackdrop({
+local function itemValid(sourceID)
+	local isExist
+	local categoryID, visualID, canEnchant, icon, _, itemLink, transmogLink, _, _ =
+    	C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+	if armorSlot[categoryID] then
+		return true
+	end
+	return isExist
+end
+
+local function getItemID(sourceID)
+	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
+	return(sourceInfo.itemID)
+end
+
+local function getAromorSlot(sourceID)
+	local categoryID, visualID, canEnchant, icon, _, itemLink, transmogLink, _, _ =
+    	C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+	return ArmorSlotSourceType[categoryID]
+end
+
+local function getItemLink(sourceID)
+	local categoryID, visualID, canEnchant, icon, _, itemLink, transmogLink, _, _ =
+    	C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+	return itemLink
+end
+
+-- TMCArmorFrame (main)
+local TMCArmorFrame = CreateFrame("Frame", nil, UIParent)
+TMCArmorFrame:Hide()
+TMCArmorFrame:SetFrameStrata("DIALOG")
+TMCArmorFrame:SetWidth(WindowWidth)
+TMCArmorFrame:SetHeight(WindowHeight)
+TMCArmorFrame:SetPoint("TOPLEFT",0,0)
+TMCArmorFrame:SetMovable(true)
+TMCArmorFrame:SetMinResize(400, 400)
+TMCArmorFrame:SetClampedToScreen(true)
+TMCArmorFrame:SetBackdrop({
 	bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
     edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     tile = true, tileSize = 32, edgeSize = 32,
     insets = { left = 11, right = 12, top = 12, bottom = 11 }
 })
-TMCFrame:EnableKeyboard(true)
-TMCFrame:SetScript("OnKeyDown", function(self, key)
+TMCArmorFrame:EnableKeyboard(true)
+TMCArmorFrame:SetScript("OnKeyDown", function(self, key)
 	if key == "ESCAPE" then
-		TMCFrame:Hide()
+		TMCArmorFrame:Hide()
 	end
 end)
--- end TMCFrame
+-- end TMCArmorFrame
 
 if Debug then
-	print("TMCFrame OK")
+	print("TMCArmorFrame OK")
 end
 
 -- Collection
-TMCFrame.Collection = CreateFrame("Button", nil, TMCFrame, "UIPanelButtonTemplate")
-TMCFrame.Collection:SetSize(120,30)
-TMCFrame.Collection:SetPoint("TOPLEFT", 10, -10)
-TMCFrame.Collection:SetText("Collection")
-TMCFrame.Collection:SetScript("OnClick", function(self, Button, Down)
+TMCArmorFrame.Collection = CreateFrame("Button", nil, TMCArmorFrame, "UIPanelButtonTemplate")
+TMCArmorFrame.Collection:SetSize(120,30)
+TMCArmorFrame.Collection:SetPoint("TOPLEFT", 10, -10)
+TMCArmorFrame.Collection:SetText("Collection")
+TMCArmorFrame.Collection:SetScript("OnClick", function(self, Button, Down)
 	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = false
 	InSearchFlag = false
 	NumberOfColumn = MaxNumberOfColumn
-	TMCFrame.Gallery:Load(true)
+	TMCArmorFrame.Gallery:Load(true)
 end)
 -- end Collection
 
 -- Favorites
-TMCFrame.Favorites = CreateFrame("Button", nil, TMCFrame, "UIPanelButtonTemplate")
-TMCFrame.Favorites:SetSize(120, 30)
-TMCFrame.Favorites:SetPoint("TOPLEFT", 130, -10)
-TMCFrame.Favorites:SetText("Favorites")
-TMCFrame.Favorites:SetScript("OnClick", function(self, Button, Down)
+TMCArmorFrame.Favorites = CreateFrame("Button", nil, TMCArmorFrame, "UIPanelButtonTemplate")
+TMCArmorFrame.Favorites:SetSize(120, 30)
+TMCArmorFrame.Favorites:SetPoint("TOPLEFT", 130, -10)
+TMCArmorFrame.Favorites:SetText("Favorites")
+TMCArmorFrame.Favorites:SetScript("OnClick", function(self, Button, Down)
 	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = true
 	InSearchFlag = false
 	GoBackDepth = 0
-	TMCFrame.Gallery:Load(true)
+	TMCArmorFrame.Gallery:Load(true)
 end)
 -- end Favorites
 
 -- ModelPreview
-TMCFrame.ModelPreview = CreateFrame("Frame", nil, TMCFrame)
-TMCFrame.ModelPreview.CloseButton = CreateFrame(
-		"Button", nil, TMCFrame.ModelPreview, "UIPanelCloseButton")
-TMCFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 695, -5)
-TMCFrame.ModelPreview.CloseButton:SetScript("OnClick", function(self, Button, Down)
-	TMCFrame.ModelPreview:Hide()
+TMCArmorFrame.ModelPreview = CreateFrame("Frame", nil, TMCArmorFrame)
+TMCArmorFrame.ModelPreview.CloseButton = CreateFrame(
+		"Button", nil, TMCArmorFrame.ModelPreview, "UIPanelCloseButton")
+TMCArmorFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 695, -5)
+TMCArmorFrame.ModelPreview.CloseButton:SetScript("OnClick", function(self, Button, Down)
+	TMCArmorFrame.ModelPreview:Hide()
 end)
 
-TMCFrame.ModelPreview:SetFrameStrata("DIALOG")
-TMCFrame.ModelPreview:SetBackdrop({
+TMCArmorFrame.ModelPreview:SetFrameStrata("DIALOG")
+TMCArmorFrame.ModelPreview:SetBackdrop({
     bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     insets = {left = 11, right = 12, top = 12, bottom = 11}
 })
-TMCFrame.ModelPreview:SetAllPoints()
+TMCArmorFrame.ModelPreview:SetAllPoints()
 --
-TMCFrame.ModelPreview.ModelFrame = CreateFrame(
-		"DressUpModel", "OVERLAY", TMCFrame.ModelPreview)
-TMCFrame.ModelPreview:Hide()
+TMCArmorFrame.ModelPreview.ModelFrame = CreateFrame(
+		"DressUpModel", "OVERLAY", TMCArmorFrame.ModelPreview)
+TMCArmorFrame.ModelPreview:Hide()
 
 --
-TMCFrame.ModelPreview.FontString = TMCFrame.ModelPreview.ModelFrame:CreateFontString(
+TMCArmorFrame.ModelPreview.FontString = TMCArmorFrame.ModelPreview.ModelFrame:CreateFontString(
 		nil, "BACKGROUND", "GameFontWhite")
-TMCFrame.ModelPreview.FontString:SetJustifyV("TOP")
-TMCFrame.ModelPreview.FontString:SetJustifyH("LEFT")
-TMCFrame.ModelPreview.FontString:SetPoint("TOPLEFT", 15, -15)
+TMCArmorFrame.ModelPreview.FontString:SetJustifyV("TOP")
+TMCArmorFrame.ModelPreview.FontString:SetJustifyH("LEFT")
+TMCArmorFrame.ModelPreview.FontString:SetPoint("TOPLEFT", 15, -15)
 
 --
-TMCFrame.ModelPreview.ModelFrame.DisplayInfo = 0
-TMCFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth - 300)
-TMCFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
-TMCFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 700, 0)
-TMCFrame.ModelPreview.ModelFrame:SetBackdrop({
+TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo = 0
+TMCArmorFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth - 300)
+TMCArmorFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
+TMCArmorFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 700, 0)
+TMCArmorFrame.ModelPreview.ModelFrame:SetBackdrop({
 	bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     insets = {left = 11, right = 12, top = 12, bottom = 11}
@@ -145,121 +180,111 @@ local function OnUpdate(self, elapsed)
 	self:SetFacing(offsetDegree)
 	self:SetModelScale(offsetScale)
 end
-TMCFrame.ModelPreview.ModelFrame:EnableMouse()
-TMCFrame.ModelPreview.ModelFrame:SetScript("OnUpdate", OnUpdate)
-TMCFrame.ModelPreview.ModelFrame:Show()
+TMCArmorFrame.ModelPreview.ModelFrame:EnableMouse()
+TMCArmorFrame.ModelPreview.ModelFrame:SetScript("OnUpdate", OnUpdate)
+TMCArmorFrame.ModelPreview.ModelFrame:Show()
 --
-TMCFrame.ModelPreview.Favorite = TMCFrame.ModelPreview.ModelFrame:CreateTexture(nil, "ARTWORK")
-TMCFrame.ModelPreview.Favorite:SetPoint("BOTTOMRIGHT", -10, 0)
-TMCFrame.ModelPreview.Favorite:SetSize(40, 40)
-TMCFrame.ModelPreview.Favorite:SetTexture("Interface\\Collections\\Collections")
-TMCFrame.ModelPreview.Favorite:SetTexCoord(0.18, 0.02, 0.18, 0.07, 0.23, 0.02, 0.23, 0.07)
+TMCArmorFrame.ModelPreview.Favorite = TMCArmorFrame.ModelPreview.ModelFrame:CreateTexture(nil, "ARTWORK")
+TMCArmorFrame.ModelPreview.Favorite:SetPoint("BOTTOMRIGHT", -10, 0)
+TMCArmorFrame.ModelPreview.Favorite:SetSize(40, 40)
+TMCArmorFrame.ModelPreview.Favorite:SetTexture("Interface\\Collections\\Collections")
+TMCArmorFrame.ModelPreview.Favorite:SetTexCoord(0.18, 0.02, 0.18, 0.07, 0.23, 0.02, 0.23, 0.07)
 
 --
-TMCFrame.ModelPreview.AddToFavorite = CreateFrame(
-		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
-TMCFrame.ModelPreview.AddToFavorite:SetSize(120, 30)
-TMCFrame.ModelPreview.AddToFavorite:SetPoint("BOTTOMLEFT", 11, 11)
-TMCFrame.ModelPreview.AddToFavorite:SetText("Add to Favorite")
-TMCFrame.ModelPreview.AddToFavorite:SetScript("OnClick", function(self, Button, Down)
-	TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = 1
-	TMCFrame.ModelPreview.AddToFavorite:Hide()
-	TMCFrame.ModelPreview.RemoveFavorite:Show()
-	TMCFrame.ModelPreview.Favorite:Show()
+TMCArmorFrame.ModelPreview.AddToFavorite = CreateFrame(
+		"Button", nil, TMCArmorFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
+TMCArmorFrame.ModelPreview.AddToFavorite:SetSize(120, 30)
+TMCArmorFrame.ModelPreview.AddToFavorite:SetPoint("BOTTOMLEFT", 11, 11)
+TMCArmorFrame.ModelPreview.AddToFavorite:SetText("Add to Favorite")
+TMCArmorFrame.ModelPreview.AddToFavorite:SetScript("OnClick", function(self, Button, Down)
+	TakusMorphCatalogArmorDB.FavoriteList[TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo] = 1
+	TMCArmorFrame.ModelPreview.AddToFavorite:Hide()
+	TMCArmorFrame.ModelPreview.RemoveFavorite:Show()
+	TMCArmorFrame.ModelPreview.Favorite:Show()
 	ModelID = OffsetModelID
-	TMCFrame.Gallery:Load()
+	TMCArmorFrame.Gallery:Load()
 end)
 
 --
-TMCFrame.ModelPreview.RemoveFavorite = CreateFrame(
-		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
-TMCFrame.ModelPreview.RemoveFavorite:SetSize(120, 30)
-TMCFrame.ModelPreview.RemoveFavorite:SetPoint("BOTTOMLEFT", 11, 11)
-TMCFrame.ModelPreview.RemoveFavorite:SetText("Remove Favorite")
-TMCFrame.ModelPreview.RemoveFavorite:SetScript("OnClick", function(self, Button, Down)
-	TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = nil
-	TMCFrame.ModelPreview.AddToFavorite:Show()
-	TMCFrame.ModelPreview.RemoveFavorite:Hide()
-	TMCFrame.ModelPreview.Favorite:Hide()
+TMCArmorFrame.ModelPreview.RemoveFavorite = CreateFrame(
+		"Button", nil, TMCArmorFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
+TMCArmorFrame.ModelPreview.RemoveFavorite:SetSize(120, 30)
+TMCArmorFrame.ModelPreview.RemoveFavorite:SetPoint("BOTTOMLEFT", 11, 11)
+TMCArmorFrame.ModelPreview.RemoveFavorite:SetText("Remove Favorite")
+TMCArmorFrame.ModelPreview.RemoveFavorite:SetScript("OnClick", function(self, Button, Down)
+	TakusMorphCatalogArmorDB.FavoriteList[TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo] = nil
+	TMCArmorFrame.ModelPreview.AddToFavorite:Show()
+	TMCArmorFrame.ModelPreview.RemoveFavorite:Hide()
+	TMCArmorFrame.ModelPreview.Favorite:Hide()
 	ModelID = OffsetModelID
-	TMCFrame.Gallery:Load()
+	TMCArmorFrame.Gallery:Load()
 end)
 
 --
-TMCFrame.ModelPreview.CopyID = CreateFrame(
-		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
-TMCFrame.ModelPreview.CopyID:SetSize(70, 30)
-TMCFrame.ModelPreview.CopyID:SetPoint("BOTTOMLEFT", 131, 11)
-TMCFrame.ModelPreview.CopyID:SetText("PLAY AS")
-TMCFrame.ModelPreview.CopyID:SetScript("OnClick", function(self, Button, Down)
-	msg = ".morph " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
+TMCArmorFrame.ModelPreview.morphAS = CreateFrame(
+		"Button", nil, TMCArmorFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
+TMCArmorFrame.ModelPreview.morphAS:SetSize(100, 30)
+TMCArmorFrame.ModelPreview.morphAS:SetPoint("BOTTOMLEFT", 131, 11)
+TMCArmorFrame.ModelPreview.morphAS:SetText("MORPH AS")
+TMCArmorFrame.ModelPreview.morphAS:SetScript("OnClick", function(self, Button, Down)
+	local armor_slot = getAromorSlot(TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo)
+	msg = ".item " .. armor_slot .. " " .. getItemID(TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo)
 	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
 	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
 
---
-TMCFrame.ModelPreview.MountAs = CreateFrame(
-		"Button", nil, TMCFrame.ModelPreview.ModelFrame, "UIPanelButtonTemplate")
-TMCFrame.ModelPreview.MountAs:SetSize(85, 30)
-TMCFrame.ModelPreview.MountAs:SetPoint("BOTTOMLEFT", 201, 11)
-TMCFrame.ModelPreview.MountAs:SetText("MOUNT AS")
-TMCFrame.ModelPreview.MountAs:SetScript("OnClick", function(self, Button, Down)
-	msg = ".mount " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
-	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
-	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
-end)
 -- end ModelPreview
 
 -- TitleFrame
-TMCFrame.TitleFrame = CreateFrame("Frame", nil, TMCFrame)
-TMCFrame.TitleFrame:SetSize(TMCFrame:GetWidth(), 40)
-TMCFrame.TitleFrame:SetPoint("TOP")
-TMCFrame.TitleFrame.Background = TMCFrame.TitleFrame:CreateTexture(nil, "BACKGROUND")
-TMCFrame.TitleFrame.Background:SetColorTexture(1, 0, 0, 0)
-TMCFrame.TitleFrame.Background:SetAllPoints(TMCFrame.TitleFrame)
-TMCFrame.TitleFrame.FontString = TMCFrame.TitleFrame:CreateFontString(nil, nil, "GameFontNormal")
-TMCFrame.TitleFrame.FontString:SetText("Taku's Morph Catalog")
-TMCFrame.TitleFrame.FontString:SetAllPoints(TMCFrame.TitleFrame)
-TMCFrame.TitleFrame.CloseButton = CreateFrame("Button", nil, TMCFrame.TitleFrame, "UIPanelCloseButton")
-TMCFrame.TitleFrame.CloseButton:SetPoint("RIGHT", -3, 0)
-TMCFrame.TitleFrame.CloseButton:SetScript("OnClick", function(self, Button, Down)
-	TMCFrame:Hide()
+TMCArmorFrame.TitleFrame = CreateFrame("Frame", nil, TMCArmorFrame)
+TMCArmorFrame.TitleFrame:SetSize(TMCArmorFrame:GetWidth(), 40)
+TMCArmorFrame.TitleFrame:SetPoint("TOP")
+TMCArmorFrame.TitleFrame.Background = TMCArmorFrame.TitleFrame:CreateTexture(nil, "BACKGROUND")
+TMCArmorFrame.TitleFrame.Background:SetColorTexture(1, 0, 0, 0)
+TMCArmorFrame.TitleFrame.Background:SetAllPoints(TMCArmorFrame.TitleFrame)
+TMCArmorFrame.TitleFrame.FontString = TMCArmorFrame.TitleFrame:CreateFontString(nil, nil, "GameFontNormal")
+TMCArmorFrame.TitleFrame.FontString:SetText("Taku's Morph Catalog")
+TMCArmorFrame.TitleFrame.FontString:SetAllPoints(TMCArmorFrame.TitleFrame)
+TMCArmorFrame.TitleFrame.CloseButton = CreateFrame("Button", nil, TMCArmorFrame.TitleFrame, "UIPanelCloseButton")
+TMCArmorFrame.TitleFrame.CloseButton:SetPoint("RIGHT", -3, 0)
+TMCArmorFrame.TitleFrame.CloseButton:SetScript("OnClick", function(self, Button, Down)
+	TMCArmorFrame:Hide()
 end)
-TMCFrame.TitleFrame:SetScript("OnMouseDown", function(self, Button)
-	TMCFrame:StartMoving()
+TMCArmorFrame.TitleFrame:SetScript("OnMouseDown", function(self, Button)
+	TMCArmorFrame:StartMoving()
 end)
-TMCFrame.TitleFrame:SetScript("OnMouseUp", function(self, Button)
-	TMCFrame:StopMovingOrSizing()
+TMCArmorFrame.TitleFrame:SetScript("OnMouseUp", function(self, Button)
+	TMCArmorFrame:StopMovingOrSizing()
 end)
 -- end TitleFrame
 
 -- PageController
-TMCFrame.PageController = CreateFrame("Frame", nil, TMCFrame)
-TMCFrame.PageController:SetSize(TMCFrame:GetWidth(), 75)
-TMCFrame.PageController:SetPoint("BOTTOM")
-TMCFrame.PageController.FontString = TMCFrame.PageController:CreateFontString(
+TMCArmorFrame.PageController = CreateFrame("Frame", nil, TMCArmorFrame)
+TMCArmorFrame.PageController:SetSize(TMCArmorFrame:GetWidth(), 75)
+TMCArmorFrame.PageController:SetPoint("BOTTOM")
+TMCArmorFrame.PageController.FontString = TMCArmorFrame.PageController:CreateFontString(
 		nil, nil, "GameFontWhite")
-TMCFrame.PageController.FontString:SetAllPoints(TMCFrame.PageController)
+TMCArmorFrame.PageController.FontString:SetAllPoints(TMCArmorFrame.PageController)
 
-function TMCFrame.PageController:UpdateButtons()
+function TMCArmorFrame.PageController:UpdateButtons()
 	if (ModelID >= MaxModelID) then
-		TMCFrame.NextPageButton:SetBackdrop({
+		TMCArmorFrame.NextPageButton:SetBackdrop({
 		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Disabled",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
 	else
-		TMCFrame.NextPageButton:SetBackdrop( {
+		TMCArmorFrame.NextPageButton:SetBackdrop( {
 		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
 	end
 	if (GoBackDepth == 0) then
-		TMCFrame.PreviousPageButton:SetBackdrop( {
+		TMCArmorFrame.PreviousPageButton:SetBackdrop( {
 		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
 	else
-		TMCFrame.PreviousPageButton:SetBackdrop( {
+		TMCArmorFrame.PreviousPageButton:SetBackdrop( {
 		  bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Up",
 		  insets = { left = 4, right = 4, top = 4, bottom = 4 }
 		})
@@ -268,31 +293,31 @@ end
 -- end PageController
 
 -- NextPageButton
-TMCFrame.NextPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
+TMCArmorFrame.NextPageButton = CreateFrame("Button", nil, TMCArmorFrame.PageController)
 --
-TMCFrame.NextPageButton:SetSize(45, 45)
-TMCFrame.NextPageButton:SetPoint("Center", 100, 0)
-TMCFrame.NextPageButton:SetBackdrop( {
+TMCArmorFrame.NextPageButton:SetSize(45, 45)
+TMCArmorFrame.NextPageButton:SetPoint("Center", 100, 0)
+TMCArmorFrame.NextPageButton:SetBackdrop( {
   bgFile = "Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up",
   insets = { left = 4, right = 4, top = 4, bottom = 4 }
 })
 --
-TMCFrame.NextPageButton.HoverGlow = TMCFrame.NextPageButton:CreateTexture(nil, "BACKGROUND")
-TMCFrame.NextPageButton.HoverGlow:SetTexture("Interface\\Buttons\\CheckButtonGlow")
-TMCFrame.NextPageButton.HoverGlow:SetAllPoints(TMCFrame.NextPageButton)
-TMCFrame.NextPageButton.HoverGlow:SetAlpha(0)
+TMCArmorFrame.NextPageButton.HoverGlow = TMCArmorFrame.NextPageButton:CreateTexture(nil, "BACKGROUND")
+TMCArmorFrame.NextPageButton.HoverGlow:SetTexture("Interface\\Buttons\\CheckButtonGlow")
+TMCArmorFrame.NextPageButton.HoverGlow:SetAllPoints(TMCArmorFrame.NextPageButton)
+TMCArmorFrame.NextPageButton.HoverGlow:SetAlpha(0)
 --
-TMCFrame.NextPageButton:SetScript("OnEnter", function()
+TMCArmorFrame.NextPageButton:SetScript("OnEnter", function()
 	if (ModelID < MaxModelID) then
-		TMCFrame.NextPageButton.HoverGlow:SetAlpha(1)
+		TMCArmorFrame.NextPageButton.HoverGlow:SetAlpha(1)
 	end
 end);
 --
-TMCFrame.NextPageButton:SetScript("OnLeave", function()
-	TMCFrame.NextPageButton.HoverGlow:SetAlpha(0)
+TMCArmorFrame.NextPageButton:SetScript("OnLeave", function()
+	TMCArmorFrame.NextPageButton.HoverGlow:SetAlpha(0)
 end);
 --
-TMCFrame.NextPageButton:SetScript("OnClick", function(self, Button, Down)
+TMCArmorFrame.NextPageButton:SetScript("OnClick", function(self, Button, Down)
 	if (ModelID >= MaxModelID) then
 		return
 	end
@@ -302,100 +327,100 @@ TMCFrame.NextPageButton:SetScript("OnClick", function(self, Button, Down)
 	GoBackDepth = GoBackDepth + 1
 	--
 	if InSearchFlag then
-		TMCFrame.Gallery:Load(false, InSearchFlag)
+		TMCArmorFrame.Gallery:Load(false, InSearchFlag)
 	else
-		TMCFrame.Gallery:Load()
+		TMCArmorFrame.Gallery:Load()
 	end
 	--
 end)
 -- end NextPageButton
 
 -- GoToEditBox
-TMCFrame.GoToEditBox = CreateFrame('EditBox', nil, TMCFrame.PageController, "InputBoxTemplate")
+TMCArmorFrame.GoToEditBox = CreateFrame('EditBox', nil, TMCArmorFrame.PageController, "InputBoxTemplate")
 --
-TMCFrame.GoToEditBox.FontString = TMCFrame.GoToEditBox:CreateFontString(nil, nil, "GameFontWhite")
-TMCFrame.GoToEditBox.FontString:SetPoint("LEFT", -50, 0)
-TMCFrame.GoToEditBox.FontString:SetText("GotoID")
+TMCArmorFrame.GoToEditBox.FontString = TMCArmorFrame.GoToEditBox:CreateFontString(nil, nil, "GameFontWhite")
+TMCArmorFrame.GoToEditBox.FontString:SetPoint("LEFT", -50, 0)
+TMCArmorFrame.GoToEditBox.FontString:SetText("GotoID")
 --
-TMCFrame.GoToEditBox:SetPoint("LEFT", 100, 0)
-TMCFrame.GoToEditBox:SetMultiLine(false)
-TMCFrame.GoToEditBox:SetAutoFocus(false)
-TMCFrame.GoToEditBox:EnableMouse(true)
-TMCFrame.GoToEditBox:SetMaxLetters(6)
-TMCFrame.GoToEditBox:SetTextInsets(0, 0, 0, 0)
-TMCFrame.GoToEditBox:SetFont('Fonts\\ARIALN.ttf', 12, '')
-TMCFrame.GoToEditBox:SetWidth(70)
-TMCFrame.GoToEditBox:SetHeight(20)
-TMCFrame.GoToEditBox:SetScript('OnEscapePressed', function() TMCFrame.GoToEditBox:ClearFocus() end)
-TMCFrame.GoToEditBox:SetScript('OnEnterPressed', function()
-	TMCFrame.GoToEditBox:ClearFocus()
+TMCArmorFrame.GoToEditBox:SetPoint("LEFT", 100, 0)
+TMCArmorFrame.GoToEditBox:SetMultiLine(false)
+TMCArmorFrame.GoToEditBox:SetAutoFocus(false)
+TMCArmorFrame.GoToEditBox:EnableMouse(true)
+TMCArmorFrame.GoToEditBox:SetMaxLetters(6)
+TMCArmorFrame.GoToEditBox:SetTextInsets(0, 0, 0, 0)
+TMCArmorFrame.GoToEditBox:SetFont('Fonts\\ARIALN.ttf', 12, '')
+TMCArmorFrame.GoToEditBox:SetWidth(70)
+TMCArmorFrame.GoToEditBox:SetHeight(20)
+TMCArmorFrame.GoToEditBox:SetScript('OnEscapePressed', function() TMCArmorFrame.GoToEditBox:ClearFocus() end)
+TMCArmorFrame.GoToEditBox:SetScript('OnEnterPressed', function()
+	TMCArmorFrame.GoToEditBox:ClearFocus()
 	--
-	OffsetModelID = tonumber(TMCFrame.GoToEditBox:GetText())
+	OffsetModelID = tonumber(TMCArmorFrame.GoToEditBox:GetText())
 	if OffsetModelID >= MaxModelID then
 		OffsetModelID = MaxModelID
 	end
 	NumberOfColumn = MaxNumberOfColumn
 	ModelID = OffsetModelID
 	InSearchFlag = false
-	TMCFrame.Gallery:Load(true)
+	TMCArmorFrame.Gallery:Load(true)
 end)
 -- end GoToEditBox
 
 -- search editBox
-TMCFrame.searchEditBox = CreateFrame(
-		'EditBox', nil, TMCFrame.PageController, "InputBoxTemplate")
+TMCArmorFrame.searchEditBox = CreateFrame(
+		'EditBox', nil, TMCArmorFrame.PageController, "InputBoxTemplate")
 --
-TMCFrame.searchEditBox.FontString =
-	TMCFrame.searchEditBox:CreateFontString(nil, nil, "GameFontWhite")
-TMCFrame.searchEditBox.FontString:SetPoint("LEFT", -50, 0)
-TMCFrame.searchEditBox.FontString:SetText("Search")
+TMCArmorFrame.searchEditBox.FontString =
+	TMCArmorFrame.searchEditBox:CreateFontString(nil, nil, "GameFontWhite")
+TMCArmorFrame.searchEditBox.FontString:SetPoint("LEFT", -50, 0)
+TMCArmorFrame.searchEditBox.FontString:SetText("Search")
 --
-TMCFrame.searchEditBox:SetPoint("RIGHT", -50, 0)
-TMCFrame.searchEditBox:SetMultiLine(false)
-TMCFrame.searchEditBox:SetAutoFocus(false)
-TMCFrame.searchEditBox:EnableMouse(true)
-TMCFrame.searchEditBox:SetMaxLetters(50)
-TMCFrame.searchEditBox:SetTextInsets(0, 0, 0, 0)
-TMCFrame.searchEditBox:SetFont('Fonts\\ARIALN.ttf', 12, '')
-TMCFrame.searchEditBox:SetWidth(70)
-TMCFrame.searchEditBox:SetHeight(20)
-TMCFrame.searchEditBox:SetScript(
-		'OnEscapePressed', function() TMCFrame.searchEditBox:ClearFocus() end)
-TMCFrame.searchEditBox:SetScript('OnEnterPressed', function()
-	TMCFrame.searchEditBox:ClearFocus()
+TMCArmorFrame.searchEditBox:SetPoint("RIGHT", -50, 0)
+TMCArmorFrame.searchEditBox:SetMultiLine(false)
+TMCArmorFrame.searchEditBox:SetAutoFocus(false)
+TMCArmorFrame.searchEditBox:EnableMouse(true)
+TMCArmorFrame.searchEditBox:SetMaxLetters(50)
+TMCArmorFrame.searchEditBox:SetTextInsets(0, 0, 0, 0)
+TMCArmorFrame.searchEditBox:SetFont('Fonts\\ARIALN.ttf', 12, '')
+TMCArmorFrame.searchEditBox:SetWidth(70)
+TMCArmorFrame.searchEditBox:SetHeight(20)
+TMCArmorFrame.searchEditBox:SetScript(
+		'OnEscapePressed', function() TMCArmorFrame.searchEditBox:ClearFocus() end)
+TMCArmorFrame.searchEditBox:SetScript('OnEnterPressed', function()
+	TMCArmorFrame.searchEditBox:ClearFocus()
 	InSearchFlag = true
 	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = false
 	NumberOfColumn = MaxNumberOfColumn
 	--
-	SearchResult = doSearch(TMCFrame.searchEditBox:GetText())
-	TMCFrame.Gallery:Load(true, InSearchFlag)
+	SearchResult = doSearch(TMCArmorFrame.searchEditBox:GetText())
+	TMCArmorFrame.Gallery:Load(true, InSearchFlag)
 end)
 -- end editBox
 
 -- PreviousPageButton
-TMCFrame.PreviousPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
-TMCFrame.PreviousPageButton:SetSize(45, 45)
-TMCFrame.PreviousPageButton:SetPoint("Center", -100, 0)
-TMCFrame.PreviousPageButton:SetBackdrop({
+TMCArmorFrame.PreviousPageButton = CreateFrame("Button", nil, TMCArmorFrame.PageController)
+TMCArmorFrame.PreviousPageButton:SetSize(45, 45)
+TMCArmorFrame.PreviousPageButton:SetPoint("Center", -100, 0)
+TMCArmorFrame.PreviousPageButton:SetBackdrop({
   bgFile = "Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Disabled",
   insets = { left = 4, right = 4, top = 4, bottom = 4 }
 })
-TMCFrame.PreviousPageButton.HoverGlow =
-	TMCFrame.PreviousPageButton:CreateTexture(nil, "BACKGROUND")
-TMCFrame.PreviousPageButton.HoverGlow:SetTexture("Interface\\Buttons\\CheckButtonGlow")
-TMCFrame.PreviousPageButton.HoverGlow:SetAllPoints(TMCFrame.PreviousPageButton)
-TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
-TMCFrame.PreviousPageButton:SetScript("OnEnter", function()
+TMCArmorFrame.PreviousPageButton.HoverGlow =
+	TMCArmorFrame.PreviousPageButton:CreateTexture(nil, "BACKGROUND")
+TMCArmorFrame.PreviousPageButton.HoverGlow:SetTexture("Interface\\Buttons\\CheckButtonGlow")
+TMCArmorFrame.PreviousPageButton.HoverGlow:SetAllPoints(TMCArmorFrame.PreviousPageButton)
+TMCArmorFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
+TMCArmorFrame.PreviousPageButton:SetScript("OnEnter", function()
 	if (GoBackDepth > 0) then
-		TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(1)
+		TMCArmorFrame.PreviousPageButton.HoverGlow:SetAlpha(1)
 	end
 end);
-TMCFrame.PreviousPageButton:SetScript("OnLeave", function()
-	TMCFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
+TMCArmorFrame.PreviousPageButton:SetScript("OnLeave", function()
+	TMCArmorFrame.PreviousPageButton.HoverGlow:SetAlpha(0)
 end);
-TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
+TMCArmorFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
 	if (GoBackDepth == 0) then
 		return
 	end
@@ -403,13 +428,13 @@ TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
 	--
 	ModelID = OffsetModelID
 	NumberOfColumn = MaxNumberOfColumn
-	TMCFrame.Gallery:Load(true, InSearchFlag)
+	TMCArmorFrame.Gallery:Load(true, InSearchFlag)
 	--
 	ModelID = OffsetModelID
 	NumberOfColumn = GoBackStack[GoBackDepth-1].Zoom
 	GoBackStack[GoBackDepth-1] = nil
 	GoBackDepth = GoBackDepth - 1
-	TMCFrame.Gallery:Load()
+	TMCArmorFrame.Gallery:Load()
 	--
 end)
 
@@ -454,10 +479,10 @@ function doGetDisplayInfo(inputDisplayID)
 end
 
 -- Gallery
-TMCFrame.Gallery = CreateFrame("Frame", nil, TMCFrame)
-TMCFrame.Gallery:SetPoint("TOP", 0, -50)
-TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
-TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
+TMCArmorFrame.Gallery = CreateFrame("Frame", nil, TMCArmorFrame)
+TMCArmorFrame.Gallery:SetPoint("TOP", 0, -50)
+TMCArmorFrame.Gallery:SetSize(TMCArmorFrame:GetWidth() - 50, TMCArmorFrame:GetHeight() - 125)
+TMCArmorFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
 	NewNumberOfColumn = NumberOfColumn
 	if (delta < 0) then
 		if (NumberOfColumn == MaxNumberOfColumn) then
@@ -479,24 +504,19 @@ TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
 	end
 	ModelID = OffsetModelID
 	NumberOfColumn = NewNumberOfColumn
-	TMCFrame.Gallery:Load()
+	TMCArmorFrame.Gallery:Load()
 end)
 
-function TMCFrame.Gallery:Load(Reset, is_search)
+function TMCArmorFrame.Gallery:Load(Reset, is_search)
 	if Debug then
-		print("--- TMCFrame.Gallery:Load ---")
+		print("--- TMCArmorFrame.Gallery:Loadxx ---")
 		print("ModelID .. " .. ModelID)
 		print("LastMaxModelID .. " .. LastMaxModelID)
 		print("OffsetModelID .. " .. OffsetModelID)
 	end
-	--update FavoriteList from popup_transform
-	for k, v in ipairs(ns.display_favorite) do
-		TakusMorphCatalogDB.FavoriteList[tonumber(v)] = 1
-		ns.display_favorite = {}
-	end
-	TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
-	local ColumnWidth = TMCFrame.Gallery:GetWidth() / NumberOfColumn
-	local MaxNumberOfRowsOnSinglePage = floor(TMCFrame.Gallery:GetHeight() / ColumnWidth)
+	TMCArmorFrame.Gallery:SetSize(TMCArmorFrame:GetWidth() - 50, TMCArmorFrame:GetHeight() - 125)
+	local ColumnWidth = TMCArmorFrame.Gallery:GetWidth() / NumberOfColumn
+	local MaxNumberOfRowsOnSinglePage = floor(TMCArmorFrame.Gallery:GetHeight() / ColumnWidth)
 	LastMaxModelID = ModelID
 	ModelID = OffsetModelID
 	local CellIndex = 0
@@ -508,7 +528,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		end
 		local bNewWidget = (Cells[CellIndex] == nil)
 		if bNewWidget then
-			Cells[CellIndex] = CreateFrame("Button", nil, TMCFrame.Gallery)
+			Cells[CellIndex] = CreateFrame("Button", nil, TMCArmorFrame.Gallery)
 			Cells[CellIndex].Favorite=Cells[CellIndex]:CreateTexture(nil, "ARTWORK")
 			Cells[CellIndex].Favorite:SetPoint("TOPLEFT", -5, 0)
 			Cells[CellIndex].Favorite:SetSize(20, 20)
@@ -522,33 +542,52 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 			Cells[CellIndex].DisplayFontString:SetPoint("TOP", 0, 0)
 			Cells[CellIndex]:SetHighlightTexture(Cells[CellIndex].HighlightBackground)
 			Cells[CellIndex]:RegisterForClicks("AnyUp")
-			Cells[CellIndex].ModelFrame = CreateFrame("PlayerModel", nil, Cells[CellIndex])
+			Cells[CellIndex].ModelFrame = CreateFrame("DressUpModel", nil, Cells[CellIndex])
+			Cells[CellIndex].ModelFrame:SetAutoDress(false)
+			Cells[CellIndex].ModelFrame:SetUnit("player")
+			Cells[CellIndex].ModelFrame:SetSheathed(false)
+			Cells[CellIndex].ModelFrame:Undress()
+			Cells[CellIndex]:SetScript("OnEnter", function(self, Button, Down)
+				local cpmsoleCmd = "/console SET alwaysCompareItems 0"
+				DEFAULT_CHAT_FRAME.editBox:SetText(cpmsoleCmd)
+				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+				GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+        		GameTooltip:SetHyperlink(getItemLink(self.ModelFrame.DisplayInfo))
+				GameTooltip:Show()
+			end)
+			Cells[CellIndex]:SetScript("OnLeave", function(self, Button, Down)
+				local cpmsoleCmd = "/console SET alwaysCompareItems 0"
+				DEFAULT_CHAT_FRAME.editBox:SetText(cpmsoleCmd)
+				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+				GameTooltip:Hide()
+			end)
 			Cells[CellIndex]:SetScript("OnClick", function(self, Button, Down)
-				TMCFrame.ModelPreview.ModelFrame:SetDisplayInfo(self.ModelFrame.DisplayInfo)
-				TMCFrame.ModelPreview.ModelFrame.DisplayInfo = self.ModelFrame.DisplayInfo
-				local displayResult = doGetDisplayInfo(TMCFrame.ModelPreview.ModelFrame.DisplayInfo)
-				TMCFrame.ModelPreview.FontString:SetText(displayResult)
-				if TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] then
-					TMCFrame.ModelPreview.Favorite:Show()
-					TMCFrame.ModelPreview.AddToFavorite:Hide()
-					TMCFrame.ModelPreview.RemoveFavorite:Show()
+				TMCArmorFrame.ModelPreview.ModelFrame:SetAutoDress(false)
+				TMCArmorFrame.ModelPreview.ModelFrame:SetUnit("player")
+				TMCArmorFrame.ModelPreview.ModelFrame:SetSheathed(false)
+				TMCArmorFrame.ModelPreview.ModelFrame:Undress()
+				TMCArmorFrame.ModelPreview.ModelFrame:TryOn(getItemLink(self.ModelFrame.DisplayInfo))
+				TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo = self.ModelFrame.DisplayInfo
+				if TakusMorphCatalogArmorDB.FavoriteList[self.ModelFrame.DisplayInfo] then
+					TMCArmorFrame.ModelPreview.Favorite:Show()
+					TMCArmorFrame.ModelPreview.AddToFavorite:Hide()
+					TMCArmorFrame.ModelPreview.RemoveFavorite:Show()
 				else
-					TMCFrame.ModelPreview.Favorite:Hide()
-					TMCFrame.ModelPreview.AddToFavorite:Show()
-					TMCFrame.ModelPreview.RemoveFavorite:Hide()
+					TMCArmorFrame.ModelPreview.Favorite:Hide()
+					TMCArmorFrame.ModelPreview.AddToFavorite:Show()
+					TMCArmorFrame.ModelPreview.RemoveFavorite:Hide()
 				end
-				TMCFrame.ModelPreview:Show()
+				TMCArmorFrame.ModelPreview:Show()
 			end)
 		end
 		-- always do
 		Cells[CellIndex]:Show()
 		if bNewWidget or Cells[CellIndex].ModelFrame.DisplayInfo < ModelID or Reset or is_search then
-			Cells[CellIndex].ModelFrame:SetDisplayInfo(2418)
-			BlankModelFileID = Cells[CellIndex].ModelFrame:GetModelFileID()
 			if (DisplayFavorites) then
 				while ModelID <= MaxModelID do
-					if (TakusMorphCatalogDB.FavoriteList[ModelID]) then
-						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+					if (TakusMorphCatalogArmorDB.FavoriteList[ModelID]) and itemValid(ModelID) then
+						Cells[CellIndex].ModelFrame:Undress()
+						Cells[CellIndex].ModelFrame:TryOn(getItemLink(ModelID))
 						Cells[CellIndex].DisplayFontString:SetText(ModelID)
 						ModelID = ModelID + 1
 						break
@@ -557,20 +596,24 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 				end
 			else
 				while ModelID <= MaxModelID do
-					if is_search then
-						if SearchResult[ModelID] then
-							Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+					if itemValid(ModelID) then
+						if is_search then
+							if SearchResult[ModelID] then
+								Cells[CellIndex].ModelFrame:Undress()
+								Cells[CellIndex].ModelFrame:TryOn(getItemLink(ModelID))
+								Cells[CellIndex].DisplayFontString:SetText(ModelID)
+								ModelID = ModelID + 1
+								break
+							end
+						else
+							Cells[CellIndex].ModelFrame:Undress()
+							Cells[CellIndex].ModelFrame:TryOn(getItemLink(ModelID))
 							Cells[CellIndex].DisplayFontString:SetText(ModelID)
+							ModelID = ModelID + 1
+							break
 						end
-					else
-						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-						Cells[CellIndex].DisplayFontString:SetText(ModelID)
 					end
 					ModelID = ModelID + 1
-					if Cells[CellIndex].ModelFrame:GetModelFileID() ~= nil and
-							Cells[CellIndex].ModelFrame:GetModelFileID() ~= BlankModelFileID then
-						break
-					end
 				end
 			end
 			Cells[CellIndex].ModelFrame.DisplayInfo = ModelID - 1
@@ -583,7 +626,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		Cells[CellIndex]:SetWidth(ColumnWidth)
 		Cells[CellIndex]:SetHeight(ColumnWidth)
 		Cells[CellIndex]:SetPoint("TOPLEFT", OffsetX * ColumnWidth, OffsetY * - ColumnWidth)
-		if (TakusMorphCatalogDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
+		if (TakusMorphCatalogArmorDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
 			Cells[CellIndex].Favorite:Show()
 		else
 			Cells[CellIndex].Favorite:Hide()
@@ -596,8 +639,8 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		CellIndex = CellIndex + 1
 	end
 	--
-	TMCFrame.PageController.FontString:SetText(LastMaxModelID .. " - " .. ModelID - 1)
-	TMCFrame.PageController:UpdateButtons()
+	TMCArmorFrame.PageController.FontString:SetText(LastMaxModelID .. " - " .. ModelID - 1)
+	TMCArmorFrame.PageController:UpdateButtons()
 end
 -- end Gallery
 
@@ -605,15 +648,14 @@ if Debug then
 	print("ModelFrames OK")
 end
 
-
-function TMCFrame.TAKUSMORPHCATALOG()
-	TMCFrame:Show()
+function TMCArmorFrame.TAKUSMORPHCATALOGArmors()
+	TMCArmorFrame:Show()
 	OffsetModelID = 0
 	ModelID = 0
 	DisplayFavorites = false
 	InSearchFlag = false
 	NumberOfColumn = MaxNumberOfColumn
-	TMCFrame.Gallery:Load(true)
+	TMCArmorFrame.Gallery:Load(true)
 end
 
-ns.ArmorsTMCFrame = TMCFrame
+ns.ArmorsTMCFrame = TMCArmorFrame

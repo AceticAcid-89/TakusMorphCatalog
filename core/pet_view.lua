@@ -1,7 +1,7 @@
 local _, ns = ...
 
 -- settings
-local Debug = true
+local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
@@ -20,10 +20,9 @@ local DisplayFavorites = false
 local SearchResult = {}
 local InSearchFlag = false
 --
-TakusMorphCatalogDB = {
+TakusMorphCatalogPetDB = {
 	FavoriteList = {}
 }
-print("TakusMorphCatalog: Type /tmc to display the morph catalog !")
 -- end
 
 -- TMCFrame (main)
@@ -162,7 +161,7 @@ TMCFrame.ModelPreview.AddToFavorite:SetSize(120, 30)
 TMCFrame.ModelPreview.AddToFavorite:SetPoint("BOTTOMLEFT", 11, 11)
 TMCFrame.ModelPreview.AddToFavorite:SetText("Add to Favorite")
 TMCFrame.ModelPreview.AddToFavorite:SetScript("OnClick", function(self, Button, Down)
-	TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = 1
+	TakusMorphCatalogPetDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = 1
 	TMCFrame.ModelPreview.AddToFavorite:Hide()
 	TMCFrame.ModelPreview.RemoveFavorite:Show()
 	TMCFrame.ModelPreview.Favorite:Show()
@@ -177,7 +176,7 @@ TMCFrame.ModelPreview.RemoveFavorite:SetSize(120, 30)
 TMCFrame.ModelPreview.RemoveFavorite:SetPoint("BOTTOMLEFT", 11, 11)
 TMCFrame.ModelPreview.RemoveFavorite:SetText("Remove Favorite")
 TMCFrame.ModelPreview.RemoveFavorite:SetScript("OnClick", function(self, Button, Down)
-	TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = nil
+	TakusMorphCatalogPetDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] = nil
 	TMCFrame.ModelPreview.AddToFavorite:Show()
 	TMCFrame.ModelPreview.RemoveFavorite:Hide()
 	TMCFrame.ModelPreview.Favorite:Hide()
@@ -491,7 +490,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 	end
 	--update FavoriteList from popup_transform
 	for k, v in ipairs(ns.display_favorite) do
-		TakusMorphCatalogDB.FavoriteList[tonumber(v)] = 1
+		TakusMorphCatalogPetDB.FavoriteList[tonumber(v)] = 1
 		ns.display_favorite = {}
 	end
 	TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
@@ -528,7 +527,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 				TMCFrame.ModelPreview.ModelFrame.DisplayInfo = self.ModelFrame.DisplayInfo
 				local displayResult = doGetDisplayInfo(TMCFrame.ModelPreview.ModelFrame.DisplayInfo)
 				TMCFrame.ModelPreview.FontString:SetText(displayResult)
-				if TakusMorphCatalogDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] then
+				if TakusMorphCatalogPetDB.FavoriteList[TMCFrame.ModelPreview.ModelFrame.DisplayInfo] then
 					TMCFrame.ModelPreview.Favorite:Show()
 					TMCFrame.ModelPreview.AddToFavorite:Hide()
 					TMCFrame.ModelPreview.RemoveFavorite:Show()
@@ -547,7 +546,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 			BlankModelFileID = Cells[CellIndex].ModelFrame:GetModelFileID()
 			if (DisplayFavorites) then
 				while ModelID <= MaxModelID do
-					if (TakusMorphCatalogDB.FavoriteList[ModelID]) then
+					if (TakusMorphCatalogPetDB.FavoriteList[ModelID]) then
 						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
 						Cells[CellIndex].DisplayFontString:SetText(ModelID)
 						ModelID = ModelID + 1
@@ -583,7 +582,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		Cells[CellIndex]:SetWidth(ColumnWidth)
 		Cells[CellIndex]:SetHeight(ColumnWidth)
 		Cells[CellIndex]:SetPoint("TOPLEFT", OffsetX * ColumnWidth, OffsetY * - ColumnWidth)
-		if (TakusMorphCatalogDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
+		if (TakusMorphCatalogPetDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
 			Cells[CellIndex].Favorite:Show()
 		else
 			Cells[CellIndex].Favorite:Hide()
@@ -606,7 +605,7 @@ if Debug then
 end
 
 
-function TMCFrame.TAKUSMORPHCATALOG()
+function TMCFrame.TAKUSMORPHCATALOGPets()
 	TMCFrame:Show()
 	OffsetModelID = 0
 	ModelID = 0

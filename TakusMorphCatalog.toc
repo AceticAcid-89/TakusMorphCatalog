@@ -4,6 +4,6 @@
 ## Author: Taku @Druidsmoker
 ## Notes: An in-game model viewer made for morphing
 ## DefaultState: Enabled
-## SavedVariables: TakusMorphCatalogDB
+## SavedVariables: TakusMorphCatalogDB, TakusMorphCatalogArmorDB, TakusMorphCatalogWeaponDB, TakusMorphCatalogPetDB
 
 addon.xml

@@ -1,7 +1,7 @@
 local _, ns = ...
 
 -- settings
-local Debug = true
+local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
@@ -27,7 +27,6 @@ local mountTable = {}
 for index, mountID in ipairs(C_MountJournal.GetMountIDs()) do
 	mountTable[mountID] = 1
 end
-print("TakusMorphCatalog: Type /tmc to display the morph catalog !")
 -- end
 
 -- TMCFrame (main)
@@ -628,7 +627,7 @@ if Debug then
 end
 
 
-function TMCFrame.TAKUSMORPHCATALOG()
+function TMCFrame.TAKUSMORPHCATALOGMounts()
 	TMCFrame:Show()
 	OffsetModelID = 0
 	ModelID = 0

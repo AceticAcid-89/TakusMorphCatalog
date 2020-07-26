@@ -1,7 +1,7 @@
 local _, ns = ...
 
 -- settings
-local Debug = true
+local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
@@ -23,7 +23,6 @@ local InSearchFlag = false
 TakusMorphCatalogDB = {
 	FavoriteList = {}
 }
-print("TakusMorphCatalog: Type /tmc to display the morph catalog !")
 -- end
 
 -- TMCFrame (main)
@@ -544,7 +543,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		Cells[CellIndex]:Show()
 		if bNewWidget or Cells[CellIndex].ModelFrame.DisplayInfo < ModelID or Reset or is_search then
 			Cells[CellIndex].ModelFrame:SetDisplayInfo(2418)
-			BlankModelFileID = Cells[CellIndex].ModelFrame:GetModelFileID()
+			local BlankModelFileID = Cells[CellIndex].ModelFrame:GetModelFileID()
 			if (DisplayFavorites) then
 				while ModelID <= MaxModelID do
 					if (TakusMorphCatalogDB.FavoriteList[ModelID]) then
@@ -606,7 +605,7 @@ if Debug then
 end
 
 
-function TMCFrame.TAKUSMORPHCATALOG()
+function TMCFrame.TAKUSMORPHCATALOGModels()
 	TMCFrame:Show()
 	OffsetModelID = 0
 	ModelID = 0
