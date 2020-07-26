@@ -6,5 +6,10 @@
 	<Script file="database\display_1.lua"/>
 	<Script file="database\display_2.lua"/>
 	<Script file="core\popup_transform.lua"/>
-	<Script file="core\TakusMorphCatalog.lua"/>
+	<Script file="core\model_view.lua"/>
+	<Script file="core\mounts_view.lua"/>
+	<Script file="core\armor_view.lua"/>
+	<Script file="core\weapon_view.lua"/>
+	<Script file="core\pet_view.lua"/>
+	<Script file="core\core.lua"/>
 </Ui>

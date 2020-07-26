@@ -5,7 +5,7 @@ local Debug = true
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
-local MaxModelID = 200000
+local MaxModelID = 1380
 local WindowWidth = 1000
 local WindowHeight = 700
 
@@ -20,19 +20,13 @@ local DisplayFavorites = false
 local SearchResult = {}
 local InSearchFlag = false
 --
-
+TakusMorphCatalogDB = {
+	FavoriteList = {}
+}
 local mountTable = {}
 for index, mountID in ipairs(C_MountJournal.GetMountIDs()) do
 	mountTable[mountID] = 1
 end
-
-
--- Types
-local GlobalType = "model"
-
-TakusMorphCatalogDB = {
-	FavoriteList = {}
-}
 print("TakusMorphCatalog: Type /tmc to display the morph catalog !")
 -- end
 
@@ -75,11 +69,7 @@ TMCFrame.Collection:SetScript("OnClick", function(self, Button, Down)
 	DisplayFavorites = false
 	InSearchFlag = false
 	NumberOfColumn = MaxNumberOfColumn
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true)
-	else
-		TMCFrame.Gallery:Load(true)
-	end
+	TMCFrame.Gallery:Load(true)
 end)
 -- end Collection
 
@@ -94,11 +84,7 @@ TMCFrame.Favorites:SetScript("OnClick", function(self, Button, Down)
 	DisplayFavorites = true
 	InSearchFlag = false
 	GoBackDepth = 0
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true)
-	else
-		TMCFrame.Gallery:Load(true)
-	end
+	TMCFrame.Gallery:Load(true)
 end)
 -- end Favorites
 
@@ -185,11 +171,7 @@ TMCFrame.ModelPreview.AddToFavorite:SetScript("OnClick", function(self, Button, 
 	TMCFrame.ModelPreview.RemoveFavorite:Show()
 	TMCFrame.ModelPreview.Favorite:Show()
 	ModelID = OffsetModelID
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true)
-	else
-		TMCFrame.Gallery:Load()
-	end
+	TMCFrame.Gallery:Load()
 end)
 
 --
@@ -204,11 +186,7 @@ TMCFrame.ModelPreview.RemoveFavorite:SetScript("OnClick", function(self, Button,
 	TMCFrame.ModelPreview.RemoveFavorite:Hide()
 	TMCFrame.ModelPreview.Favorite:Hide()
 	ModelID = OffsetModelID
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true)
-	else
-		TMCFrame.Gallery:Load()
-	end
+	TMCFrame.Gallery:Load()
 end)
 
 --
@@ -235,6 +213,13 @@ TMCFrame.ModelPreview.MountAs:SetScript("OnClick", function(self, Button, Down)
 	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
 -- end ModelPreview
+
+local function getMountDisplayID(mountID)
+    local mountDisplayId, _,_,_,_,_,_,_,_ =
+		C_MountJournal.GetMountInfoExtraByID(mountID)
+    return mountDisplayId
+end
+
 
 -- TitleFrame
 TMCFrame.TitleFrame = CreateFrame("Frame", nil, TMCFrame)
@@ -328,17 +313,9 @@ TMCFrame.NextPageButton:SetScript("OnClick", function(self, Button, Down)
 	GoBackDepth = GoBackDepth + 1
 	--
 	if InSearchFlag then
-		if GlobalType == "mounts" then
-			TMCFrame.Gallery:MountLoad(true, true)
-		else
-			TMCFrame.Gallery:Load(false, true)
-		end
+		TMCFrame.Gallery:Load(false, InSearchFlag)
 	else
-		if GlobalType == "mounts" then
-			TMCFrame.Gallery:MountLoad(true)
-		else
-			TMCFrame.Gallery:Load()
-		end
+		TMCFrame.Gallery:Load()
 	end
 	--
 end)
@@ -371,11 +348,7 @@ TMCFrame.GoToEditBox:SetScript('OnEnterPressed', function()
 	NumberOfColumn = MaxNumberOfColumn
 	ModelID = OffsetModelID
 	InSearchFlag = false
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true)
-	else
-		TMCFrame.Gallery:Load(true)
-	end
+	TMCFrame.Gallery:Load(true)
 end)
 -- end GoToEditBox
 
@@ -388,7 +361,7 @@ TMCFrame.searchEditBox.FontString =
 TMCFrame.searchEditBox.FontString:SetPoint("LEFT", -50, 0)
 TMCFrame.searchEditBox.FontString:SetText("Search")
 --
-TMCFrame.searchEditBox:SetPoint("RIGHT", -140, 0)
+TMCFrame.searchEditBox:SetPoint("RIGHT", -50, 0)
 TMCFrame.searchEditBox:SetMultiLine(false)
 TMCFrame.searchEditBox:SetAutoFocus(false)
 TMCFrame.searchEditBox:EnableMouse(true)
@@ -408,40 +381,9 @@ TMCFrame.searchEditBox:SetScript('OnEnterPressed', function()
 	NumberOfColumn = MaxNumberOfColumn
 	--
 	SearchResult = doSearch(TMCFrame.searchEditBox:GetText())
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true, InSearchFlag)
-	else
-		TMCFrame.Gallery:Load(true, InSearchFlag)
-	end
+	TMCFrame.Gallery:Load(true, InSearchFlag)
 end)
 -- end editBox
-
--- scroll select Frame
-TMCFrame.dropDown = CreateFrame("FRAME", nil, TMCFrame.PageController, "UIDropDownMenuTemplate")
-TMCFrame.dropDown:SetPoint("RIGHT", 0, -3)
-UIDropDownMenu_SetWidth(TMCFrame.dropDown, 90)
-UIDropDownMenu_SetText(TMCFrame.dropDown, "global type")
-
-UIDropDownMenu_Initialize(TMCFrame.dropDown, function(self, level)
-	local types = {"model", "npc", "pets", "mounts", "armor", "weapon", "enchant"}
-	local info = UIDropDownMenu_CreateInfo()
-	for _, v in ipairs(types) do
-	info.text, info.notCheckable = v, true
-	info.func = self.SetValue
-	info.arg1 = v
-	UIDropDownMenu_AddButton(info, level)
-	end
-end)
-
-function TMCFrame.dropDown:SetValue(newValue)
-	local choose = newValue
-	UIDropDownMenu_SetText(TMCFrame.dropDown, "type: " .. choose)
-	GlobalType = choose
-	CloseDropDownMenus()
-end
-
-
--- end scroll select Frame
 
 -- PreviousPageButton
 TMCFrame.PreviousPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
@@ -472,20 +414,13 @@ TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
 	--
 	ModelID = OffsetModelID
 	NumberOfColumn = MaxNumberOfColumn
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true, InSearchFlag)
-	else
-		TMCFrame.Gallery:Load(true, InSearchFlag)
-	end
+	TMCFrame.Gallery:Load(true, InSearchFlag)
 	--
 	ModelID = OffsetModelID
 	NumberOfColumn = GoBackStack[GoBackDepth-1].Zoom
 	GoBackStack[GoBackDepth-1] = nil
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true)
-	else
-		TMCFrame.Gallery:Load()
-	end
+	GoBackDepth = GoBackDepth - 1
+	TMCFrame.Gallery:Load()
 	--
 end)
 
@@ -555,11 +490,7 @@ TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
 	end
 	ModelID = OffsetModelID
 	NumberOfColumn = NewNumberOfColumn
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad(true)
-	else
-		TMCFrame.Gallery:Load()
-	end
+	TMCFrame.Gallery:Load()
 end)
 
 function TMCFrame.Gallery:Load(Reset, is_search)
@@ -568,9 +499,7 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		print("ModelID .. " .. ModelID)
 		print("LastMaxModelID .. " .. LastMaxModelID)
 		print("OffsetModelID .. " .. OffsetModelID)
-		print("GlobalType .. " .. GlobalType)
 	end
-	MaxModelID = 200000
 	--update FavoriteList from popup_transform
 	for k, v in ipairs(ns.display_favorite) do
 		TakusMorphCatalogDB.FavoriteList[tonumber(v)] = 1
@@ -606,10 +535,12 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 			Cells[CellIndex]:RegisterForClicks("AnyUp")
 			Cells[CellIndex].ModelFrame = CreateFrame("PlayerModel", nil, Cells[CellIndex])
 			Cells[CellIndex]:SetScript("OnClick", function(self, Button, Down)
-				TMCFrame.ModelPreview.ModelFrame:SetDisplayInfo(self.ModelFrame.DisplayInfo)
-				local displayResult = doGetDisplayInfo(self.ModelFrame.DisplayInfo)
+                local mountDisplayId = getMountDisplayID(self.ModelFrame.DisplayInfo)
+				TMCFrame.ModelPreview.ModelFrame:SetDisplayInfo(mountDisplayId)
+                TMCFrame.ModelPreview.ModelFrame.DisplayInfo = mountDisplayId
+				local displayResult = doGetDisplayInfo(mountDisplayId)
 				TMCFrame.ModelPreview.FontString:SetText(displayResult)
-				if TakusMorphCatalogDB.FavoriteList[self.ModelFrame.DisplayInfo] then
+				if TakusMorphCatalogDB.FavoriteList[mountDisplayId] then
 					TMCFrame.ModelPreview.Favorite:Show()
 					TMCFrame.ModelPreview.AddToFavorite:Hide()
 					TMCFrame.ModelPreview.RemoveFavorite:Show()
@@ -625,11 +556,11 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		Cells[CellIndex]:Show()
 		if bNewWidget or Cells[CellIndex].ModelFrame.DisplayInfo < ModelID or Reset or is_search then
 			Cells[CellIndex].ModelFrame:SetDisplayInfo(2418)
-			BlankModelFileID = Cells[CellIndex].ModelFrame:GetModelFileID()
 			if (DisplayFavorites) then
 				while ModelID <= MaxModelID do
-					if (TakusMorphCatalogDB.FavoriteList[ModelID]) then
-						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
+                    local mountDisplayId = getMountDisplayID(ModelID)
+					if (TakusMorphCatalogDB.FavoriteList[mountDisplayId]) then
+						Cells[CellIndex].ModelFrame:SetDisplayInfo(mountDisplayId)
 						Cells[CellIndex].DisplayFontString:SetText(ModelID)
 						ModelID = ModelID + 1
 						break
@@ -638,33 +569,43 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 				end
 			else
 				while ModelID <= MaxModelID do
-					if is_search then
-						if SearchResult[ModelID] then
-							Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-							Cells[CellIndex].DisplayFontString:SetText(ModelID)
-						end
-					else
-						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-						Cells[CellIndex].DisplayFontString:SetText(ModelID)
-					end
-					ModelID = ModelID + 1
-					if Cells[CellIndex].ModelFrame:GetModelFileID() ~= nil and
-							Cells[CellIndex].ModelFrame:GetModelFileID() ~= BlankModelFileID then
-						break
-					end
+                    local mountDisplayId = getMountDisplayID(ModelID)
+                    if mountTable[ModelID] and mountDisplayId then
+                        if is_search then
+                            if SearchResult[mountDisplayId] then
+                                Cells[CellIndex].ModelFrame:SetDisplayInfo(mountDisplayId)
+                                Cells[CellIndex].DisplayFontString:SetText(ModelID)
+                            end
+                        else
+                            Cells[CellIndex].ModelFrame:SetDisplayInfo(mountDisplayId)
+                            Cells[CellIndex].DisplayFontString:SetText(ModelID)
+                        end
+                    end
+                    ModelID = ModelID + 1
+                    local mountDisplayId = getMountDisplayID(ModelID - 1)
+                    if mountTable[ModelID - 1] and mountDisplayId then
+                        if not is_search then
+                            break
+                        else
+                            if SearchResult[mountDisplayId] then
+                                break
+                            end
+                        end
+                    end
 				end
 			end
 			Cells[CellIndex].ModelFrame.DisplayInfo = ModelID - 1
 		else
 			ModelID = Cells[CellIndex].ModelFrame.DisplayInfo + 1
-		end
+        end
 		if (Cells[CellIndex].ModelFrame.DisplayInfo == MaxModelID) then
 			Cells[CellIndex]:Hide()
 		end
 		Cells[CellIndex]:SetWidth(ColumnWidth)
 		Cells[CellIndex]:SetHeight(ColumnWidth)
 		Cells[CellIndex]:SetPoint("TOPLEFT", OffsetX * ColumnWidth, OffsetY * - ColumnWidth)
-		if (TakusMorphCatalogDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
+        local displayFavoriteID = getMountDisplayID(Cells[CellIndex].ModelFrame.DisplayInfo)
+		if (TakusMorphCatalogDB.FavoriteList[displayFavoriteID]) then
 			Cells[CellIndex].Favorite:Show()
 		else
 			Cells[CellIndex].Favorite:Hide()
@@ -677,129 +618,24 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 		CellIndex = CellIndex + 1
 	end
 	--
-	TMCFrame.PageController.FontString:SetText(LastMaxModelID .. " - " .. ModelID - 1)
+	TMCFrame.PageController.FontString:SetText(LastMaxModelID .. " - " .. ModelID)
 	TMCFrame.PageController:UpdateButtons()
 end
 -- end Gallery
-
-
-
-function TMCFrame.Gallery:MountLoad(Reset, is_search)
-	if Debug then
-		print("--- TMCFrame.Gallery:Load ---")
-		print("ModelID .. " .. ModelID)
-		print("LastMaxModelID .. " .. LastMaxModelID)
-		print("OffsetModelID .. " .. OffsetModelID)
-		print("GlobalType .. " .. GlobalType)
-	end
-	--update FavoriteList from popup_transform
-	--for k, v in ipairs(ns.display_favorite) do
-	--	TakusMorphCatalogDB.FavoriteList[tonumber(v)] = 1
-	--	ns.display_favorite = {}
-	--end
-	MaxModelID = 1350
-	TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
-	local ColumnWidth = TMCFrame.Gallery:GetWidth() / NumberOfColumn
-	local MaxNumberOfRowsOnSinglePage = floor(TMCFrame.Gallery:GetHeight() / ColumnWidth)
-	LastMaxModelID = ModelID
-	ModelID = OffsetModelID
-	local CellIndex = 0
-	while CellIndex < NumberOfColumn * MaxNumberOfRowsOnSinglePage do
-		OffsetX = CellIndex % NumberOfColumn
-		OffsetY = floor(CellIndex / NumberOfColumn)
-		if (OffsetY == MaxNumberOfRowsOnSinglePage) then
-			break
-		end
-		-- always do
-		Cells[CellIndex]:Show()
-		if bNewWidget or Cells[CellIndex].ModelFrame.DisplayInfo < ModelID or Reset or is_search then
-			if (DisplayFavorites) then
-				while ModelID <= MaxModelID do
-					if (TakusMorphCatalogDB.FavoriteList[ModelID]) then
-						Cells[CellIndex].ModelFrame:SetDisplayInfo(ModelID)
-						Cells[CellIndex].DisplayFontString:SetText(ModelID)
-						ModelID = ModelID + 1
-						break
-					end
-					ModelID = ModelID + 1
-				end
-			else
-				while ModelID <= MaxModelID do
-					ModelID = ModelID + 1
-					local mountDisplayId, _,_,_,_,_,_,_,_ =
-							C_MountJournal.GetMountInfoExtraByID(ModelID)
-					if mountTable[ModelID] and mountDisplayId then
-						if is_search then
-							if SearchResult[ModelID] then
-								Cells[CellIndex].ModelFrame:SetDisplayInfo(mountDisplayId)
-								Cells[CellIndex].DisplayFontString:SetText(ModelID)
-							end
-						else
-							Cells[CellIndex].ModelFrame:SetDisplayInfo(mountDisplayId)
-							Cells[CellIndex].DisplayFontString:SetText(ModelID)
-							Cells[CellIndex]:SetScript("OnClick", function()
-								TMCFrame.ModelPreview.ModelFrame:SetDisplayInfo(mountDisplayId)
-								local creatureName, _, _, _, _, _, _, _, _, _, _, _ =
-									C_MountJournal.GetMountInfoByID(mountDisplayId)
-								TMCFrame.ModelPreview.FontString:SetText(creatureName)
-								if TakusMorphCatalogDB.FavoriteList[mountDisplayId] then
-									TMCFrame.ModelPreview.Favorite:Show()
-									TMCFrame.ModelPreview.AddToFavorite:Hide()
-									TMCFrame.ModelPreview.RemoveFavorite:Show()
-								else
-									TMCFrame.ModelPreview.Favorite:Hide()
-									TMCFrame.ModelPreview.AddToFavorite:Show()
-									TMCFrame.ModelPreview.RemoveFavorite:Hide()
-								end
-								TMCFrame.ModelPreview:Show()
-							end)
-						end
-						break
-					end
-				end
-			end
-			Cells[CellIndex].ModelFrame.DisplayInfo = ModelID - 1
-		else
-			ModelID = Cells[CellIndex].ModelFrame.DisplayInfo + 1
-		end
-		if (Cells[CellIndex].ModelFrame.DisplayInfo == MaxModelID) then
-			Cells[CellIndex]:Hide()
-		end
-		Cells[CellIndex]:SetWidth(ColumnWidth)
-		Cells[CellIndex]:SetHeight(ColumnWidth)
-		Cells[CellIndex]:SetPoint("TOPLEFT", OffsetX * ColumnWidth, OffsetY * - ColumnWidth)
-		if (TakusMorphCatalogDB.FavoriteList[Cells[CellIndex].ModelFrame.DisplayInfo]) then
-			Cells[CellIndex].Favorite:Show()
-		else
-			Cells[CellIndex].Favorite:Hide()
-		end
-		Cells[CellIndex].ModelFrame:SetAllPoints()
-		CellIndex = CellIndex + 1
-	end --while
-	while Cells[CellIndex] ~= nil do
-		Cells[CellIndex]:Hide()
-		CellIndex = CellIndex + 1
-	end
-	--
-	TMCFrame.PageController.FontString:SetText(LastMaxModelID .. " - " .. ModelID - 1)
-	TMCFrame.PageController:UpdateButtons()
-end
--- end Gallery
-
 
 if Debug then
 	print("ModelFrames OK")
 end
 
--- slash commands
-SLASH_TAKUSMORPHCATALOG1 = '/tmc'
-function SlashCmdList.TAKUSMORPHCATALOG()
+
+function TMCFrame.TAKUSMORPHCATALOG()
 	TMCFrame:Show()
-	ModelID=LastMaxModelID
-	if GlobalType == "mounts" then
-		TMCFrame.Gallery:MountLoad()
-	else
-		TMCFrame.Gallery:Load()
-	end
+	OffsetModelID = 0
+	ModelID = 0
+	DisplayFavorites = false
+	InSearchFlag = false
+	NumberOfColumn = MaxNumberOfColumn
+	TMCFrame.Gallery:Load(true)
 end
--- end slash commands
+
+ns.MountsTMCFrame = TMCFrame
