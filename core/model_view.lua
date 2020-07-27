@@ -137,10 +137,10 @@ local function OnUpdate(self, elapsed)
 		self:SetModelScale(1)
 		return
 	end
-	offsetX = x - lastX
-	offsetY = y - lastY
-	offsetDegree = offsetX / 100 * math.pi
-	offsetScale = (offsetY / 180 * 2) * 0.45 + 1
+	local offsetX = x - lastX
+	local offsetY = y - lastY
+	local offsetDegree = offsetX / 100 * math.pi
+	local offsetScale = (offsetY / 180 * 2) * 0.45 + 1
 	self:SetFacing(offsetDegree)
 	self:SetModelScale(offsetScale)
 end
@@ -191,7 +191,7 @@ TMCFrame.ModelPreview.CopyID:SetSize(70, 30)
 TMCFrame.ModelPreview.CopyID:SetPoint("BOTTOMLEFT", 131, 11)
 TMCFrame.ModelPreview.CopyID:SetText("PLAY AS")
 TMCFrame.ModelPreview.CopyID:SetScript("OnClick", function(self, Button, Down)
-	msg = ".morph " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
+	local msg = ".morph " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
 	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
 	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
@@ -203,7 +203,7 @@ TMCFrame.ModelPreview.MountAs:SetSize(85, 30)
 TMCFrame.ModelPreview.MountAs:SetPoint("BOTTOMLEFT", 201, 11)
 TMCFrame.ModelPreview.MountAs:SetText("MOUNT AS")
 TMCFrame.ModelPreview.MountAs:SetScript("OnClick", function(self, Button, Down)
-	msg = ".mount " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
+	local msg = ".mount " .. TMCFrame.ModelPreview.ModelFrame.DisplayInfo
 	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
 	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
@@ -412,7 +412,7 @@ TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
 	--
 end)
 
-function doSearch(inputStr)
+local function doSearch(inputStr)
 	local result = {}
 	for _, k in ipairs({0, 1, 2}) do
 		local tableId = "npc_id_table_" .. k
@@ -432,7 +432,7 @@ end
 
 -- end PreviousPageButton
 
-function doGetDisplayInfo(inputDisplayID)
+local function doGetDisplayInfo(inputDisplayID)
 	local result = ""
 	for _, k in ipairs({0, 1, 2}) do
 		local tableId = "display_id_table_" .. k
@@ -457,14 +457,14 @@ TMCFrame.Gallery = CreateFrame("Frame", nil, TMCFrame)
 TMCFrame.Gallery:SetPoint("TOP", 0, -50)
 TMCFrame.Gallery:SetSize(TMCFrame:GetWidth() - 50, TMCFrame:GetHeight() - 125)
 TMCFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
-	NewNumberOfColumn = NumberOfColumn
+	local NewNumberOfColumn = NumberOfColumn
 	if (delta < 0) then
 		if (NumberOfColumn == MaxNumberOfColumn) then
 			return
 		end
 		NewNumberOfColumn = NumberOfColumn * 2
 		-- pop all inferior zoom from gobackstack
-		Depth = GoBackDepth - 1
+		local Depth = GoBackDepth - 1
 		while Depth > 0 and GoBackStack[Depth].Zoom < NumberOfColumn do
 			GoBackStack[Depth] = nil
 			Depth = Depth - 1
@@ -500,8 +500,8 @@ function TMCFrame.Gallery:Load(Reset, is_search)
 	ModelID = OffsetModelID
 	local CellIndex = 0
 	while CellIndex < NumberOfColumn * MaxNumberOfRowsOnSinglePage do
-		OffsetX = CellIndex % NumberOfColumn
-		OffsetY = floor(CellIndex / NumberOfColumn)
+		local OffsetX = CellIndex % NumberOfColumn
+		local OffsetY = floor(CellIndex / NumberOfColumn)
 		if (OffsetY == MaxNumberOfRowsOnSinglePage) then
 			break
 		end

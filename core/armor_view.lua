@@ -173,10 +173,10 @@ local function OnUpdate(self, elapsed)
 		self:SetModelScale(1)
 		return
 	end
-	offsetX = x - lastX
-	offsetY = y - lastY
-	offsetDegree = offsetX / 100 * math.pi
-	offsetScale = (offsetY / 180 * 2) * 0.45 + 1
+	local offsetX = x - lastX
+	local offsetY = y - lastY
+	local offsetDegree = offsetX / 100 * math.pi
+	local offsetScale = (offsetY / 180 * 2) * 0.45 + 1
 	self:SetFacing(offsetDegree)
 	self:SetModelScale(offsetScale)
 end
@@ -228,7 +228,7 @@ TMCArmorFrame.ModelPreview.morphAS:SetPoint("BOTTOMLEFT", 131, 11)
 TMCArmorFrame.ModelPreview.morphAS:SetText("MORPH AS")
 TMCArmorFrame.ModelPreview.morphAS:SetScript("OnClick", function(self, Button, Down)
 	local armor_slot = getAromorSlot(TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo)
-	msg = ".item " .. armor_slot .. " " .. getItemID(TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo)
+	local msg = ".item " .. armor_slot .. " " .. getItemID(TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo)
 	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
 	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
@@ -438,7 +438,7 @@ TMCArmorFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Dow
 	--
 end)
 
-function doSearch(inputStr)
+local function doSearch(inputStr)
 	local result = {}
 	for _, k in ipairs({0, 1, 2}) do
 		local tableId = "npc_id_table_" .. k
@@ -458,39 +458,20 @@ end
 
 -- end PreviousPageButton
 
-function doGetDisplayInfo(inputDisplayID)
-	local result = ""
-	for _, k in ipairs({0, 1, 2}) do
-		local tableId = "display_id_table_" .. k
-		for display_id, items in pairs(ns[tableId]) do
-			if display_id == "display_id_" .. inputDisplayID then
-				for _, item in ipairs(items) do
-					local npc_id = item.npc_id
-					local en_name = item.en_name
-					local cn_name = item.cn_name
-					local item_str = en_name .. " " .. cn_name .. " " .. npc_id  ..
-							 "\n"
-					result = table.concat({result, item_str})
-				end
-			end
-		end
-	end
-	return result
-end
 
 -- Gallery
 TMCArmorFrame.Gallery = CreateFrame("Frame", nil, TMCArmorFrame)
 TMCArmorFrame.Gallery:SetPoint("TOP", 0, -50)
 TMCArmorFrame.Gallery:SetSize(TMCArmorFrame:GetWidth() - 50, TMCArmorFrame:GetHeight() - 125)
 TMCArmorFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
-	NewNumberOfColumn = NumberOfColumn
+	local NewNumberOfColumn = NumberOfColumn
 	if (delta < 0) then
 		if (NumberOfColumn == MaxNumberOfColumn) then
 			return
 		end
 		NewNumberOfColumn = NumberOfColumn * 2
 		-- pop all inferior zoom from gobackstack
-		Depth = GoBackDepth - 1
+		local Depth = GoBackDepth - 1
 		while Depth > 0 and GoBackStack[Depth].Zoom < NumberOfColumn do
 			GoBackStack[Depth] = nil
 			Depth = Depth - 1
@@ -521,8 +502,8 @@ function TMCArmorFrame.Gallery:Load(Reset, is_search)
 	ModelID = OffsetModelID
 	local CellIndex = 0
 	while CellIndex < NumberOfColumn * MaxNumberOfRowsOnSinglePage do
-		OffsetX = CellIndex % NumberOfColumn
-		OffsetY = floor(CellIndex / NumberOfColumn)
+		local OffsetX = CellIndex % NumberOfColumn
+		local OffsetY = floor(CellIndex / NumberOfColumn)
 		if (OffsetY == MaxNumberOfRowsOnSinglePage) then
 			break
 		end
@@ -548,17 +529,11 @@ function TMCArmorFrame.Gallery:Load(Reset, is_search)
 			Cells[CellIndex].ModelFrame:SetSheathed(false)
 			Cells[CellIndex].ModelFrame:Undress()
 			Cells[CellIndex]:SetScript("OnEnter", function(self, Button, Down)
-				local cpmsoleCmd = "/console SET alwaysCompareItems 0"
-				DEFAULT_CHAT_FRAME.editBox:SetText(cpmsoleCmd)
-				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 				GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
         		GameTooltip:SetHyperlink(getItemLink(self.ModelFrame.DisplayInfo))
 				GameTooltip:Show()
 			end)
 			Cells[CellIndex]:SetScript("OnLeave", function(self, Button, Down)
-				local cpmsoleCmd = "/console SET alwaysCompareItems 0"
-				DEFAULT_CHAT_FRAME.editBox:SetText(cpmsoleCmd)
-				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 				GameTooltip:Hide()
 			end)
 			Cells[CellIndex]:SetScript("OnClick", function(self, Button, Down)

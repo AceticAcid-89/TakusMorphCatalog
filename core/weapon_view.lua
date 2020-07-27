@@ -42,13 +42,36 @@ end
 
 local function getItemID(sourceID)
 	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
-	return(sourceInfo.itemID)
+	return sourceInfo.itemID
+end
+
+local function getItemName(sourceID)
+	local categoryID, visualID, canEnchant, icon, _, itemLink, transmogLink, _, _ =
+    	C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+	if weaponSlot[categoryID] then
+		return itemLink
+	else
+		return ""
+	end
 end
 
 local function getItemLink(sourceID)
 	local categoryID, visualID, canEnchant, icon, _, itemLink, transmogLink, _, _ =
     	C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
 	return itemLink
+end
+
+local function doSearch(inputStr)
+	local result = {}
+	local weaponID = 0
+	while weaponID < MaxModelID do
+		local name = getItemName(weaponID)
+		if strmatch(string.lower(name), string.lower(inputStr)) then
+			print(name, inputStr)
+			result[weaponID] = 1
+		end
+	end
+	return result
 end
 
 -- TMCWeaponFrame (main)
@@ -163,10 +186,10 @@ local function OnUpdate(self, elapsed)
 		self:SetModelScale(1)
 		return
 	end
-	offsetX = x - lastX
-	offsetY = y - lastY
-	offsetDegree = offsetX / 100 * math.pi
-	offsetScale = (offsetY / 180 * 2) * 0.45 + 1
+	local offsetX = x - lastX
+	local offsetY = y - lastY
+	local offsetDegree = offsetX / 100 * math.pi
+	local offsetScale = (offsetY / 180 * 2) * 0.45 + 1
 	self:SetFacing(offsetDegree)
 	self:SetModelScale(offsetScale)
 end
@@ -217,7 +240,7 @@ TMCWeaponFrame.ModelPreview.mainHand:SetSize(100, 30)
 TMCWeaponFrame.ModelPreview.mainHand:SetPoint("BOTTOMLEFT", 131, 11)
 TMCWeaponFrame.ModelPreview.mainHand:SetText("MAIN HAND")
 TMCWeaponFrame.ModelPreview.mainHand:SetScript("OnClick", function(self, Button, Down)
-	msg = ".item 16 " .. getItemID(TMCWeaponFrame.ModelPreview.ModelFrame.DisplayInfo)
+	local msg = ".item 16 " .. getItemID(TMCWeaponFrame.ModelPreview.ModelFrame.DisplayInfo)
 	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
 	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
@@ -229,7 +252,7 @@ TMCWeaponFrame.ModelPreview.offHand:SetSize(100, 30)
 TMCWeaponFrame.ModelPreview.offHand:SetPoint("BOTTOMLEFT", 231, 11)
 TMCWeaponFrame.ModelPreview.offHand:SetText("OFF HAND")
 TMCWeaponFrame.ModelPreview.offHand:SetScript("OnClick", function(self, Button, Down)
-	msg = ".item 17 " .. getItemID(TMCWeaponFrame.ModelPreview.ModelFrame.DisplayInfo)
+	local msg = ".item 17 " .. getItemID(TMCWeaponFrame.ModelPreview.ModelFrame.DisplayInfo)
 	DEFAULT_CHAT_FRAME.editBox:SetText(msg)
 	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 end)
@@ -437,60 +460,21 @@ TMCWeaponFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Do
 	TMCWeaponFrame.Gallery:Load()
 	--
 end)
-
-function doSearch(inputStr)
-	local result = {}
-	for _, k in ipairs({0, 1, 2}) do
-		local tableId = "npc_id_table_" .. k
-		for npc_id, info in pairs(ns[tableId]) do
-			local npc_en_name = info["en_name"]
-			local npc_cn_name = info["cn_name"]
-			if string.match(string.lower(npc_en_name), string.lower(inputStr)) then
-				result[tonumber(info["display_id"])] = 1
-			end
-			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
-				result[tonumber(info["display_id"])] = 1
-			end
-		end
-	end
-	return result
-end
-
 -- end PreviousPageButton
-
-function doGetDisplayInfo(inputDisplayID)
-	local result = ""
-	for _, k in ipairs({0, 1, 2}) do
-		local tableId = "display_id_table_" .. k
-		for display_id, items in pairs(ns[tableId]) do
-			if display_id == "display_id_" .. inputDisplayID then
-				for _, item in ipairs(items) do
-					local npc_id = item.npc_id
-					local en_name = item.en_name
-					local cn_name = item.cn_name
-					local item_str = en_name .. " " .. cn_name .. " " .. npc_id  ..
-							 "\n"
-					result = table.concat({result, item_str})
-				end
-			end
-		end
-	end
-	return result
-end
 
 -- Gallery
 TMCWeaponFrame.Gallery = CreateFrame("Frame", nil, TMCWeaponFrame)
 TMCWeaponFrame.Gallery:SetPoint("TOP", 0, -50)
 TMCWeaponFrame.Gallery:SetSize(TMCWeaponFrame:GetWidth() - 50, TMCWeaponFrame:GetHeight() - 125)
 TMCWeaponFrame.Gallery:SetScript("OnMouseWheel", function(self, delta)
-	NewNumberOfColumn = NumberOfColumn
+	local NewNumberOfColumn = NumberOfColumn
 	if (delta < 0) then
 		if (NumberOfColumn == MaxNumberOfColumn) then
 			return
 		end
-		NewNumberOfColumn = NumberOfColumn * 2
+		local NewNumberOfColumn = NumberOfColumn * 2
 		-- pop all inferior zoom from gobackstack
-		Depth = GoBackDepth - 1
+		local Depth = GoBackDepth - 1
 		while Depth > 0 and GoBackStack[Depth].Zoom < NumberOfColumn do
 			GoBackStack[Depth] = nil
 			Depth = Depth - 1
@@ -521,8 +505,8 @@ function TMCWeaponFrame.Gallery:Load(Reset, is_search)
 	ModelID = OffsetModelID
 	local CellIndex = 0
 	while CellIndex < NumberOfColumn * MaxNumberOfRowsOnSinglePage do
-		OffsetX = CellIndex % NumberOfColumn
-		OffsetY = floor(CellIndex / NumberOfColumn)
+		local OffsetX = CellIndex % NumberOfColumn
+		local OffsetY = floor(CellIndex / NumberOfColumn)
 		if (OffsetY == MaxNumberOfRowsOnSinglePage) then
 			break
 		end
@@ -548,17 +532,11 @@ function TMCWeaponFrame.Gallery:Load(Reset, is_search)
 			Cells[CellIndex].ModelFrame:SetSheathed(false)
 			Cells[CellIndex].ModelFrame:Undress()
 			Cells[CellIndex]:SetScript("OnEnter", function(self, Button, Down)
-				local cpmsoleCmd = "/console SET alwaysCompareItems 0"
-				DEFAULT_CHAT_FRAME.editBox:SetText(cpmsoleCmd)
-				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 				GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
         		GameTooltip:SetHyperlink(getItemLink(self.ModelFrame.DisplayInfo))
 				GameTooltip:Show()
 			end)
 			Cells[CellIndex]:SetScript("OnLeave", function(self, Button, Down)
-				local cpmsoleCmd = "/console SET alwaysCompareItems 0"
-				DEFAULT_CHAT_FRAME.editBox:SetText(cpmsoleCmd)
-				ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
 				GameTooltip:Hide()
 			end)
 			Cells[CellIndex]:SetScript("OnClick", function(self, Button, Down)
@@ -658,5 +636,15 @@ function TMCWeaponFrame.TAKUSMORPHCATALOGWeapons()
 	NumberOfColumn = MaxNumberOfColumn
 	TMCWeaponFrame.Gallery:Load(true)
 end
+
+local function myframe_OnLoad()
+	local consoleCmd = "/console SET alwaysCompareItems 0"
+	DEFAULT_CHAT_FRAME.editBox:SetText(consoleCmd)
+	ChatEdit_SendText(DEFAULT_CHAT_FRAME.editBox, 0)
+end
+
+local myframe = CreateFrame("Frame", "myframe", UIParent);
+myframe:SetScript("OnEvent", function() myframe_OnLoad() end)
+myframe:RegisterEvent("PLAYER_LOGIN")
 
 ns.WeaponsTMCFrame = TMCWeaponFrame

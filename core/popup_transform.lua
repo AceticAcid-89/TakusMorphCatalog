@@ -7,7 +7,7 @@ function Transform()
     local npc_id = common.split(npc_guid, "-")[6]
     local found
     for _, k in ipairs({0, 1, 2}) do
-        tableId = "npc_id_table_" .. k
+        local tableId = "npc_id_table_" .. k
         if ns[tableId]["npc_id_" .. npc_id] then
             local display_id = ns[tableId]["npc_id_" .. npc_id].display_id
 
@@ -19,6 +19,7 @@ function Transform()
             -- transform
 
             else
+                local msg
                 if IsAltKeyDown() then
                     msg = ".mount " .. display_id
                     print("Mount as " .. npc_name)
