@@ -5,7 +5,7 @@ local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
-local MaxModelID = 120000
+local MaxModelID = 110000
 local WindowWidth = 1000
 local WindowHeight = 700
 
@@ -44,6 +44,15 @@ local function itemValid(sourceID)
 	return isExist
 end
 
+local function getItemInfo(sourceID)
+	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
+    if not sourceInfo.name then
+        sourceInfo.name = "UNKOWN"
+    end
+	return sourceInfo.itemID .. "    " .. sourceInfo.name
+end
+
+
 local function getItemID(sourceID)
 	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
 	return(sourceInfo.itemID)
@@ -59,6 +68,29 @@ local function getItemLink(sourceID)
 	local categoryID, visualID, canEnchant, icon, _, itemLink, transmogLink, _, _ =
     	C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
 	return itemLink
+end
+
+local function getItemName(sourceID)
+	local categoryID, visualID, canEnchant, icon, _, itemLink, transmogLink, _, _ =
+    	C_TransmogCollection.GetAppearanceSourceInfo(sourceID)
+	if armorSlot[categoryID] then
+		return itemLink
+	else
+		return ""
+	end
+end
+
+local function doSearchArmor(inputStr)
+	local result = {}
+	local armorID = 0
+	while armorID < MaxModelID do
+		local name = getItemName(armorID)
+		if strmatch(string.lower(name), string.lower(inputStr)) then
+			result[armorID] = 1
+        end
+        armorID = armorID + 1
+	end
+	return result
 end
 
 -- TMCArmorFrame (main)
@@ -153,7 +185,7 @@ TMCArmorFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth - 300)
 TMCArmorFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
 TMCArmorFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 700, 0)
 TMCArmorFrame.ModelPreview.ModelFrame:SetBackdrop({
-	bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
+	bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     insets = {left = 11, right = 12, top = 12, bottom = 11}
 })
@@ -394,7 +426,7 @@ TMCArmorFrame.searchEditBox:SetScript('OnEnterPressed', function()
 	DisplayFavorites = false
 	NumberOfColumn = MaxNumberOfColumn
 	--
-	SearchResult = doSearch(TMCArmorFrame.searchEditBox:GetText())
+	SearchResult = doSearchArmor(TMCArmorFrame.searchEditBox:GetText())
 	TMCArmorFrame.Gallery:Load(true, InSearchFlag)
 end)
 -- end editBox
@@ -437,25 +469,6 @@ TMCArmorFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Dow
 	TMCArmorFrame.Gallery:Load()
 	--
 end)
-
-local function doSearch(inputStr)
-	local result = {}
-	for _, k in ipairs({0, 1, 2}) do
-		local tableId = "npc_id_table_" .. k
-		for npc_id, info in pairs(ns[tableId]) do
-			local npc_en_name = info["en_name"]
-			local npc_cn_name = info["cn_name"]
-			if string.match(string.lower(npc_en_name), string.lower(inputStr)) then
-				result[tonumber(info["display_id"])] = 1
-			end
-			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
-				result[tonumber(info["display_id"])] = 1
-			end
-		end
-	end
-	return result
-end
-
 -- end PreviousPageButton
 
 
@@ -542,6 +555,7 @@ function TMCArmorFrame.Gallery:Load(Reset, is_search)
 				TMCArmorFrame.ModelPreview.ModelFrame:SetSheathed(false)
 				TMCArmorFrame.ModelPreview.ModelFrame:Undress()
 				TMCArmorFrame.ModelPreview.ModelFrame:TryOn(getItemLink(self.ModelFrame.DisplayInfo))
+                TMCArmorFrame.ModelPreview.FontString:SetText(getItemInfo(self.ModelFrame.DisplayInfo))
 				TMCArmorFrame.ModelPreview.ModelFrame.DisplayInfo = self.ModelFrame.DisplayInfo
 				if TakusMorphCatalogArmorDB.FavoriteList[self.ModelFrame.DisplayInfo] then
 					TMCArmorFrame.ModelPreview.Favorite:Show()

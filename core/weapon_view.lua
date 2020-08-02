@@ -5,7 +5,7 @@ local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
-local MaxModelID = 120000
+local MaxModelID = 110000
 local WindowWidth = 1000
 local WindowHeight = 700
 
@@ -40,6 +40,14 @@ local function itemValid(sourceID)
 	return isExist
 end
 
+local function getItemInfo(sourceID)
+	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
+    if not sourceInfo.name then
+        sourceInfo.name = "UNKOWN"
+    end
+	return sourceInfo.itemID .. "    " .. sourceInfo.name
+end
+
 local function getItemID(sourceID)
 	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
 	return sourceInfo.itemID
@@ -61,15 +69,15 @@ local function getItemLink(sourceID)
 	return itemLink
 end
 
-local function doSearch(inputStr)
+local function doSearchWeapon(inputStr)
 	local result = {}
 	local weaponID = 0
 	while weaponID < MaxModelID do
 		local name = getItemName(weaponID)
 		if strmatch(string.lower(name), string.lower(inputStr)) then
-			print(name, inputStr)
 			result[weaponID] = 1
-		end
+        end
+        weaponID = weaponID + 1
 	end
 	return result
 end
@@ -166,7 +174,7 @@ TMCWeaponFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth - 300)
 TMCWeaponFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
 TMCWeaponFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 700, 0)
 TMCWeaponFrame.ModelPreview.ModelFrame:SetBackdrop({
-	bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
+	bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     insets = {left = 11, right = 12, top = 12, bottom = 11}
 })
@@ -417,7 +425,7 @@ TMCWeaponFrame.searchEditBox:SetScript('OnEnterPressed', function()
 	DisplayFavorites = false
 	NumberOfColumn = MaxNumberOfColumn
 	--
-	SearchResult = doSearch(TMCWeaponFrame.searchEditBox:GetText())
+	SearchResult = doSearchWeapon(TMCWeaponFrame.searchEditBox:GetText())
 	TMCWeaponFrame.Gallery:Load(true, InSearchFlag)
 end)
 -- end editBox
@@ -546,6 +554,7 @@ function TMCWeaponFrame.Gallery:Load(Reset, is_search)
 				TMCWeaponFrame.ModelPreview.ModelFrame:Undress()
 				TMCWeaponFrame.ModelPreview.ModelFrame:TryOn(getItemLink(self.ModelFrame.DisplayInfo))
 				TMCWeaponFrame.ModelPreview.ModelFrame.DisplayInfo = self.ModelFrame.DisplayInfo
+                TMCWeaponFrame.ModelPreview.FontString:SetText(getItemInfo(self.ModelFrame.DisplayInfo))
 				if TakusMorphCatalogWeaponDB.FavoriteList[self.ModelFrame.DisplayInfo] then
 					TMCWeaponFrame.ModelPreview.Favorite:Show()
 					TMCWeaponFrame.ModelPreview.AddToFavorite:Hide()

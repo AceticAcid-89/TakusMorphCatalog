@@ -5,7 +5,7 @@ local Debug = false
 local MaxNumberOfColumn = 5
 local MinNumberOfColumn = 3
 local NumberOfColumn = 5
-local MaxModelID = 200000
+local MaxModelID = 97000
 local WindowWidth = 1000
 local WindowHeight = 700
 
@@ -117,7 +117,7 @@ TMCFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth - 300)
 TMCFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
 TMCFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 700, 0)
 TMCFrame.ModelPreview.ModelFrame:SetBackdrop({
-	bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
+	bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     insets = {left = 11, right = 12, top = 12, bottom = 11}
 })

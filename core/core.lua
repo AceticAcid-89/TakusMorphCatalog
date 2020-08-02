@@ -32,7 +32,7 @@ coreFrame.FontString:SetFont("Fonts\\FRIZQT__.TTF", 80, "OUTLINE, MONOCHROME, TH
 
 
 buttons = {}
-Types = {"Models", "Mounts", "Armors", "Weapons", "Pets" }
+Types = {"Models", "Mounts", "Armors", "Weapons", "Pets", "Hidden"}
 
 function hideAll()
 	for _, cataType in ipairs(Types) do

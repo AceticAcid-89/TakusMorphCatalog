@@ -29,6 +29,46 @@ for index, mountID in ipairs(C_MountJournal.GetMountIDs()) do
 end
 -- end
 
+local function doSearch(inputStr)
+	local result = {}
+	for _, k in ipairs({0, 1, 2}) do
+		local tableId = "npc_id_table_" .. k
+		for npc_id, info in pairs(ns[tableId]) do
+			local npc_en_name = info["en_name"]
+			local npc_cn_name = info["cn_name"]
+			if string.match(string.lower(npc_en_name), string.lower(inputStr)) then
+				result[tonumber(info["display_id"])] = 1
+			end
+			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
+				result[tonumber(info["display_id"])] = 1
+			end
+		end
+	end
+	return result
+end
+
+-- end PreviousPageButton
+
+local function doGetDisplayInfo(inputDisplayID)
+	local result = ""
+	for _, k in ipairs({0, 1, 2}) do
+		local tableId = "display_id_table_" .. k
+		for display_id, items in pairs(ns[tableId]) do
+			if display_id == "display_id_" .. inputDisplayID then
+				for _, item in ipairs(items) do
+					local npc_id = item.npc_id
+					local en_name = item.en_name
+					local cn_name = item.cn_name
+					local item_str = en_name .. " " .. cn_name .. " " .. npc_id  ..
+							 "\n"
+					result = table.concat({result, item_str})
+				end
+			end
+		end
+	end
+	return result
+end
+
 -- TMCFrame (main)
 local TMCFrame = CreateFrame("Frame", nil, UIParent)
 TMCFrame:Hide()
@@ -121,7 +161,7 @@ TMCFrame.ModelPreview.ModelFrame:SetWidth(WindowWidth - 300)
 TMCFrame.ModelPreview.ModelFrame:SetHeight(WindowHeight)
 TMCFrame.ModelPreview.ModelFrame:SetPoint("TOPRIGHT", 700, 0)
 TMCFrame.ModelPreview.ModelFrame:SetBackdrop({
-	bgFile = "Interface\\FrameGeneral\\UI-Background-Marble.PNG",
+	bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     insets = {left = 11, right = 12, top = 12, bottom = 11}
 })
@@ -422,46 +462,6 @@ TMCFrame.PreviousPageButton:SetScript("OnClick", function(self, Button, Down)
 	TMCFrame.Gallery:Load()
 	--
 end)
-
-local function doSearch(inputStr)
-	local result = {}
-	for _, k in ipairs({0, 1, 2}) do
-		local tableId = "npc_id_table_" .. k
-		for npc_id, info in pairs(ns[tableId]) do
-			local npc_en_name = info["en_name"]
-			local npc_cn_name = info["cn_name"]
-			if string.match(string.lower(npc_en_name), string.lower(inputStr)) then
-				result[tonumber(info["display_id"])] = 1
-			end
-			if string.match(string.lower(npc_cn_name), string.lower(inputStr)) then
-				result[tonumber(info["display_id"])] = 1
-			end
-		end
-	end
-	return result
-end
-
--- end PreviousPageButton
-
-local function doGetDisplayInfo(inputDisplayID)
-	local result = ""
-	for _, k in ipairs({0, 1, 2}) do
-		local tableId = "display_id_table_" .. k
-		for display_id, items in pairs(ns[tableId]) do
-			if display_id == "display_id_" .. inputDisplayID then
-				for _, item in ipairs(items) do
-					local npc_id = item.npc_id
-					local en_name = item.en_name
-					local cn_name = item.cn_name
-					local item_str = en_name .. " " .. cn_name .. " " .. npc_id  ..
-							 "\n"
-					result = table.concat({result, item_str})
-				end
-			end
-		end
-	end
-	return result
-end
 
 -- Gallery
 TMCFrame.Gallery = CreateFrame("Frame", nil, TMCFrame)
