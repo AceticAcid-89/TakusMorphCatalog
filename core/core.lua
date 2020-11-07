@@ -1,7 +1,7 @@
 local _, ns = ...
 
 -- coreFrame (main)
-local coreFrame = CreateFrame("Frame", nil, UIParent)
+local coreFrame = CreateFrame("Frame", nil, UIParent, BackdropTemplateMixin and "BackdropTemplate")
 coreFrame:Hide()
 coreFrame:SetFrameStrata("DIALOG")
 coreFrame:SetWidth(1000)

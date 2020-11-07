@@ -43,7 +43,7 @@ end
 local function getItemInfo(sourceID)
 	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
     if not sourceInfo.name then
-        sourceInfo.name = "UNKOWN"
+        sourceInfo.name = "UNKNOWN"
     end
 	return sourceInfo.itemID .. "    " .. sourceInfo.name
 end
@@ -83,7 +83,7 @@ local function doSearchWeapon(inputStr)
 end
 
 -- TMCWeaponFrame (main)
-local TMCWeaponFrame = CreateFrame("Frame", nil, UIParent)
+local TMCWeaponFrame = CreateFrame("Frame", nil, UIParent, BackdropTemplateMixin and "BackdropTemplate")
 TMCWeaponFrame:Hide()
 TMCWeaponFrame:SetFrameStrata("DIALOG")
 TMCWeaponFrame:SetWidth(WindowWidth)
@@ -141,7 +141,7 @@ end)
 -- end Favorites
 
 -- ModelPreview
-TMCWeaponFrame.ModelPreview = CreateFrame("Frame", nil, TMCWeaponFrame)
+TMCWeaponFrame.ModelPreview = CreateFrame("Frame", nil, TMCWeaponFrame, BackdropTemplateMixin and "BackdropTemplate")
 TMCWeaponFrame.ModelPreview.CloseButton = CreateFrame(
 		"Button", nil, TMCWeaponFrame.ModelPreview, "UIPanelCloseButton")
 TMCWeaponFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 695, -5)
@@ -158,7 +158,7 @@ TMCWeaponFrame.ModelPreview:SetBackdrop({
 TMCWeaponFrame.ModelPreview:SetAllPoints()
 --
 TMCWeaponFrame.ModelPreview.ModelFrame = CreateFrame(
-		"DressUpModel", "OVERLAY", TMCWeaponFrame.ModelPreview)
+		"DressUpModel", "OVERLAY", TMCWeaponFrame.ModelPreview, BackdropTemplateMixin and "BackdropTemplate")
 TMCWeaponFrame.ModelPreview:Hide()
 
 --
@@ -324,7 +324,7 @@ end
 -- end PageController
 
 -- NextPageButton
-TMCWeaponFrame.NextPageButton = CreateFrame("Button", nil, TMCWeaponFrame.PageController)
+TMCWeaponFrame.NextPageButton = CreateFrame("Button", nil, TMCWeaponFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 --
 TMCWeaponFrame.NextPageButton:SetSize(45, 45)
 TMCWeaponFrame.NextPageButton:SetPoint("Center", 100, 0)
@@ -431,7 +431,7 @@ end)
 -- end editBox
 
 -- PreviousPageButton
-TMCWeaponFrame.PreviousPageButton = CreateFrame("Button", nil, TMCWeaponFrame.PageController)
+TMCWeaponFrame.PreviousPageButton = CreateFrame("Button", nil, TMCWeaponFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 TMCWeaponFrame.PreviousPageButton:SetSize(45, 45)
 TMCWeaponFrame.PreviousPageButton:SetPoint("Center", -100, 0)
 TMCWeaponFrame.PreviousPageButton:SetBackdrop({

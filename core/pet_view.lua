@@ -26,7 +26,7 @@ TakusMorphCatalogPetDB = {
 -- end
 
 -- TMCFrame (main)
-local TMCFrame = CreateFrame("Frame", nil, UIParent)
+local TMCFrame = CreateFrame("Frame", nil, UIParent, BackdropTemplateMixin and "BackdropTemplate")
 TMCFrame:Hide()
 TMCFrame:SetFrameStrata("DIALOG")
 TMCFrame:SetWidth(WindowWidth)
@@ -84,7 +84,7 @@ end)
 -- end Favorites
 
 -- ModelPreview
-TMCFrame.ModelPreview = CreateFrame("Frame", nil, TMCFrame)
+TMCFrame.ModelPreview = CreateFrame("Frame", nil, TMCFrame, BackdropTemplateMixin and "BackdropTemplate")
 TMCFrame.ModelPreview.CloseButton = CreateFrame(
 		"Button", nil, TMCFrame.ModelPreview, "UIPanelCloseButton")
 TMCFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 695, -5)
@@ -101,7 +101,7 @@ TMCFrame.ModelPreview:SetBackdrop({
 TMCFrame.ModelPreview:SetAllPoints()
 --
 TMCFrame.ModelPreview.ModelFrame = CreateFrame(
-		"DressUpModel", "OVERLAY", TMCFrame.ModelPreview)
+		"DressUpModel", "OVERLAY", TMCFrame.ModelPreview, BackdropTemplateMixin and "BackdropTemplate")
 TMCFrame.ModelPreview:Hide()
 
 --
@@ -267,7 +267,7 @@ end
 -- end PageController
 
 -- NextPageButton
-TMCFrame.NextPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
+TMCFrame.NextPageButton = CreateFrame("Button", nil, TMCFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 --
 TMCFrame.NextPageButton:SetSize(45, 45)
 TMCFrame.NextPageButton:SetPoint("Center", 100, 0)
@@ -374,7 +374,7 @@ end)
 -- end editBox
 
 -- PreviousPageButton
-TMCFrame.PreviousPageButton = CreateFrame("Button", nil, TMCFrame.PageController)
+TMCFrame.PreviousPageButton = CreateFrame("Button", nil, TMCFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 TMCFrame.PreviousPageButton:SetSize(45, 45)
 TMCFrame.PreviousPageButton:SetPoint("Center", -100, 0)
 TMCFrame.PreviousPageButton:SetBackdrop({

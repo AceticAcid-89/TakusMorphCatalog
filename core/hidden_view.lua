@@ -63,7 +63,7 @@ end
 local function getItemInfo(sourceID)
 	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
     if not sourceInfo.name then
-        sourceInfo.name = "UNKOWN"
+        sourceInfo.name = "UNKNOWN"
     end
 	return sourceInfo.itemID .. "    " .. sourceInfo.name
 end
@@ -111,7 +111,7 @@ local function doSearchHidden(inputStr)
 end
 
 -- TMCHiddenFrame (main)
-local TMCHiddenFrame = CreateFrame("Frame", nil, UIParent)
+local TMCHiddenFrame = CreateFrame("Frame", nil, UIParent, BackdropTemplateMixin and "BackdropTemplate")
 TMCHiddenFrame:Hide()
 TMCHiddenFrame:SetFrameStrata("DIALOG")
 TMCHiddenFrame:SetWidth(WindowWidth)
@@ -169,7 +169,7 @@ end)
 -- end Favorites
 
 -- ModelPreview
-TMCHiddenFrame.ModelPreview = CreateFrame("Frame", nil, TMCHiddenFrame)
+TMCHiddenFrame.ModelPreview = CreateFrame("Frame", nil, TMCHiddenFrame, BackdropTemplateMixin and "BackdropTemplate")
 TMCHiddenFrame.ModelPreview.CloseButton = CreateFrame(
 		"Button", nil, TMCHiddenFrame.ModelPreview, "UIPanelCloseButton")
 TMCHiddenFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 695, -5)
@@ -186,7 +186,7 @@ TMCHiddenFrame.ModelPreview:SetBackdrop({
 TMCHiddenFrame.ModelPreview:SetAllPoints()
 --
 TMCHiddenFrame.ModelPreview.ModelFrame = CreateFrame(
-		"DressUpModel", "OVERLAY", TMCHiddenFrame.ModelPreview)
+		"DressUpModel", "OVERLAY", TMCHiddenFrame.ModelPreview, BackdropTemplateMixin and "BackdropTemplate")
 TMCHiddenFrame.ModelPreview:Hide()
 
 --
@@ -364,7 +364,7 @@ end
 -- end PageController
 
 -- NextPageButton
-TMCHiddenFrame.NextPageButton = CreateFrame("Button", nil, TMCHiddenFrame.PageController)
+TMCHiddenFrame.NextPageButton = CreateFrame("Button", nil, TMCHiddenFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 --
 TMCHiddenFrame.NextPageButton:SetSize(45, 45)
 TMCHiddenFrame.NextPageButton:SetPoint("Center", 100, 0)
@@ -471,7 +471,7 @@ end)
 -- end editBox
 
 -- PreviousPageButton
-TMCHiddenFrame.PreviousPageButton = CreateFrame("Button", nil, TMCHiddenFrame.PageController)
+TMCHiddenFrame.PreviousPageButton = CreateFrame("Button", nil, TMCHiddenFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 TMCHiddenFrame.PreviousPageButton:SetSize(45, 45)
 TMCHiddenFrame.PreviousPageButton:SetPoint("Center", -100, 0)
 TMCHiddenFrame.PreviousPageButton:SetBackdrop({

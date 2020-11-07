@@ -30,7 +30,7 @@ end
 
 local ArmorSlotSourceType = {
 	[1] = 1, [2] = 3, [3] = 15, [4] = 5, [5] = 4,
-	[6] = 19, [7] = 9, [8] = 10, [10] = 7, [11] = 8
+	[6] = 19, [7] = 9, [8] = 10, [9] = 6, [10] = 7, [11] = 8
 }
 -- end
 
@@ -47,7 +47,7 @@ end
 local function getItemInfo(sourceID)
 	local sourceInfo = C_TransmogCollection.GetSourceInfo(sourceID)
     if not sourceInfo.name then
-        sourceInfo.name = "UNKOWN"
+        sourceInfo.name = "UNKNOWN"
     end
 	return sourceInfo.itemID .. "    " .. sourceInfo.name
 end
@@ -94,7 +94,7 @@ local function doSearchArmor(inputStr)
 end
 
 -- TMCArmorFrame (main)
-local TMCArmorFrame = CreateFrame("Frame", nil, UIParent)
+local TMCArmorFrame = CreateFrame("Frame", nil, UIParent, BackdropTemplateMixin and "BackdropTemplate")
 TMCArmorFrame:Hide()
 TMCArmorFrame:SetFrameStrata("DIALOG")
 TMCArmorFrame:SetWidth(WindowWidth)
@@ -152,7 +152,7 @@ end)
 -- end Favorites
 
 -- ModelPreview
-TMCArmorFrame.ModelPreview = CreateFrame("Frame", nil, TMCArmorFrame)
+TMCArmorFrame.ModelPreview = CreateFrame("Frame", nil, TMCArmorFrame, BackdropTemplateMixin and "BackdropTemplate")
 TMCArmorFrame.ModelPreview.CloseButton = CreateFrame(
 		"Button", nil, TMCArmorFrame.ModelPreview, "UIPanelCloseButton")
 TMCArmorFrame.ModelPreview.CloseButton:SetPoint("TOPRIGHT", 695, -5)
@@ -169,7 +169,7 @@ TMCArmorFrame.ModelPreview:SetBackdrop({
 TMCArmorFrame.ModelPreview:SetAllPoints()
 --
 TMCArmorFrame.ModelPreview.ModelFrame = CreateFrame(
-		"DressUpModel", "OVERLAY", TMCArmorFrame.ModelPreview)
+		"DressUpModel", "OVERLAY", TMCArmorFrame.ModelPreview, BackdropTemplateMixin and "BackdropTemplate")
 TMCArmorFrame.ModelPreview:Hide()
 
 --
@@ -325,7 +325,7 @@ end
 -- end PageController
 
 -- NextPageButton
-TMCArmorFrame.NextPageButton = CreateFrame("Button", nil, TMCArmorFrame.PageController)
+TMCArmorFrame.NextPageButton = CreateFrame("Button", nil, TMCArmorFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 --
 TMCArmorFrame.NextPageButton:SetSize(45, 45)
 TMCArmorFrame.NextPageButton:SetPoint("Center", 100, 0)
@@ -432,7 +432,7 @@ end)
 -- end editBox
 
 -- PreviousPageButton
-TMCArmorFrame.PreviousPageButton = CreateFrame("Button", nil, TMCArmorFrame.PageController)
+TMCArmorFrame.PreviousPageButton = CreateFrame("Button", nil, TMCArmorFrame.PageController, BackdropTemplateMixin and "BackdropTemplate")
 TMCArmorFrame.PreviousPageButton:SetSize(45, 45)
 TMCArmorFrame.PreviousPageButton:SetPoint("Center", -100, 0)
 TMCArmorFrame.PreviousPageButton:SetBackdrop({
